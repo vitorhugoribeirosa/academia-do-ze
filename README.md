@@ -1,4 +1,4 @@
-# Trabalho da Tia Lu - Dia 27
+# Trabalho do Tio Lu - Dia 27
 
 ## Captura de tela da compilação
 
