@@ -1,14 +1,26 @@
 // VITOR HUGO RIBEIRO SA
+using AcademiaDoZe.Domain.Common;
+
 namespace AcademiaDoZe.Domain.ValueObjects;
 
 public sealed record Arquivo
 {
-    public string Nome { get; }
     public byte[] Conteudo { get; }
 
-    public Arquivo(string nome, byte[] conteudo)
+    private Arquivo(byte[] conteudo)
     {
-        Nome = nome;
-        Conteudo = conteudo;
+        Conteudo = [.. conteudo];
+    }
+
+    public static Result<Arquivo> Criar(byte[]? conteudo)
+    {
+        if (conteudo is null || conteudo.Length == 0)
+            return Result<Arquivo>.Failure("Arquivo", "ARQUIVO_OBRIGATORIO");
+
+        const int tamanhoMaximoBytes = 15 * 1024 * 1024;
+        if (conteudo.Length > tamanhoMaximoBytes)
+            return Result<Arquivo>.Failure("Arquivo", "ARQUIVO_TIPO_TAMANHO");
+
+        return Result<Arquivo>.Success(new Arquivo(conteudo));
     }
 }
