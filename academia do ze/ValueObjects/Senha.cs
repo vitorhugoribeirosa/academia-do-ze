@@ -15,9 +15,14 @@ public sealed record Senha
 
     public static Result<Senha> Criar(string valor)
     {
-        if (NormalizadoService.TextoVazioOuNulo(valor))
-            return Result<Senha>.Failure("Senha", "SENHA_OBRIGATORIA");
+        if (NormalizacaoService.TextoVazioOuNulo(valor))
+            return Result<Senha>.Failure("Senha", "SENHA_OBRIGATORIO");
 
-        return Result<Senha>.Success(new Senha(valor));
+        var textoLimpo = NormalizacaoService.LimparEspacos(valor);
+
+        if (textoLimpo.Length < 6 || !textoLimpo.Any(char.IsUpper))
+            return Result<Senha>.Failure("Senha", "SENHA_FORMATO");
+
+        return Result<Senha>.Success(new Senha(textoLimpo));
     }
 }

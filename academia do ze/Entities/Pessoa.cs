@@ -10,10 +10,10 @@ public abstract class Pessoa : Entity
     public Cpf Cpf { get; }
     public DateOnly DataNascimento { get; }
     public Telefone Telefone { get; }
-    public Email? Email { get; }
+    public Email Email { get; }
     public Endereco Endereco { get; }
-    public Senha Senha { get; private set; }
-    public Arquivo? Foto { get; }
+    public Senha Senha { get; protected set; }
+    public Arquivo Foto { get; }
 
     protected Pessoa(
         int id,
@@ -21,10 +21,10 @@ public abstract class Pessoa : Entity
         Cpf cpf,
         DateOnly dataNascimento,
         Telefone telefone,
-        Email? email,
+        Email email,
         Endereco endereco,
         Senha senha,
-        Arquivo? foto) : base(id)
+        Arquivo foto) : base(id)
     {
         Nome = nome;
         Cpf = cpf;
@@ -36,14 +36,4 @@ public abstract class Pessoa : Entity
         Foto = foto;
     }
 
-    public Result<Senha> AlterarSenha(string novaSenha)
-    {
-        var senhaResult = AcademiaDoZe.Domain.ValueObjects.Senha.Criar(novaSenha);
-
-        if (senhaResult.IsFailure)
-            return senhaResult;
-
-        Senha = senhaResult.Value!;
-        return senhaResult;
-    }
 }

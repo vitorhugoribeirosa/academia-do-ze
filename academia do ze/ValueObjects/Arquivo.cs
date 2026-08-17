@@ -12,9 +12,9 @@ public sealed record Arquivo
         Conteudo = [.. conteudo];
     }
 
-    public static Result<Arquivo> Criar(byte[]? conteudo)
+    public static Result<Arquivo> Criar(byte[] conteudo)
     {
-        if (conteudo is null || conteudo.Length == 0)
+        if (conteudo is null)
             return Result<Arquivo>.Failure("Arquivo", "ARQUIVO_OBRIGATORIO");
 
         const int tamanhoMaximoBytes = 15 * 1024 * 1024;

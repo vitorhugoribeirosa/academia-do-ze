@@ -5,7 +5,7 @@ using AcademiaDoZe.Domain.ValueObjects;
 
 namespace AcademiaDoZe.Domain.Entities;
 
-public sealed class Logradouro : Entity
+public sealed class Logradouro : Entity, IAggregateRoot
 {
     public Cep Cep { get; }
     public string Nome { get; }
@@ -48,12 +48,12 @@ public sealed class Logradouro : Entity
 
         ValidarTextoObrigatorio("Nome", "NOME_OBRIGATORIO", ref nome, notifications);
         ValidarTextoObrigatorio("Bairro", "BAIRRO_OBRIGATORIO", ref bairro, notifications);
-        ValidarTextoObrigatorio("Cidade", "CIDADE_OBRIGATORIA", ref cidade, notifications);
+        ValidarTextoObrigatorio("Cidade", "CIDADE_OBRIGATORIO", ref cidade, notifications);
         ValidarTextoObrigatorio("Estado", "ESTADO_OBRIGATORIO", ref estado, notifications);
         ValidarTextoObrigatorio("Pais", "PAIS_OBRIGATORIO", ref pais, notifications);
 
-        estado = NormalizadoService.ParaMaiusculo(
-            NormalizadoService.LimparTodosEspacos(estado));
+        estado = NormalizacaoService.ParaMaiusculo(
+            NormalizacaoService.LimparTodosEspacos(estado));
 
         if (notifications.Count != 0)
             return Result<Logradouro>.Failure(notifications);
@@ -68,9 +68,9 @@ public sealed class Logradouro : Entity
         ref string valor,
         ICollection<Notification> notifications)
     {
-        if (NormalizadoService.TextoVazioOuNulo(valor))
+        if (NormalizacaoService.TextoVazioOuNulo(valor))
             notifications.Add(new Notification(propriedade, mensagem));
         else
-            valor = NormalizadoService.LimparEspacos(valor);
+            valor = NormalizacaoService.LimparEspacos(valor);
     }
 }

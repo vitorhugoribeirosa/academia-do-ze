@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace AcademiaDoZe.Domain.Services;
 
-public static partial class NormalizadoService
+public static partial class NormalizacaoService
 {
     public static bool TextoVazioOuNulo(string? texto) =>
         string.IsNullOrWhiteSpace(texto);
@@ -16,13 +16,10 @@ public static partial class NormalizadoService
     public static string LimparTodosEspacos(string? texto) =>
         string.IsNullOrWhiteSpace(texto)
             ? string.Empty
-            : EspacosRegex().Replace(texto, string.Empty);
+            : texto.Replace(" ", string.Empty);
 
     public static string ParaMaiusculo(string? texto) =>
         string.IsNullOrEmpty(texto) ? string.Empty : texto.ToUpperInvariant();
-
-    public static string ParaMinusculo(string? texto) =>
-        string.IsNullOrEmpty(texto) ? string.Empty : texto.ToLowerInvariant();
 
     public static string LimparEDigitos(string? texto) =>
         string.IsNullOrEmpty(texto)

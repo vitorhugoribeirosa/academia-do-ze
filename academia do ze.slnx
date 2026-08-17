@@ -1,3 +1,4 @@
 <Solution>
   <Project Path="academia do ze/AcademiaDoZe.Domain.csproj" />
+  <Project Path="AcademiaDoZe.Domain.Tests/AcademiaDoZe.Domain.Tests.csproj" />
 </Solution>

@@ -5,45 +5,29 @@ namespace AcademiaDoZe.Domain.Entities;
 
 public sealed class AcessoAluno : Entity, IAggregateRoot
 {
-    public Aluno Aluno { get; }
-    public DateTime DataHoraEntrada { get; }
-    public DateTime? DataHoraSaida { get; private set; }
-    public TimeSpan? TempoPermanencia => DataHoraSaida - DataHoraEntrada;
+    public int AlunoId { get; private set; }
+    public DateTime DataHora { get; private set; }
 
-    private AcessoAluno(int id, Aluno aluno, DateTime dataHoraEntrada) : base(id)
+    private AcessoAluno(int id, int alunoId, DateTime dataHora) : base(id)
     {
-        Aluno = aluno;
-        DataHoraEntrada = dataHoraEntrada;
+        AlunoId = alunoId;
+        DataHora = dataHora;
     }
 
-    public static Result<AcessoAluno> Criar(
-        int id,
-        Aluno? aluno,
-        DateTime dataHoraEntrada)
+    public static Result<AcessoAluno> Criar(int id, Aluno aluno, DateTime dataHora)
     {
         var notifications = new List<Notification>();
 
         if (aluno is null)
-            notifications.Add(new Notification("Aluno", "ALUNO_OBRIGATORIO"));
+            notifications.Add(new Notification("Aluno", "ALUNO_INVALIDO"));
 
-        if (dataHoraEntrada == default)
-            notifications.Add(new Notification("DataHoraEntrada", "DATA_HORA_ENTRADA_OBRIGATORIA"));
+        if (dataHora.TimeOfDay < new TimeSpan(6, 0, 0) ||
+            dataHora.TimeOfDay > new TimeSpan(22, 0, 0))
+            notifications.Add(new Notification("DataHora", "DATA_HORA_INTERVALO_INVALIDO"));
 
         if (notifications.Count != 0)
             return Result<AcessoAluno>.Failure(notifications);
 
-        return Result<AcessoAluno>.Success(new AcessoAluno(id, aluno!, dataHoraEntrada));
-    }
-
-    public Result<TimeSpan> RegistrarSaida(DateTime dataHoraSaida)
-    {
-        if (DataHoraSaida is not null)
-            return Result<TimeSpan>.Failure("DataHoraSaida", "SAIDA_JA_REGISTRADA");
-
-        if (dataHoraSaida < DataHoraEntrada)
-            return Result<TimeSpan>.Failure("DataHoraSaida", "SAIDA_ANTERIOR_ENTRADA");
-
-        DataHoraSaida = dataHoraSaida;
-        return Result<TimeSpan>.Success(dataHoraSaida - DataHoraEntrada);
+        return Result<AcessoAluno>.Success(new AcessoAluno(id, aluno!.Id, dataHora));
     }
 }

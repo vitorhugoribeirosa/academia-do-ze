@@ -15,10 +15,10 @@ public sealed record Cep
 
     public static Result<Cep> Criar(string valor)
     {
-        if (NormalizadoService.TextoVazioOuNulo(valor))
+        if (NormalizacaoService.TextoVazioOuNulo(valor))
             return Result<Cep>.Failure("Cep", "CEP_OBRIGATORIO");
 
-        var textoLimpo = NormalizadoService.LimparEDigitos(valor);
+        var textoLimpo = NormalizacaoService.LimparEDigitos(valor);
 
         if (textoLimpo.Length != 8)
             return Result<Cep>.Failure("Cep", "CEP_DIGITOS");

@@ -15,8 +15,7 @@ public sealed record Email
 
     public static Result<Email> Criar(string valor)
     {
-        var textoLimpo = NormalizadoService.ParaMinusculo(
-            NormalizadoService.LimparTodosEspacos(valor));
+        var textoLimpo = NormalizacaoService.LimparEspacos(valor);
 
         if (string.IsNullOrWhiteSpace(textoLimpo) || !ValidarFormato(textoLimpo))
             return Result<Email>.Failure("Email", "EMAIL_FORMATO");
