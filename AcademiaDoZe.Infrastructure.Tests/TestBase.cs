@@ -6,7 +6,7 @@ namespace AcademiaDoZe.Infrastructure.Tests;
 
 public abstract class TestBase
 {
-    private const DatabaseType SelectedDatabaseType = DatabaseType.SqlServer;
+    private const DatabaseType SelectedDatabaseType = DatabaseType.MySql;
 
     protected string ConnectionString { get; }
     protected DatabaseType DatabaseType { get; }
@@ -33,4 +33,20 @@ public abstract class TestBase
     protected static string GerarEmail() => $"user_{Guid.NewGuid().ToString("N")[..8]}@test.com";
     protected static string GerarTelefone() =>
         (49990000000L + (DateTime.UtcNow.Ticks % 8000000000L) + Interlocked.Increment(ref _counter)).ToString("D11")[..11];
+
+    protected static string GerarCpf()
+    {
+        var baseCpf = (100000000 + Math.Abs(DateTime.UtcNow.Ticks + Interlocked.Increment(ref _counter)) % 899999999)
+            .ToString("D9");
+        var primeiroDigito = CalcularDigitoCpf(baseCpf, 10);
+        var segundoDigito = CalcularDigitoCpf(baseCpf + primeiroDigito, 11);
+        return baseCpf + primeiroDigito + segundoDigito;
+    }
+
+    private static int CalcularDigitoCpf(string numeros, int pesoInicial)
+    {
+        var soma = numeros.Select((numero, indice) => (numero - '0') * (pesoInicial - indice)).Sum();
+        var resto = soma % 11;
+        return resto < 2 ? 0 : 11 - resto;
+    }
 }
