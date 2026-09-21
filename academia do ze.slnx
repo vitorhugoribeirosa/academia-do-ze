@@ -3,4 +3,5 @@
   <Project Path="AcademiaDoZe.Domain.Tests/AcademiaDoZe.Domain.Tests.csproj" />
   <Project Path="AcademiaDoZe.Infrastructure.Tests/AcademiaDoZe.Infrastructure.Tests.csproj" />
   <Project Path="AcademiaDoZe.Infrastructure/AcademiaDoZe.Infrastructure.csproj" />
+  <Project Path="AcademiaDoZe.Application/AcademiaDoZe.Application.csproj" />
 </Solution>
