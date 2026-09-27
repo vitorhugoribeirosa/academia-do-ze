@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "AcademiaDoZe.Presentation.AppMaui",
+    "Projects": [
+      {
+        "Path": "AcademiaDoZe.Presentation.AppMaui\\AcademiaDoZe.Presentation.AppMaui.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

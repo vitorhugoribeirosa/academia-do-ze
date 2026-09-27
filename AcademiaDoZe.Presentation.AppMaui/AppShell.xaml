@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="AcademiaDoZe.Presentation.AppMaui.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:AcademiaDoZe.Presentation.AppMaui.Views"
+    Title="Academia do Zé">
+
+    <FlyoutItem Title="Dashboard">
+        <ShellContent ContentTemplate="{DataTemplate views:DashboardListPage}" Route="dashboard" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Logradouros">
+        <ShellContent ContentTemplate="{DataTemplate views:LogradouroListPage}" Route="logradouros" />
+    </FlyoutItem>
+
+</Shell>
