@@ -8,25 +8,23 @@
     FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource WarmWhite}, Dark={StaticResource OffBlack}}">
 
     <Shell.FlyoutHeader>
-        <Border BackgroundColor="{StaticResource Tertiary}"
-                Stroke="{StaticResource Gold}"
-                StrokeThickness="0,0,0,2"
-                Padding="18,22">
-            <VerticalStackLayout Spacing="10">
+        <Border BackgroundColor="{AppThemeBinding Light={StaticResource Surface}, Dark={StaticResource SurfaceDark}}"
+                Stroke="{AppThemeBinding Light=#D8D4CC, Dark={StaticResource Gray600}}"
+                StrokeThickness="0"
+                Padding="16,20">
+            <VerticalStackLayout Spacing="8">
                 <Border BackgroundColor="White"
-                        Stroke="Transparent"
-                        StrokeShape="RoundRectangle 12"
-                        Padding="6">
-                    <Image Source="academiadoze.png" HeightRequest="86" Aspect="AspectFit"/>
+                        Stroke="#D8D4CC"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="4">
+                    <Image Source="academiadoze.png" HeightRequest="92" Aspect="AspectFit"/>
                 </Border>
-                <Label Text="ACADEMIA DO ZÉ"
-                       TextColor="White"
+                <Label Text="Academia do Zé"
+                       TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}"
                        FontFamily="OpenSansSemibold"
                        FontAttributes="Bold"
-                       FontSize="18"/>
-                <Label Text="Gestão e desempenho"
-                       TextColor="#CFC7BB"
-                       FontSize="12"/>
+                       FontSize="16"/>
             </VerticalStackLayout>
         </Border>
     </Shell.FlyoutHeader>

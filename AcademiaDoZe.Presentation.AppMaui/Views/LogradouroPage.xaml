@@ -11,37 +11,20 @@
                                  Spacing="18"
                                  MaximumWidthRequest="900"
                                  HorizontalOptions="Fill">
-                <Grid ColumnDefinitions="8,*" ColumnSpacing="14">
-                    <BoxView Grid.Column="0" Color="{StaticResource Primary}" CornerRadius="4"/>
-                    <VerticalStackLayout Grid.Column="1" Spacing="3">
+                <Grid>
+                    <VerticalStackLayout Spacing="4">
                         <Label Text="Cadastro de logradouro" Style="{StaticResource SectionTitle}"/>
-                        <Label Text="Preencha os dados abaixo para salvar o endereço."
+                        <Label Text="Preencha os dados do endereço."
                                Style="{StaticResource MutedText}"/>
                     </VerticalStackLayout>
                 </Grid>
 
                 <Border Style="{StaticResource CardBorder}">
-                    <VerticalStackLayout Spacing="10">
-                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                            <VerticalStackLayout Grid.Column="0" Spacing="2">
-                                <Label Text="LOCALIZAÇÃO RÁPIDA" Style="{StaticResource FieldLabel}"/>
-                                <Label Text="Informe o CEP e faça a busca automática."
-                                       Style="{StaticResource MutedText}"
-                                       FontSize="12"/>
-                            </VerticalStackLayout>
-                            <Border Grid.Column="1"
-                                    BackgroundColor="{StaticResource Secondary}"
-                                    Stroke="Transparent"
-                                    StrokeShape="RoundRectangle 10"
-                                    Padding="12,6"
-                                    VerticalOptions="Center">
-                                <Label Text="CEP"
-                                       TextColor="{StaticResource Primary}"
-                                       FontFamily="OpenSansSemibold"
-                                       FontAttributes="Bold"
-                                       FontSize="12"/>
-                            </Border>
-                        </Grid>
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="Consulta por CEP" Style="{StaticResource SectionTitle}" FontSize="18"/>
+                        <Label Text="Informe o CEP para preencher o endereço."
+                               Style="{StaticResource MutedText}"
+                               FontSize="12"/>
                         <Grid ColumnDefinitions="*,130" ColumnSpacing="10">
                             <Entry Grid.Column="0"
                                    Text="{Binding Logradouro.Cep}"
@@ -51,7 +34,7 @@
                                     Text="Buscar CEP"
                                     Command="{Binding SearchByCepCommand}"
                                     Style="{StaticResource ButtonPrimary}"
-                                    HeightRequest="48"
+                                    HeightRequest="44"
                                     FontSize="14"/>
                         </Grid>
                     </VerticalStackLayout>
@@ -59,56 +42,45 @@
 
                 <Border Style="{StaticResource CardBorder}">
                     <VerticalStackLayout Spacing="16">
-                        <Grid ColumnDefinitions="*,Auto">
-                            <Label Grid.Column="0" Text="Dados do endereço" Style="{StaticResource SectionTitle}" FontSize="20"/>
-                            <Border Grid.Column="1"
-                                    BackgroundColor="{AppThemeBinding Light=#F1ECE3, Dark=#2A2A2A}"
-                                    Stroke="Transparent"
-                                    StrokeShape="RoundRectangle 10"
-                                    Padding="12,6"
-                                    VerticalOptions="Center">
-                                <Label Text="{Binding Logradouro.Id, StringFormat='ID {0}'}"
-                                       Style="{StaticResource MutedText}"
-                                       FontFamily="OpenSansSemibold"
-                                       FontAttributes="Bold"
-                                       FontSize="12"/>
-                            </Border>
-                        </Grid>
+                        <Label Text="Dados do endereço" Style="{StaticResource SectionTitle}" FontSize="18"/>
+                        <Label Text="{Binding Logradouro.Id, StringFormat='Identificador: {0}'}"
+                               Style="{StaticResource MutedText}"
+                               FontSize="12"/>
 
                         <VerticalStackLayout Spacing="4">
-                            <Label Text="NOME / RUA" Style="{StaticResource FieldLabel}"/>
+                            <Label Text="Nome / Rua" Style="{StaticResource FieldLabel}"/>
                             <Entry Text="{Binding Logradouro.Nome}" Placeholder="Digite o nome da rua..."/>
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Spacing="4">
-                            <Label Text="BAIRRO" Style="{StaticResource FieldLabel}"/>
+                            <Label Text="Bairro" Style="{StaticResource FieldLabel}"/>
                             <Entry Text="{Binding Logradouro.Bairro}" Placeholder="Digite o bairro..."/>
                         </VerticalStackLayout>
 
                         <Grid ColumnDefinitions="*,150" ColumnSpacing="12">
                             <VerticalStackLayout Grid.Column="0" Spacing="4">
-                                <Label Text="CIDADE" Style="{StaticResource FieldLabel}"/>
+                                <Label Text="Cidade" Style="{StaticResource FieldLabel}"/>
                                 <Entry Text="{Binding Logradouro.Cidade}" Placeholder="Digite a cidade..."/>
                             </VerticalStackLayout>
                             <VerticalStackLayout Grid.Column="1" Spacing="4">
-                                <Label Text="ESTADO" Style="{StaticResource FieldLabel}"/>
+                                <Label Text="Estado" Style="{StaticResource FieldLabel}"/>
                                 <Entry Text="{Binding Logradouro.Estado}" Placeholder="UF"/>
                             </VerticalStackLayout>
                         </Grid>
 
                         <VerticalStackLayout Spacing="4">
-                            <Label Text="PAÍS" Style="{StaticResource FieldLabel}"/>
+                            <Label Text="País" Style="{StaticResource FieldLabel}"/>
                             <Entry Text="{Binding Logradouro.Pais}" Placeholder="Digite o país..."/>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
 
-                <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
-                    <Button Grid.Column="0"
+                <Grid ColumnDefinitions="*,140,180" ColumnSpacing="12">
+                    <Button Grid.Column="1"
                             Text="Cancelar"
                             Command="{Binding CancelCommand}"
                             Style="{StaticResource ButtonSecondary}"/>
-                    <Button Grid.Column="1"
+                    <Button Grid.Column="2"
                             Text="Salvar logradouro"
                             Command="{Binding SaveLogradouroCommand}"
                             Style="{StaticResource ButtonPrimary}"/>

@@ -7,120 +7,78 @@
              Title="{Binding Title}">
     <Grid>
         <ScrollView>
-            <VerticalStackLayout Padding="26,20,26,36"
-                                 Spacing="22"
+            <VerticalStackLayout Padding="32,24,32,36"
+                                 Spacing="20"
                                  MaximumWidthRequest="1000"
                                  HorizontalOptions="Fill">
-                <Border Style="{StaticResource HeroBorder}">
-                    <VerticalStackLayout Spacing="14">
-                        <Border BackgroundColor="White"
-                                Stroke="#E8B326"
-                                StrokeThickness="1"
-                                StrokeShape="RoundRectangle 18"
-                                Padding="12"
-                                HorizontalOptions="Center"
-                                MaximumWidthRequest="720">
-                            <Image Source="academiadoze.png"
-                                   HeightRequest="245"
-                                   Aspect="AspectFit"/>
-                        </Border>
-
-                        <Label Text="ACADEMIA DO ZÉ"
-                               TextColor="White"
-                               FontFamily="OpenSansSemibold"
-                               FontAttributes="Bold"
-                               FontSize="28"
-                               HorizontalTextAlignment="Center"/>
-                        <BoxView Color="{StaticResource Gold}"
-                                 HeightRequest="3"
-                                 WidthRequest="84"
-                                 CornerRadius="2"
-                                 HorizontalOptions="Center"/>
-                        <Label Text="Gestão simples. Resultado forte."
-                               TextColor="#E7E1D8"
-                               FontSize="15"
-                               HorizontalTextAlignment="Center"/>
-                    </VerticalStackLayout>
-                </Border>
-
-                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                    <VerticalStackLayout Grid.Column="0" Spacing="3">
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                    <VerticalStackLayout Grid.Column="0" Spacing="4">
                         <Label Text="Visão geral" Style="{StaticResource SectionTitle}"/>
-                        <Label Text="Acompanhe os principais números da academia."
+                        <Label Text="Resumo dos cadastros da academia."
                                Style="{StaticResource MutedText}"/>
                     </VerticalStackLayout>
-                    <Border Grid.Column="1"
-                            BackgroundColor="{StaticResource Secondary}"
-                            Stroke="Transparent"
-                            StrokeShape="RoundRectangle 12"
-                            Padding="14,8"
-                            VerticalOptions="Center">
-                        <Label Text="PAINEL"
-                               TextColor="{StaticResource Primary}"
-                               FontFamily="OpenSansSemibold"
-                               FontAttributes="Bold"
-                               FontSize="12"/>
-                    </Border>
+                    <Label Grid.Column="1"
+                           Text="Dashboard"
+                           Style="{StaticResource MutedText}"
+                           VerticalOptions="Center"/>
                 </Grid>
+
+                <Border Style="{StaticResource HeroBorder}">
+                    <Image Source="academiadoze.png"
+                           HeightRequest="190"
+                           MaximumWidthRequest="620"
+                           HorizontalOptions="Center"
+                           Aspect="AspectFit"/>
+                </Border>
+
+                <Label Text="Indicadores" Style="{StaticResource SectionTitle}" FontSize="20"/>
 
                 <Grid RowDefinitions="Auto,Auto"
                       ColumnDefinitions="*,*"
-                      RowSpacing="16"
-                      ColumnSpacing="16">
+                      RowSpacing="12"
+                      ColumnSpacing="12">
                     <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource MetricCard}">
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateToLogradourosCommand}"/>
                         </Border.GestureRecognizers>
-                        <Grid ColumnDefinitions="6,*" ColumnSpacing="16">
-                            <BoxView Grid.Column="0" Color="{StaticResource Primary}" CornerRadius="3"/>
-                            <VerticalStackLayout Grid.Column="1" Spacing="2">
-                                <Label Text="{Binding TotalLogradouros}" Style="{StaticResource MetricValue}"/>
-                                <Label Text="Logradouros" FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="16"/>
-                                <Label Text="Toque para acessar" Style="{StaticResource MutedText}" FontSize="12"/>
-                            </VerticalStackLayout>
-                        </Grid>
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Logradouros" Style="{StaticResource MutedText}"/>
+                            <Label Text="{Binding TotalLogradouros}" Style="{StaticResource MetricValue}"/>
+                            <Label Text="Abrir cadastro" TextColor="{StaticResource Primary}" FontFamily="OpenSansSemibold" FontSize="12"/>
+                        </VerticalStackLayout>
                     </Border>
 
                     <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource MetricCard}">
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateToAlunosCommand}"/>
                         </Border.GestureRecognizers>
-                        <Grid ColumnDefinitions="6,*" ColumnSpacing="16">
-                            <BoxView Grid.Column="0" Color="{StaticResource Gold}" CornerRadius="3"/>
-                            <VerticalStackLayout Grid.Column="1" Spacing="2">
-                                <Label Text="{Binding TotalAlunos}" Style="{StaticResource MetricValue}"/>
-                                <Label Text="Alunos" FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="16"/>
-                                <Label Text="Cadastros ativos" Style="{StaticResource MutedText}" FontSize="12"/>
-                            </VerticalStackLayout>
-                        </Grid>
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Alunos" Style="{StaticResource MutedText}"/>
+                            <Label Text="{Binding TotalAlunos}" Style="{StaticResource MetricValue}"/>
+                            <Label Text="Cadastros registrados" Style="{StaticResource MutedText}" FontSize="12"/>
+                        </VerticalStackLayout>
                     </Border>
 
                     <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource MetricCard}">
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateToColaboradoresCommand}"/>
                         </Border.GestureRecognizers>
-                        <Grid ColumnDefinitions="6,*" ColumnSpacing="16">
-                            <BoxView Grid.Column="0" Color="#303030" CornerRadius="3"/>
-                            <VerticalStackLayout Grid.Column="1" Spacing="2">
-                                <Label Text="{Binding TotalColaboradores}" Style="{StaticResource MetricValue}"/>
-                                <Label Text="Colaboradores" FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="16"/>
-                                <Label Text="Equipe cadastrada" Style="{StaticResource MutedText}" FontSize="12"/>
-                            </VerticalStackLayout>
-                        </Grid>
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Colaboradores" Style="{StaticResource MutedText}"/>
+                            <Label Text="{Binding TotalColaboradores}" Style="{StaticResource MetricValue}"/>
+                            <Label Text="Equipe cadastrada" Style="{StaticResource MutedText}" FontSize="12"/>
+                        </VerticalStackLayout>
                     </Border>
 
                     <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource MetricCard}">
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NavigateToMatriculasCommand}"/>
                         </Border.GestureRecognizers>
-                        <Grid ColumnDefinitions="6,*" ColumnSpacing="16">
-                            <BoxView Grid.Column="0" Color="#E7861A" CornerRadius="3"/>
-                            <VerticalStackLayout Grid.Column="1" Spacing="2">
-                                <Label Text="{Binding TotalMatriculas}" Style="{StaticResource MetricValue}"/>
-                                <Label Text="Matrículas" FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="16"/>
-                                <Label Text="Planos registrados" Style="{StaticResource MutedText}" FontSize="12"/>
-                            </VerticalStackLayout>
-                        </Grid>
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Matrículas" Style="{StaticResource MutedText}"/>
+                            <Label Text="{Binding TotalMatriculas}" Style="{StaticResource MetricValue}"/>
+                            <Label Text="Planos registrados" Style="{StaticResource MutedText}" FontSize="12"/>
+                        </VerticalStackLayout>
                     </Border>
                 </Grid>
             </VerticalStackLayout>
