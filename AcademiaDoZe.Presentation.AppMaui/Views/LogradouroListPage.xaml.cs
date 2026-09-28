@@ -52,4 +52,22 @@ public partial class LogradouroListPage : ContentPage
             await DisplayAlertAsync("Erro", $"Erro ao excluir logradouro: {ex.Message}", "OK");
         }
     }
+
+    private void OnFilterSelectorTapped(object? sender, TappedEventArgs e)
+    {
+        FilterOptionsPanel.IsVisible = !FilterOptionsPanel.IsVisible;
+        FilterArrowLabel.Text = FilterOptionsPanel.IsVisible ? "▲" : "▼";
+    }
+
+    private void OnFilterOptionTapped(object? sender, TappedEventArgs e)
+    {
+        if (e.Parameter is string filterType &&
+            BindingContext is LogradouroListViewModel viewModel)
+        {
+            viewModel.SelectedFilterType = filterType;
+        }
+
+        FilterOptionsPanel.IsVisible = false;
+        FilterArrowLabel.Text = "▼";
+    }
 }

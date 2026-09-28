@@ -25,11 +25,31 @@
             <VerticalStackLayout Spacing="8">
                 <Label Text="Pesquisar cadastro" Style="{StaticResource FieldLabel}"/>
                 <Grid ColumnDefinitions="130,*,100" ColumnSpacing="10" VerticalOptions="Center">
-                    <Picker Grid.Column="0"
-                            Title="Filtro"
-                            ItemsSource="{Binding FilterTypes}"
-                            SelectedItem="{Binding SelectedFilterType}"
-                            VerticalOptions="Center"/>
+                    <Border Grid.Column="0"
+                            BackgroundColor="{AppThemeBinding Light={StaticResource WarmWhite}, Dark={StaticResource Gray900}}"
+                            Stroke="{AppThemeBinding Light=#D8D4CC, Dark={StaticResource Gray600}}"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 6"
+                            HeightRequest="44"
+                            Padding="12,0"
+                            VerticalOptions="Center">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnFilterSelectorTapped"/>
+                        </Border.GestureRecognizers>
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="6">
+                            <Label Text="{Binding SelectedFilterType}"
+                                   FontFamily="OpenSansRegular"
+                                   FontSize="14"
+                                   TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"
+                                   VerticalTextAlignment="Center"/>
+                            <Label x:Name="FilterArrowLabel"
+                                   Grid.Column="1"
+                                   Text="▼"
+                                   FontSize="12"
+                                   TextColor="{AppThemeBinding Light={StaticResource TextMuted}, Dark={StaticResource TextMutedDark}}"
+                                   VerticalTextAlignment="Center"/>
+                        </Grid>
+                    </Border>
                     <Entry Grid.Column="1"
                            Text="{Binding SearchText}"
                            Placeholder="Digite o valor..."
@@ -41,6 +61,42 @@
                             HeightRequest="44"
                             Command="{Binding SearchLogradourosCommand}"/>
                 </Grid>
+            </VerticalStackLayout>
+        </Border>
+
+        <Border x:Name="FilterOptionsPanel"
+                Grid.Row="1"
+                Grid.RowSpan="3"
+                ZIndex="10"
+                IsVisible="False"
+                HorizontalOptions="Start"
+                VerticalOptions="Start"
+                WidthRequest="130"
+                Margin="40,94,0,0"
+                Padding="4"
+                BackgroundColor="{AppThemeBinding Light={StaticResource WarmWhite}, Dark={StaticResource Gray900}}"
+                Stroke="{AppThemeBinding Light=#D8D4CC, Dark={StaticResource Gray600}}"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 6">
+            <VerticalStackLayout BindableLayout.ItemsSource="{Binding FilterTypes}" Spacing="0">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <Border BackgroundColor="Transparent"
+                                StrokeThickness="0"
+                                HeightRequest="38"
+                                Padding="10,0">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                      Tapped="OnFilterOptionTapped"/>
+                            </Border.GestureRecognizers>
+                            <Label Text="{Binding .}"
+                                   TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}"
+                                   FontFamily="OpenSansRegular"
+                                   FontSize="14"
+                                   VerticalTextAlignment="Center"/>
+                        </Border>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
             </VerticalStackLayout>
         </Border>
 
