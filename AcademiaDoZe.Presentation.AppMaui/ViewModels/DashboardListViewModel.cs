@@ -5,6 +5,9 @@ namespace AcademiaDoZe.Presentation.AppMaui.ViewModels;
 
 public partial class DashboardListViewModel : BaseViewModel
 {
+    private const string LogoResourceName =
+        "AcademiaDoZe.Presentation.AppMaui.Resources.Images.academiadoze.png";
+
     private readonly ILogradouroService _logradouroService;
     private readonly IAlunoService _alunoService;
     private readonly IColaboradorService _colaboradorService;
@@ -21,6 +24,10 @@ public partial class DashboardListViewModel : BaseViewModel
 
     private int _totalMatriculas;
     public int TotalMatriculas { get => _totalMatriculas; set => SetProperty(ref _totalMatriculas, value); }
+
+    public ImageSource LogoImage { get; } = ImageSource.FromStream(() =>
+        typeof(DashboardListViewModel).Assembly.GetManifestResourceStream(LogoResourceName)
+        ?? throw new InvalidOperationException("Imagem da Academia do Zé não encontrada no aplicativo."));
 
     public DashboardListViewModel(
         ILogradouroService logradouroService,

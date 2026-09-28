@@ -24,7 +24,7 @@
                 </Grid>
 
                 <Border Style="{StaticResource HeroBorder}">
-                    <Image Source="academiadoze.png"
+                    <Image Source="{Binding LogoImage}"
                            HeightRequest="190"
                            MaximumWidthRequest="620"
                            HorizontalOptions="Center"
