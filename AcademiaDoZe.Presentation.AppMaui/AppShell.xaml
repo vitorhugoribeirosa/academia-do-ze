@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="AcademiaDoZe.Presentation.AppMaui.AppShell"
+    x:Name="AppShellRoot"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:AcademiaDoZe.Presentation.AppMaui.Views"
@@ -18,7 +19,9 @@
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 8"
                         Padding="4">
-                    <Image Source="academiadoze.png" HeightRequest="92" Aspect="AspectFit"/>
+                    <Image Source="{Binding Source={x:Reference AppShellRoot}, Path=MenuLogoImage}"
+                           HeightRequest="92"
+                           Aspect="AspectFit"/>
                 </Border>
                 <Label Text="Academia do Zé"
                        TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}"
