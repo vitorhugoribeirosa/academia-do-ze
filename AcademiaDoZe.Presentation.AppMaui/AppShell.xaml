@@ -4,7 +4,32 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:AcademiaDoZe.Presentation.AppMaui.Views"
-    Title="Academia do Zé">
+    Title="Academia do Zé"
+    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource WarmWhite}, Dark={StaticResource OffBlack}}">
+
+    <Shell.FlyoutHeader>
+        <Border BackgroundColor="{StaticResource Tertiary}"
+                Stroke="{StaticResource Gold}"
+                StrokeThickness="0,0,0,2"
+                Padding="18,22">
+            <VerticalStackLayout Spacing="10">
+                <Border BackgroundColor="White"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="6">
+                    <Image Source="academiadoze.png" HeightRequest="86" Aspect="AspectFit"/>
+                </Border>
+                <Label Text="ACADEMIA DO ZÉ"
+                       TextColor="White"
+                       FontFamily="OpenSansSemibold"
+                       FontAttributes="Bold"
+                       FontSize="18"/>
+                <Label Text="Gestão e desempenho"
+                       TextColor="#CFC7BB"
+                       FontSize="12"/>
+            </VerticalStackLayout>
+        </Border>
+    </Shell.FlyoutHeader>
 
     <FlyoutItem Title="Dashboard">
         <ShellContent ContentTemplate="{DataTemplate views:DashboardListPage}" Route="dashboard" />
@@ -13,5 +38,12 @@
     <FlyoutItem Title="Logradouros">
         <ShellContent ContentTemplate="{DataTemplate views:LogradouroListPage}" Route="logradouros" />
     </FlyoutItem>
+
+    <Shell.FlyoutFooter>
+        <Label Text="Vitor Hugo Ribeiro Sá"
+               Style="{StaticResource MutedText}"
+               FontSize="12"
+               Margin="18,10,18,18"/>
+    </Shell.FlyoutFooter>
 
 </Shell>
