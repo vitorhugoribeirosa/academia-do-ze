@@ -39,7 +39,7 @@ public partial class DashboardListViewModel : BaseViewModel
         _alunoService = alunoService;
         _colaboradorService = colaboradorService;
         _matriculaService = matriculaService;
-        Title = "Dashboard";
+        Title = "Início";
     }
 
     [RelayCommand]

@@ -14,7 +14,7 @@
 
                 <Grid RowDefinitions="Auto,Auto">
                     <VerticalStackLayout Spacing="6">
-                        <Label Text="Dashboard" Style="{StaticResource HeaderTitle}"/>
+                        <Label Text="Início" Style="{StaticResource HeaderTitle}"/>
                         <Label Text="Visão geral dos cadastros da academia." Style="{StaticResource HeaderSubtitle}"/>
                     </VerticalStackLayout>
                     <BoxView Grid.Row="1"
