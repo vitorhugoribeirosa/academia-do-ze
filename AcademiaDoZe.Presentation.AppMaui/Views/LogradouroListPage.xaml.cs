@@ -1,4 +1,5 @@
 using AcademiaDoZe.Application.DTOs;
+using AcademiaDoZe.Presentation.AppMaui.Services;
 using AcademiaDoZe.Presentation.AppMaui.ViewModels;
 
 namespace AcademiaDoZe.Presentation.AppMaui.Views;
@@ -32,7 +33,7 @@ public partial class LogradouroListPage : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlertAsync("Erro", $"Erro ao editar logradouro: {ex.Message}", "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Erro ao editar logradouro: {ex.Message}", "OK");
         }
     }
 
@@ -49,7 +50,7 @@ public partial class LogradouroListPage : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlertAsync("Erro", $"Erro ao excluir logradouro: {ex.Message}", "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Erro ao excluir logradouro: {ex.Message}", "OK");
         }
     }
 

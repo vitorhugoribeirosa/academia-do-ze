@@ -1,5 +1,6 @@
 using AcademiaDoZe.Application.DTOs;
 using AcademiaDoZe.Application.Interfaces;
+using AcademiaDoZe.Presentation.AppMaui.Services;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 
@@ -46,7 +47,7 @@ public partial class LogradouroListViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlertAsync("Erro", $"Erro ao navegar para tela de cadastro: {ex.Message}", "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Erro ao navegar para tela de cadastro: {ex.Message}", "OK");
         }
     }
 
@@ -62,7 +63,7 @@ public partial class LogradouroListViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlertAsync("Erro", $"Erro ao navegar para tela de edição: {ex.Message}", "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Erro ao navegar para tela de edição: {ex.Message}", "OK");
         }
     }
 
@@ -101,7 +102,7 @@ public partial class LogradouroListViewModel : BaseViewModel
             {
                 if (!int.TryParse(SearchText.Trim(), out int id) || id <= 0)
                 {
-                    await Shell.Current.DisplayAlertAsync("Validação", "Para buscar por ID, informe um número inteiro positivo válido.", "OK");
+                    await InAppDialogService.ShowAsync("Validação", "Para buscar por ID, informe um número inteiro positivo válido.", "OK");
                     return;
                 }
 
@@ -114,7 +115,7 @@ public partial class LogradouroListViewModel : BaseViewModel
                 var cepLimpo = new string([.. SearchText.Where(char.IsDigit)]);
                 if (cepLimpo.Length != 8)
                 {
-                    await Shell.Current.DisplayAlertAsync("Validação", "Para buscar por CEP, informe os 8 dígitos numéricos.", "OK");
+                    await InAppDialogService.ShowAsync("Validação", "Para buscar por CEP, informe os 8 dígitos numéricos.", "OK");
                     return;
                 }
 
@@ -133,11 +134,11 @@ public partial class LogradouroListViewModel : BaseViewModel
         }
         catch (OperationCanceledException)
         {
-            await Shell.Current.DisplayAlertAsync("Tempo Esgotado", "A busca expirou. Verifique a conexão com o banco.", "OK");
+            await InAppDialogService.ShowAsync("Tempo Esgotado", "A busca expirou. Verifique a conexão com o banco.", "OK");
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlertAsync("Erro", $"Erro ao buscar logradouros: {ex.Message}", "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Erro ao buscar logradouros: {ex.Message}", "OK");
         }
         finally
         {
@@ -177,11 +178,11 @@ public partial class LogradouroListViewModel : BaseViewModel
         }
         catch (OperationCanceledException)
         {
-            await Shell.Current.DisplayAlertAsync("Tempo Esgotado", "O carregamento dos logradouros expirou. Verifique a conexão.", "OK");
+            await InAppDialogService.ShowAsync("Tempo Esgotado", "O carregamento dos logradouros expirou. Verifique a conexão.", "OK");
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlertAsync("Erro", $"Erro ao carregar logradouros: {ex.Message}", "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Erro ao carregar logradouros: {ex.Message}", "OK");
         }
         finally
         {
@@ -196,7 +197,7 @@ public partial class LogradouroListViewModel : BaseViewModel
         if (logradouro == null)
             return;
 
-        bool confirm = await Shell.Current.DisplayAlertAsync(
+        bool confirm = await InAppDialogService.ShowAsync(
             "Confirmar Exclusão",
             $"Deseja realmente excluir o logradouro {logradouro.Nome}?",
             "Sim",
@@ -214,16 +215,16 @@ public partial class LogradouroListViewModel : BaseViewModel
             if (success)
             {
                 Logradouros.Remove(logradouro);
-                await Shell.Current.DisplayAlertAsync("Sucesso", "Logradouro excluído com sucesso!", "OK");
+                await InAppDialogService.ShowAsync("Sucesso", "Logradouro excluído com sucesso!", "OK");
             }
             else
             {
-                await Shell.Current.DisplayAlertAsync("Erro", "Não foi possível excluir o logradouro.", "OK");
+                await InAppDialogService.ShowAsync("Erro", "Não foi possível excluir o logradouro.", "OK");
             }
         }
         catch (OperationCanceledException)
         {
-            await Shell.Current.DisplayAlertAsync("Tempo Esgotado", "A exclusão do logradouro expirou. Verifique a conexão.", "OK");
+            await InAppDialogService.ShowAsync("Tempo Esgotado", "A exclusão do logradouro expirou. Verifique a conexão.", "OK");
         }
         catch (Exception ex)
         {
@@ -231,14 +232,14 @@ public partial class LogradouroListViewModel : BaseViewModel
                 ex.Message.Contains("constraint", StringComparison.OrdinalIgnoreCase) ||
                 ex.Message.Contains("REFERENCE", StringComparison.OrdinalIgnoreCase))
             {
-                await Shell.Current.DisplayAlertAsync(
+                await InAppDialogService.ShowAsync(
                     "Não Permitido",
                     "Este logradouro não pode ser excluído pois está vinculado a alunos ou colaboradores cadastrados.",
                     "OK");
             }
             else
             {
-                await Shell.Current.DisplayAlertAsync("Erro", $"Erro ao excluir logradouro: {ex.Message}", "OK");
+                await InAppDialogService.ShowAsync("Erro", $"Erro ao excluir logradouro: {ex.Message}", "OK");
             }
         }
         finally

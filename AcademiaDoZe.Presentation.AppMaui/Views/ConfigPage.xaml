@@ -18,7 +18,7 @@
 
             <Border Style="{StaticResource FlatSection}">
                 <VerticalStackLayout Spacing="18">
-                    <Grid ColumnDefinitions="*,270" ColumnSpacing="24">
+                    <Grid ColumnDefinitions="*,380" ColumnSpacing="24">
                         <Grid ColumnDefinitions="34,*" ColumnSpacing="10" VerticalOptions="Center">
                             <Label Text="&#xe40a;"
                                    FontFamily="MaterialIcons"
@@ -33,19 +33,25 @@
                         </Grid>
                         <VerticalStackLayout Grid.Column="1" Spacing="6">
                             <Label Text="Tema do aplicativo" Style="{StaticResource FieldLabel}"/>
-                            <Border Style="{StaticResource FormFieldBorder}">
-                                <Picker x:Name="TemaPicker"
-                                        Title="Selecione um tema"
-                                        Style="{StaticResource FormPicker}">
-                                    <Picker.ItemsSource>
-                                        <x:Array Type="{x:Type x:String}">
-                                            <x:String>Claro</x:String>
-                                            <x:String>Escuro</x:String>
-                                            <x:String>Sistema</x:String>
-                                        </x:Array>
-                                    </Picker.ItemsSource>
-                                </Picker>
-                            </Border>
+                            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="6">
+                                <Button x:Name="TemaClaroButton"
+                                        Text="Claro"
+                                        CommandParameter="0"
+                                        Clicked="OnTemaOptionClicked"
+                                        Style="{StaticResource ButtonSecondary}"/>
+                                <Button x:Name="TemaEscuroButton"
+                                        Grid.Column="1"
+                                        Text="Escuro"
+                                        CommandParameter="1"
+                                        Clicked="OnTemaOptionClicked"
+                                        Style="{StaticResource ButtonSecondary}"/>
+                                <Button x:Name="TemaSistemaButton"
+                                        Grid.Column="2"
+                                        Text="Sistema"
+                                        CommandParameter="2"
+                                        Clicked="OnTemaOptionClicked"
+                                        Style="{StaticResource ButtonSecondary}"/>
+                            </Grid>
                         </VerticalStackLayout>
                     </Grid>
                     <BoxView Style="{StaticResource SectionRule}"/>
@@ -91,31 +97,28 @@
                              Margin="20,0"/>
 
                     <VerticalStackLayout Grid.Row="3" Padding="20" Spacing="18">
-                        <Grid ColumnDefinitions="270,*" ColumnSpacing="16">
+                        <Grid>
                             <VerticalStackLayout Spacing="6">
                                 <Label Text="Gerenciador" Style="{StaticResource FieldLabel}"/>
-                                <Border Style="{StaticResource FormFieldBorder}">
-                                    <Grid ColumnDefinitions="28,*" ColumnSpacing="6">
-                                        <Label Text="&#xe1db;"
-                                               FontFamily="MaterialIcons"
-                                               FontSize="19"
-                                               TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
-                                               VerticalTextAlignment="Center"/>
-                                        <Picker x:Name="DatabaseTypePicker"
-                                                Grid.Column="1"
-                                                Title="Selecione um banco de dados"
-                                                Style="{StaticResource FormPicker}"
-                                                SelectedIndexChanged="OnDatabaseTypeChanged">
-                                            <Picker.ItemsSource>
-                                                <x:Array Type="{x:Type x:String}">
-                                                    <x:String>SQLite</x:String>
-                                                    <x:String>MySQL</x:String>
-                                                    <x:String>SQL Server</x:String>
-                                                </x:Array>
-                                            </Picker.ItemsSource>
-                                        </Picker>
-                                    </Grid>
-                                </Border>
+                                <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                                    <Button x:Name="BancoSqliteButton"
+                                            Text="SQLite"
+                                            CommandParameter="0"
+                                            Clicked="OnDatabaseOptionClicked"
+                                            Style="{StaticResource ButtonSecondary}"/>
+                                    <Button x:Name="BancoMySqlButton"
+                                            Grid.Column="1"
+                                            Text="MySQL"
+                                            CommandParameter="1"
+                                            Clicked="OnDatabaseOptionClicked"
+                                            Style="{StaticResource ButtonSecondary}"/>
+                                    <Button x:Name="BancoSqlServerButton"
+                                            Grid.Column="2"
+                                            Text="SQL Server"
+                                            CommandParameter="2"
+                                            Clicked="OnDatabaseOptionClicked"
+                                            Style="{StaticResource ButtonSecondary}"/>
+                                </Grid>
                             </VerticalStackLayout>
 
                         </Grid>
@@ -214,7 +217,7 @@
                                     Text="Salvar conexão"
                                     Clicked="OnSalvarBancoClicked"
                                     Style="{StaticResource ButtonPrimary}"
-                                    WidthRequest="150">
+                                    WidthRequest="200">
                                 <Button.ImageSource>
                                     <FontImageSource FontFamily="MaterialIcons"
                                                      Glyph="&#xe161;"

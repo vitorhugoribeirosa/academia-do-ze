@@ -1,5 +1,6 @@
 using AcademiaDoZe.Application.DTOs;
 using AcademiaDoZe.Application.Interfaces;
+using AcademiaDoZe.Presentation.AppMaui.Services;
 using CommunityToolkit.Mvvm.Input;
 
 namespace AcademiaDoZe.Presentation.AppMaui.ViewModels;
@@ -91,11 +92,11 @@ public partial class LogradouroViewModel : BaseViewModel
         }
         catch (OperationCanceledException)
         {
-            await Shell.Current.DisplayAlertAsync("Tempo Esgotado", "O carregamento do logradouro expirou. Verifique a conexão.", "OK");
+            await InAppDialogService.ShowAsync("Tempo Esgotado", "O carregamento do logradouro expirou. Verifique a conexão.", "OK");
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlertAsync("Erro", $"Erro ao carregar logradouro: {ex.Message}", "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Erro ao carregar logradouro: {ex.Message}", "OK");
         }
         finally
         {
@@ -108,14 +109,14 @@ public partial class LogradouroViewModel : BaseViewModel
     {
         if (string.IsNullOrWhiteSpace(Logradouro.Cep))
         {
-            await Shell.Current.DisplayAlertAsync("Aviso", "Informe o CEP para realizar a busca.", "OK");
+            await InAppDialogService.ShowAsync("Aviso", "Informe o CEP para realizar a busca.", "OK");
             return;
         }
 
         var apenasDigitos = new string([.. Logradouro.Cep.Where(char.IsDigit)]);
         if (apenasDigitos.Length != 8)
         {
-            await Shell.Current.DisplayAlertAsync("Validação", "O CEP deve conter exatamente 8 dígitos numéricos.", "OK");
+            await InAppDialogService.ShowAsync("Validação", "O CEP deve conter exatamente 8 dígitos numéricos.", "OK");
             return;
         }
 
@@ -130,20 +131,20 @@ public partial class LogradouroViewModel : BaseViewModel
                 LogradouroId = logradouroData.Id;
                 IsEditMode = true;
                 Title = "Editar Logradouro";
-                await Shell.Current.DisplayAlertAsync("Aviso", "CEP já cadastrado! Dados carregados para edição.", "OK");
+                await InAppDialogService.ShowAsync("Aviso", "CEP já cadastrado! Dados carregados para edição.", "OK");
             }
             else
             {
-                await Shell.Current.DisplayAlertAsync("Aviso", "CEP não encontrado.", "OK");
+                await InAppDialogService.ShowAsync("Aviso", "CEP não encontrado.", "OK");
             }
         }
         catch (OperationCanceledException)
         {
-            await Shell.Current.DisplayAlertAsync("Tempo Esgotado", "A busca do CEP expirou. Verifique a conexão com o banco.", "OK");
+            await InAppDialogService.ShowAsync("Tempo Esgotado", "A busca do CEP expirou. Verifique a conexão com o banco.", "OK");
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlertAsync("Erro", $"Erro ao buscar CEP: {ex.Message}", "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Erro ao buscar CEP: {ex.Message}", "OK");
         }
         finally
         {
@@ -175,31 +176,31 @@ public partial class LogradouroViewModel : BaseViewModel
             if (IsEditMode)
             {
                 await _logradouroService.AtualizarAsync(Logradouro, cts.Token);
-                await Shell.Current.DisplayAlertAsync("Sucesso", "Logradouro atualizado com sucesso!", "OK");
+                await InAppDialogService.ShowAsync("Sucesso", "Logradouro atualizado com sucesso!", "OK");
             }
             else
             {
                 await _logradouroService.AdicionarAsync(Logradouro, cts.Token);
-                await Shell.Current.DisplayAlertAsync("Sucesso", "Logradouro criado com sucesso!", "OK");
+                await InAppDialogService.ShowAsync("Sucesso", "Logradouro criado com sucesso!", "OK");
             }
 
             await Shell.Current.GoToAsync("..");
         }
         catch (OperationCanceledException)
         {
-            await Shell.Current.DisplayAlertAsync("Tempo Esgotado", "A gravação do logradouro expirou. Verifique a conexão.", "OK");
+            await InAppDialogService.ShowAsync("Tempo Esgotado", "A gravação do logradouro expirou. Verifique a conexão.", "OK");
         }
         catch (InvalidOperationException ex)
         {
-            await Shell.Current.DisplayAlertAsync("Regra de Negócio", ex.Message, "OK");
+            await InAppDialogService.ShowAsync("Regra de Negócio", ex.Message, "OK");
         }
         catch (ArgumentException ex)
         {
-            await Shell.Current.DisplayAlertAsync("Validação", ex.Message, "OK");
+            await InAppDialogService.ShowAsync("Validação", ex.Message, "OK");
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlertAsync("Erro", $"Erro ao salvar logradouro: {ex.Message}", "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Erro ao salvar logradouro: {ex.Message}", "OK");
         }
         finally
         {
@@ -248,7 +249,7 @@ public partial class LogradouroViewModel : BaseViewModel
         if (errors.Count > 0)
         {
             var mensagem = "Por favor, corrija os seguintes campos:\n\n" + string.Join("\n", errors);
-            await Shell.Current.DisplayAlertAsync("Erros de Validação", mensagem, "OK");
+            await InAppDialogService.ShowAsync("Erros de Validação", mensagem, "OK");
             return false;
         }
 

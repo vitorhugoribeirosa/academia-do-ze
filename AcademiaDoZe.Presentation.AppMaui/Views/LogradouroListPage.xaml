@@ -16,7 +16,7 @@
                     Text="Novo logradouro"
                     Command="{Binding AddLogradouroCommand}"
                     Style="{StaticResource ButtonPrimary}"
-                    WidthRequest="168"
+                    WidthRequest="196"
                     VerticalOptions="Center">
                 <Button.ImageSource>
                     <FontImageSource FontFamily="MaterialIcons" Glyph="&#xe145;" Size="18"

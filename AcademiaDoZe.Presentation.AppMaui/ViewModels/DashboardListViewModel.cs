@@ -1,4 +1,5 @@
 using AcademiaDoZe.Application.Interfaces;
+using AcademiaDoZe.Presentation.AppMaui.Services;
 using CommunityToolkit.Mvvm.Input;
 
 namespace AcademiaDoZe.Presentation.AppMaui.ViewModels;
@@ -68,14 +69,14 @@ public partial class DashboardListViewModel : BaseViewModel
         }
         catch (OperationCanceledException)
         {
-            await Shell.Current.DisplayAlertAsync(
+            await InAppDialogService.ShowAsync(
                 "Tempo Esgotado",
                 "A conexão com o banco de dados expirou (timeout). Verifique se o caminho ou os dados de conexão estão corretos.",
                 "OK");
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlertAsync("Erro", $"Erro ao carregar dados do painel: {ex.Message}", "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Erro ao carregar dados do painel: {ex.Message}", "OK");
         }
         finally
         {

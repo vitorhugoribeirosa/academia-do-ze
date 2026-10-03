@@ -1,4 +1,5 @@
 using AcademiaDoZe.Presentation.AppMaui.Messages;
+using AcademiaDoZe.Presentation.AppMaui.Services;
 using AcademiaDoZe.Infrastructure.Data;
 using CommunityToolkit.Mvvm.Messaging;
 
@@ -7,7 +8,8 @@ namespace AcademiaDoZe.Presentation.AppMaui.Views;
 public partial class ConfigPage : ContentPage
 {
     private const string SenhaPadraoBanco = "abcBolinhas12345";
-    private bool _carregandoBanco;
+    private int _temaSelecionadoIndex = 2;
+    private int _databaseTypeSelecionadoIndex;
 
     public ConfigPage()
     {
@@ -25,17 +27,28 @@ public partial class ConfigPage : ContentPage
 
     private void CarregarTema()
     {
-        TemaPicker.SelectedIndex = Preferences.Default.Get("Tema", "system") switch
+        _temaSelecionadoIndex = Preferences.Default.Get("Tema", "system") switch
         {
             "light" => 0,
             "dark" => 1,
             _ => 2
         };
+        AtualizarBotoesTema();
+    }
+
+    private void OnTemaOptionClicked(object? sender, EventArgs e)
+    {
+        if (sender is Button { CommandParameter: string value }
+            && int.TryParse(value, out var index))
+        {
+            _temaSelecionadoIndex = index;
+            AtualizarBotoesTema();
+        }
     }
 
     private async void OnSalvarTemaClicked(object? sender, EventArgs e)
     {
-        var tema = TemaPicker.SelectedIndex switch
+        var tema = _temaSelecionadoIndex switch
         {
             0 => "light",
             1 => "dark",
@@ -45,30 +58,33 @@ public partial class ConfigPage : ContentPage
         Preferences.Default.Set("Tema", tema);
         WeakReferenceMessenger.Default.Send(new TemaPreferencesUpdatedMessage(tema));
 
-        await DisplayAlertAsync("Tema atualizado", "A aparência do aplicativo foi atualizada.", "OK");
+        await InAppDialogService.ShowAsync("Tema atualizado", "A aparência do aplicativo foi atualizada.", "OK");
         await Shell.Current.GoToAsync("//dashboard");
     }
 
     private void CarregarBanco()
     {
-        _carregandoBanco = true;
-
         var tipoSalvo = Preferences.Default.Get("DatabaseType", DatabaseType.Sqlite.ToString());
-        DatabaseTypePicker.SelectedIndex = tipoSalvo switch
+        _databaseTypeSelecionadoIndex = tipoSalvo switch
         {
             nameof(DatabaseType.MySql) => 1,
             nameof(DatabaseType.SqlServer) => 2,
             _ => 0
         };
 
-        _carregandoBanco = false;
+        AtualizarBotoesBanco();
         AtualizarInterfacePorTipoBanco();
     }
 
-    private void OnDatabaseTypeChanged(object? sender, EventArgs e)
+    private void OnDatabaseOptionClicked(object? sender, EventArgs e)
     {
-        if (!_carregandoBanco)
+        if (sender is Button { CommandParameter: string value }
+            && int.TryParse(value, out var index))
+        {
+            _databaseTypeSelecionadoIndex = index;
+            AtualizarBotoesBanco();
             AtualizarInterfacePorTipoBanco();
+        }
     }
 
     private void AtualizarInterfacePorTipoBanco()
@@ -105,7 +121,7 @@ public partial class ConfigPage : ContentPage
         var tipo = ObterTipoBancoSelecionado();
         if (tipo is null)
         {
-            await DisplayAlertAsync("Validação", "Selecione um tipo de banco de dados.", "OK");
+            await InAppDialogService.ShowAsync("Validação", "Selecione um tipo de banco de dados.", "OK");
             return;
         }
 
@@ -113,7 +129,7 @@ public partial class ConfigPage : ContentPage
         {
             if (string.IsNullOrWhiteSpace(SqliteCaminhoEntry.Text))
             {
-                await DisplayAlertAsync("Validação", "Informe o caminho do arquivo SQLite.", "OK");
+                await InAppDialogService.ShowAsync("Validação", "Informe o caminho do arquivo SQLite.", "OK");
                 return;
             }
 
@@ -125,7 +141,7 @@ public partial class ConfigPage : ContentPage
                 || string.IsNullOrWhiteSpace(BancoEntry.Text)
                 || string.IsNullOrWhiteSpace(UsuarioEntry.Text))
             {
-                await DisplayAlertAsync(
+                await InAppDialogService.ShowAsync(
                     "Validação",
                     "Informe o servidor, o banco de dados e o usuário.",
                     "OK");
@@ -142,7 +158,7 @@ public partial class ConfigPage : ContentPage
         Preferences.Default.Set("DatabaseType", tipo.Value.ToString());
         WeakReferenceMessenger.Default.Send(new BancoPreferencesUpdatedMessage(tipo.Value.ToString()));
 
-        await DisplayAlertAsync(
+        await InAppDialogService.ShowAsync(
             "Configuração salva",
             $"As configurações do banco {ObterNomeExibicao(tipo.Value)} foram salvas.",
             "OK");
@@ -151,13 +167,34 @@ public partial class ConfigPage : ContentPage
 
     private DatabaseType? ObterTipoBancoSelecionado()
     {
-        return DatabaseTypePicker.SelectedIndex switch
+        return _databaseTypeSelecionadoIndex switch
         {
             0 => DatabaseType.Sqlite,
             1 => DatabaseType.MySql,
             2 => DatabaseType.SqlServer,
             _ => null
         };
+    }
+
+    private void AtualizarBotoesTema()
+    {
+        AtualizarBotaoSelecao(TemaClaroButton, _temaSelecionadoIndex == 0, "Claro");
+        AtualizarBotaoSelecao(TemaEscuroButton, _temaSelecionadoIndex == 1, "Escuro");
+        AtualizarBotaoSelecao(TemaSistemaButton, _temaSelecionadoIndex == 2, "Sistema");
+    }
+
+    private void AtualizarBotoesBanco()
+    {
+        AtualizarBotaoSelecao(BancoSqliteButton, _databaseTypeSelecionadoIndex == 0, "SQLite");
+        AtualizarBotaoSelecao(BancoMySqlButton, _databaseTypeSelecionadoIndex == 1, "MySQL");
+        AtualizarBotaoSelecao(BancoSqlServerButton, _databaseTypeSelecionadoIndex == 2, "SQL Server");
+    }
+
+    private static void AtualizarBotaoSelecao(Button button, bool selecionado, string texto)
+    {
+        button.Text = selecionado ? $"✓ {texto}" : texto;
+        button.Style = Microsoft.Maui.Controls.Application.Current?
+            .Resources[selecionado ? "ButtonPrimary" : "ButtonSecondary"] as Style;
     }
 
     private static string ObterNomeExibicao(DatabaseType tipo)
