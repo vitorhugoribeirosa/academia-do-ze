@@ -6,45 +6,64 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:AcademiaDoZe.Presentation.AppMaui.Views"
     Title="Academia do Zé"
-    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource WarmWhite}, Dark={StaticResource OffBlack}}">
+    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource Surface}, Dark={StaticResource SurfaceDark}}">
 
     <Shell.FlyoutHeader>
-        <Border BackgroundColor="{AppThemeBinding Light={StaticResource Surface}, Dark={StaticResource SurfaceDark}}"
-                Stroke="{AppThemeBinding Light=#D8D4CC, Dark={StaticResource Gray600}}"
-                StrokeThickness="0"
-                Padding="16,20">
-            <VerticalStackLayout Spacing="8">
-                <Border BackgroundColor="White"
-                        Stroke="#D8D4CC"
-                        StrokeThickness="1"
-                        StrokeShape="RoundRectangle 8"
-                        Padding="4">
-                    <Image Source="{Binding Source={x:Reference AppShellRoot}, Path=MenuLogoImage}"
-                           HeightRequest="92"
-                           Aspect="AspectFit"/>
-                </Border>
+        <Grid BackgroundColor="{StaticResource Tertiary}"
+              Padding="18,22,18,20"
+              ColumnDefinitions="54,*"
+              ColumnSpacing="12">
+            <Image Grid.Column="0"
+                   Source="{Binding Source={x:Reference AppShellRoot}, Path=MenuLogoImage}"
+                   HeightRequest="48"
+                   WidthRequest="48"
+                   Aspect="AspectFit"/>
+            <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
                 <Label Text="Academia do Zé"
-                       TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}"
+                       TextColor="{StaticResource White}"
                        FontFamily="OpenSansSemibold"
                        FontAttributes="Bold"
-                       FontSize="16"/>
+                       FontSize="17"/>
+                <Label Text="Administração"
+                       TextColor="#C9C3BA"
+                       FontSize="12"/>
             </VerticalStackLayout>
-        </Border>
+        </Grid>
     </Shell.FlyoutHeader>
 
     <FlyoutItem Title="Dashboard">
+        <FlyoutItem.Icon>
+            <FontImageSource FontFamily="MaterialIcons" Glyph="&#xe871;" Size="21"
+                             Color="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource PrimaryDark}}"/>
+        </FlyoutItem.Icon>
         <ShellContent ContentTemplate="{DataTemplate views:DashboardListPage}" Route="dashboard" />
     </FlyoutItem>
 
     <FlyoutItem Title="Logradouros">
+        <FlyoutItem.Icon>
+            <FontImageSource FontFamily="MaterialIcons" Glyph="&#xe0c8;" Size="21"
+                             Color="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource PrimaryDark}}"/>
+        </FlyoutItem.Icon>
         <ShellContent ContentTemplate="{DataTemplate views:LogradouroListPage}" Route="logradouros" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Configurações">
+        <FlyoutItem.Icon>
+            <FontImageSource FontFamily="MaterialIcons" Glyph="&#xe8b8;" Size="21"
+                             Color="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource PrimaryDark}}"/>
+        </FlyoutItem.Icon>
+        <ShellContent ContentTemplate="{DataTemplate views:ConfigPage}" Route="configuracoes" />
+    </FlyoutItem>
+
     <Shell.FlyoutFooter>
-        <Label Text="Vitor Hugo Ribeiro Sá"
-               Style="{StaticResource MutedText}"
-               FontSize="12"
-               Margin="18,10,18,18"/>
+        <VerticalStackLayout Padding="18,12,18,18" Spacing="7">
+            <BoxView Style="{StaticResource SectionRule}"/>
+            <Label Text="Projeto acadêmico" Style="{StaticResource MutedText}" FontSize="11"/>
+            <Label Text="Vitor Hugo Ribeiro Sá"
+                   TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}"
+                   FontFamily="OpenSansSemibold"
+                   FontSize="12"/>
+        </VerticalStackLayout>
     </Shell.FlyoutFooter>
 
 </Shell>

@@ -7,71 +7,172 @@
              Title="{Binding Title}">
     <Grid>
         <ScrollView>
-            <VerticalStackLayout Padding="32,24,32,36"
-                                 Spacing="20"
-                                 MaximumWidthRequest="1000"
+            <VerticalStackLayout Padding="32,26,32,36"
+                                 Spacing="24"
+                                 MaximumWidthRequest="1040"
                                  HorizontalOptions="Fill">
-                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
-                    <VerticalStackLayout Grid.Column="0" Spacing="4">
-                        <Label Text="Visão geral" Style="{StaticResource SectionTitle}"/>
-                        <Label Text="Resumo dos cadastros da academia."
-                               Style="{StaticResource MutedText}"/>
+
+                <Grid RowDefinitions="Auto,Auto">
+                    <VerticalStackLayout Spacing="6">
+                        <Label Text="Dashboard" Style="{StaticResource HeaderTitle}"/>
+                        <Label Text="Visão geral dos cadastros da academia." Style="{StaticResource HeaderSubtitle}"/>
                     </VerticalStackLayout>
-                    <Label Grid.Column="1"
-                           Text="Dashboard"
-                           Style="{StaticResource MutedText}"
-                           VerticalOptions="Center"/>
+                    <BoxView Grid.Row="1"
+                             Style="{StaticResource SectionRule}"
+                             Margin="0,10,0,0"/>
                 </Grid>
 
-                <Border Style="{StaticResource HeroBorder}">
-                    <Image Source="{Binding LogoImage}"
-                           HeightRequest="190"
-                           MaximumWidthRequest="620"
-                           HorizontalOptions="Center"
-                           Aspect="AspectFit"/>
+                <Grid ColumnDefinitions="1.15*,0.85*" ColumnSpacing="22">
+                    <Border Grid.Column="0"
+                            BackgroundColor="{StaticResource Tertiary}"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 6"
+                            Padding="24">
+                        <Grid RowDefinitions="Auto,*">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="ACADEMIA DO ZÉ"
+                                       TextColor="{StaticResource Gold}"
+                                       FontFamily="OpenSansSemibold"
+                                       FontAttributes="Bold"
+                                       FontSize="12"
+                                       CharacterSpacing="0.8"/>
+                                <Label Text="Painel administrativo"
+                                       TextColor="{StaticResource White}"
+                                       FontFamily="OpenSansSemibold"
+                                       FontAttributes="Bold"
+                                       FontSize="24"/>
+                            </VerticalStackLayout>
+                            <Image Grid.Row="1"
+                                   Source="{Binding LogoImage}"
+                                   HeightRequest="220"
+                                   Margin="0,18,0,4"
+                                   HorizontalOptions="Center"
+                                   Aspect="AspectFit"/>
+                        </Grid>
+                    </Border>
+
+                    <Border Grid.Column="1" Style="{StaticResource FlatSection}">
+                        <VerticalStackLayout Spacing="0">
+                            <Label Text="Resumo" Style="{StaticResource CardTitle}" Margin="0,0,0,8"/>
+                            <Grid Padding="0,10" ColumnDefinitions="30,*,Auto" ColumnSpacing="8">
+                                <Label Text="&#xe7fd;"
+                                       FontFamily="MaterialIcons"
+                                       FontSize="20"
+                                       TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                                       VerticalTextAlignment="Center"/>
+                                <Label Grid.Column="1"
+                                       Text="Alunos"
+                                       Style="{StaticResource MutedText}"
+                                       VerticalTextAlignment="Center"/>
+                                <Label Grid.Column="2" Text="{Binding TotalAlunos}" Style="{StaticResource MetricValue}" FontSize="20"/>
+                            </Grid>
+                            <BoxView Style="{StaticResource SectionRule}"/>
+                            <Grid Padding="0,10" ColumnDefinitions="30,*,Auto" ColumnSpacing="8">
+                                <Label Text="&#xea67;"
+                                       FontFamily="MaterialIcons"
+                                       FontSize="20"
+                                       TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                                       VerticalTextAlignment="Center"/>
+                                <Label Grid.Column="1"
+                                       Text="Colaboradores"
+                                       Style="{StaticResource MutedText}"
+                                       VerticalTextAlignment="Center"/>
+                                <Label Grid.Column="2" Text="{Binding TotalColaboradores}" Style="{StaticResource MetricValue}" FontSize="20"/>
+                            </Grid>
+                            <BoxView Style="{StaticResource SectionRule}"/>
+                            <Grid Padding="0,10" ColumnDefinitions="30,*,Auto" ColumnSpacing="8">
+                                <Label Text="&#xe85d;"
+                                       FontFamily="MaterialIcons"
+                                       FontSize="20"
+                                       TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                                       VerticalTextAlignment="Center"/>
+                                <Label Grid.Column="1"
+                                       Text="Matrículas"
+                                       Style="{StaticResource MutedText}"
+                                       VerticalTextAlignment="Center"/>
+                                <Label Grid.Column="2" Text="{Binding TotalMatriculas}" Style="{StaticResource MetricValue}" FontSize="20"/>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <Border Style="{StaticResource FlatSection}">
+                    <VerticalStackLayout Spacing="16">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <Label Text="&#xe8b8;"
+                                   FontFamily="MaterialIcons"
+                                   FontSize="23"
+                                   TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                                   VerticalTextAlignment="Center"/>
+                            <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                <Label Text="Ações rápidas" Style="{StaticResource CardTitle}"/>
+                                <Label Text="Acesse as tarefas mais usadas sem abrir o menu."
+                                       Style="{StaticResource MutedText}"
+                                       FontSize="12"/>
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <BoxView Style="{StaticResource SectionRule}"/>
+
+                        <FlexLayout Direction="Row"
+                                    Wrap="Wrap"
+                                    JustifyContent="SpaceBetween"
+                                    AlignItems="Center">
+                            <Button Text="Novo logradouro"
+                                    Command="{Binding NavigateToNovoLogradouroCommand}"
+                                    Style="{StaticResource ButtonPrimary}"
+                                    WidthRequest="220"
+                                    Margin="0,4">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="MaterialIcons"
+                                                     Glyph="&#xe145;"
+                                                     Size="18"
+                                                     Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}"/>
+                                </Button.ImageSource>
+                            </Button>
+                            <Button Text="Consultar logradouros"
+                                    Command="{Binding NavigateToLogradourosCommand}"
+                                    Style="{StaticResource ButtonSecondary}"
+                                    WidthRequest="220"
+                                    Margin="0,4">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="MaterialIcons"
+                                                     Glyph="&#xe0c8;"
+                                                     Size="18"
+                                                     Color="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}"/>
+                                </Button.ImageSource>
+                            </Button>
+                            <Button Text="Configurações"
+                                    Command="{Binding NavigateToConfiguracoesCommand}"
+                                    Style="{StaticResource ButtonSecondary}"
+                                    WidthRequest="220"
+                                    Margin="0,4">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="MaterialIcons"
+                                                     Glyph="&#xe8b8;"
+                                                     Size="18"
+                                                     Color="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}"/>
+                                </Button.ImageSource>
+                            </Button>
+                        </FlexLayout>
+                    </VerticalStackLayout>
                 </Border>
 
-                <Label Text="Indicadores" Style="{StaticResource SectionTitle}" FontSize="20"/>
-
-                <Grid RowDefinitions="Auto,Auto"
-                      ColumnDefinitions="*,*"
-                      RowSpacing="12"
-                      ColumnSpacing="12">
-                    <Border Grid.Row="0" Grid.Column="0" Style="{StaticResource MetricCard}">
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateToLogradourosCommand}"/>
-                        </Border.GestureRecognizers>
-                        <VerticalStackLayout Spacing="4">
-                            <Label Text="Logradouros" Style="{StaticResource MutedText}"/>
-                            <Label Text="{Binding TotalLogradouros}" Style="{StaticResource MetricValue}"/>
-                            <Label Text="Abrir cadastro" TextColor="{StaticResource Primary}" FontFamily="OpenSansSemibold" FontSize="12"/>
-                        </VerticalStackLayout>
-                    </Border>
-
-                    <Border Grid.Row="0" Grid.Column="1" Style="{StaticResource MetricCard}">
-                        <VerticalStackLayout Spacing="4">
-                            <Label Text="Alunos" Style="{StaticResource MutedText}"/>
-                            <Label Text="{Binding TotalAlunos}" Style="{StaticResource MetricValue}"/>
-                            <Label Text="Cadastros registrados" Style="{StaticResource MutedText}" FontSize="12"/>
-                        </VerticalStackLayout>
-                    </Border>
-
-                    <Border Grid.Row="1" Grid.Column="0" Style="{StaticResource MetricCard}">
-                        <VerticalStackLayout Spacing="4">
-                            <Label Text="Colaboradores" Style="{StaticResource MutedText}"/>
-                            <Label Text="{Binding TotalColaboradores}" Style="{StaticResource MetricValue}"/>
-                            <Label Text="Equipe cadastrada" Style="{StaticResource MutedText}" FontSize="12"/>
-                        </VerticalStackLayout>
-                    </Border>
-
-                    <Border Grid.Row="1" Grid.Column="1" Style="{StaticResource MetricCard}">
-                        <VerticalStackLayout Spacing="4">
-                            <Label Text="Matrículas" Style="{StaticResource MutedText}"/>
-                            <Label Text="{Binding TotalMatriculas}" Style="{StaticResource MetricValue}"/>
-                            <Label Text="Planos registrados" Style="{StaticResource MutedText}" FontSize="12"/>
-                        </VerticalStackLayout>
-                    </Border>
+                <Grid ColumnDefinitions="*,Auto,*" Margin="0,2,0,0">
+                    <BoxView VerticalOptions="Center"
+                             HeightRequest="1"
+                             BackgroundColor="{AppThemeBinding Light={StaticResource Line}, Dark={StaticResource LineDark}}"/>
+                    <Label Grid.Column="1"
+                           Text="Academia do Zé  ·  Sistema administrativo  ·  Vitor Hugo Ribeiro Sá"
+                           Style="{StaticResource MutedText}"
+                           FontSize="11"
+                           Margin="14,0"/>
+                    <BoxView Grid.Column="2"
+                             VerticalOptions="Center"
+                             HeightRequest="1"
+                             BackgroundColor="{AppThemeBinding Light={StaticResource Line}, Dark={StaticResource LineDark}}"/>
                 </Grid>
+
             </VerticalStackLayout>
         </ScrollView>
 

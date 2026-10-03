@@ -85,4 +85,10 @@ public partial class DashboardListViewModel : BaseViewModel
 
     [RelayCommand]
     private async Task NavigateToLogradourosAsync() => await Shell.Current.GoToAsync("//logradouros");
+
+    [RelayCommand]
+    private async Task NavigateToNovoLogradouroAsync() => await Shell.Current.GoToAsync("logradouro");
+
+    [RelayCommand]
+    private async Task NavigateToConfiguracoesAsync() => await Shell.Current.GoToAsync("//configuracoes");
 }

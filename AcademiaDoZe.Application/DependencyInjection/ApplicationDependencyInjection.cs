@@ -3,6 +3,7 @@ using AcademiaDoZe.Application.Services;
 using AcademiaDoZe.Domain.Repositories;
 using AcademiaDoZe.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
+using AcademiaDoZe.Infrastructure.Data;
 
 namespace AcademiaDoZe.Application.DependencyInjection;
 
@@ -20,28 +21,66 @@ public static class ApplicationDependencyInjection
         services.AddTransient(provider =>
         {
             var config = provider.GetRequiredService<RepositoryConfig>();
-            return (Func<ILogradouroRepository>)(() =>
-                new LogradouroRepository(config.ConnectionString, config.DatabaseType));
+            return CriarRepositoryFactory<ILogradouroRepository>(config,
+                static (connectionString, databaseType) =>
+                    new LogradouroRepository(connectionString, databaseType));
         });
         services.AddTransient(provider =>
         {
             var config = provider.GetRequiredService<RepositoryConfig>();
-            return (Func<IAlunoRepository>)(() =>
-                new AlunoRepository(config.ConnectionString, config.DatabaseType));
+            return CriarRepositoryFactory<IAlunoRepository>(config,
+                static (connectionString, databaseType) =>
+                    new AlunoRepository(connectionString, databaseType));
         });
         services.AddTransient(provider =>
         {
             var config = provider.GetRequiredService<RepositoryConfig>();
-            return (Func<IColaboradorRepository>)(() =>
-                new ColaboradorRepository(config.ConnectionString, config.DatabaseType));
+            return CriarRepositoryFactory<IColaboradorRepository>(config,
+                static (connectionString, databaseType) =>
+                    new ColaboradorRepository(connectionString, databaseType));
         });
         services.AddTransient(provider =>
         {
             var config = provider.GetRequiredService<RepositoryConfig>();
-            return (Func<IMatriculaRepository>)(() =>
-                new MatriculaRepository(config.ConnectionString, config.DatabaseType));
+            return CriarRepositoryFactory<IMatriculaRepository>(config,
+                static (connectionString, databaseType) =>
+                    new MatriculaRepository(connectionString, databaseType));
         });
 
         return services;
+    }
+
+    private static Func<TRepository> CriarRepositoryFactory<TRepository>(
+        RepositoryConfig config,
+        Func<string, DatabaseType, TRepository> criarRepository)
+        where TRepository : class
+    {
+        var sincronizacao = new object();
+        TRepository? repositoryAtual = null;
+        string? connectionStringAtual = null;
+        DatabaseType? databaseTypeAtual = null;
+
+        return () =>
+        {
+            lock (sincronizacao)
+            {
+                var connectionString = config.ConnectionString;
+                var databaseType = config.DatabaseType;
+
+                if (repositoryAtual is null
+                    || connectionStringAtual != connectionString
+                    || databaseTypeAtual != databaseType)
+                {
+                    if (repositoryAtual is IDisposable disposable)
+                        disposable.Dispose();
+
+                    repositoryAtual = criarRepository(connectionString, databaseType);
+                    connectionStringAtual = connectionString;
+                    databaseTypeAtual = databaseType;
+                }
+
+                return repositoryAtual;
+            }
+        };
     }
 }

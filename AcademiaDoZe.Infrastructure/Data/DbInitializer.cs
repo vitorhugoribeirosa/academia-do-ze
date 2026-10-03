@@ -8,6 +8,7 @@ namespace AcademiaDoZe.Infrastructure.Data;
 public static class DbInitializer
 {
     private static readonly ConcurrentDictionary<string, bool> BancosInicializados = new();
+    private static readonly ConcurrentDictionary<string, SemaphoreSlim> TravasInicializacao = new();
 
     public static async Task InicializarAsync(
         string connectionString,
@@ -21,10 +22,15 @@ public static class DbInitializer
         if (BancosInicializados.ContainsKey(key))
             return;
 
-        var scriptSql = ObterScript(databaseType);
+        var trava = TravasInicializacao.GetOrAdd(key, static _ => new SemaphoreSlim(1, 1));
+        await trava.WaitAsync(cancellationToken);
 
         try
         {
+            if (BancosInicializados.ContainsKey(key))
+                return;
+
+            var scriptSql = ObterScript(databaseType);
             await using var connection = DbProvider.CreateConnection(connectionString, databaseType);
             await connection.OpenAsync(cancellationToken);
             await using var command = DbProvider.CreateCommand(scriptSql, connection);
@@ -34,6 +40,10 @@ public static class DbInitializer
         catch (DbException ex)
         {
             throw new InfrastructureException("ERRO_INICIALIZAR_BANCO", "Erro ao inicializar banco de dados.", ex);
+        }
+        finally
+        {
+            trava.Release();
         }
     }
 
