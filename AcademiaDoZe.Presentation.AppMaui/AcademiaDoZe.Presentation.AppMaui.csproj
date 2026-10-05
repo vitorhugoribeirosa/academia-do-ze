@@ -30,6 +30,7 @@
 		<!-- Display name -->
 		<ApplicationTitle>Academia do Zé</ApplicationTitle>
 		<AssemblyName Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">Academia do Zé</AssemblyName>
+		<PackageId>AcademiaDoZe.Presentation.AppMaui</PackageId>
 		<AssemblyTitle>Academia do Zé</AssemblyTitle>
 		<Product>Academia do Zé</Product>
 		<Description>Sistema administrativo da Academia do Zé</Description>
