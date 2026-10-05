@@ -29,6 +29,9 @@
 
 		<!-- Display name -->
 		<ApplicationTitle>Academia do Zé</ApplicationTitle>
+		<AssemblyTitle>Academia do Zé</AssemblyTitle>
+		<Product>Academia do Zé</Product>
+		<Description>Sistema administrativo da Academia do Zé</Description>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.academiadoze.presentation.appmaui</ApplicationId>
