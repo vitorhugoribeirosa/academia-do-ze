@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AcademiaDoZe.Presentation.AppMaui.Views.ColaboradorPage"
+             xmlns:vm="clr-namespace:AcademiaDoZe.Presentation.AppMaui.ViewModels"
+             x:DataType="vm:ColaboradorViewModel"
+             Title="{Binding Title}">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="32,26,32,40"
+                                 Spacing="24"
+                                 MaximumWidthRequest="960"
+                                 HorizontalOptions="Fill">
+
+                <VerticalStackLayout Spacing="6">
+                    <Label Text="{Binding Title}" Style="{StaticResource HeaderTitle}"/>
+                    <Label Text="Informe os dados pessoais, o endereço e os dados de trabalho."
+                           Style="{StaticResource HeaderSubtitle}"/>
+                    <BoxView Style="{StaticResource SectionRule}" Margin="0,10,0,0"/>
+                </VerticalStackLayout>
+
+                <Border Style="{StaticResource FlatSection}">
+                    <VerticalStackLayout Spacing="18">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="Dados pessoais" Style="{StaticResource CardTitle}"/>
+                            <Label Grid.Column="1"
+                                   Text="{Binding Colaborador.Id, StringFormat='ID {0}'}"
+                                   IsVisible="{Binding IsEditMode}"
+                                   Style="{StaticResource MutedText}"
+                                   VerticalTextAlignment="Center"/>
+                        </Grid>
+                        <BoxView Style="{StaticResource SectionRule}"/>
+
+                        <Grid ColumnDefinitions="154,*" ColumnSpacing="22">
+                            <VerticalStackLayout Grid.Column="0" Spacing="10">
+                                <Border HeightRequest="132" WidthRequest="132" Padding="0"
+                                        HorizontalOptions="Center"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark=#302C27}"
+                                        Stroke="{AppThemeBinding Light={StaticResource Line}, Dark={StaticResource LineDark}}"
+                                        StrokeShape="RoundRectangle 6">
+                                    <Grid>
+                                        <Label Text="&#xe7fd;" FontFamily="MaterialIcons" FontSize="48"
+                                               HorizontalOptions="Center" VerticalOptions="Center"
+                                               TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"/>
+                                        <Image Source="{Binding Colaborador.Foto, Converter={StaticResource FotoToImageSourceConverter}}"
+                                               Style="{StaticResource PhotoPreview}"
+                                               HeightRequest="132" WidthRequest="132"/>
+                                    </Grid>
+                                </Border>
+                                <Button Text="Usar câmera"
+                                        Command="{Binding CapturePhotoCommand}"
+                                        Style="{StaticResource ButtonSmall}"
+                                        WidthRequest="132"/>
+                                <Button Text="Abrir galeria"
+                                        Command="{Binding PickPhotoCommand}"
+                                        Style="{StaticResource ButtonSecondary}"
+                                        WidthRequest="132"/>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1" Spacing="15">
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="Nome" Style="{StaticResource FieldLabel}"/>
+                                    <Entry Text="{Binding Colaborador.Nome}"
+                                           Placeholder="Nome completo" MaxLength="150"/>
+                                </VerticalStackLayout>
+
+                                <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
+                                    <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                        <Label Text="CPF" Style="{StaticResource FieldLabel}"/>
+                                        <Entry Text="{Binding Colaborador.Cpf}"
+                                               Placeholder="000.000.000-00"
+                                               Keyboard="Numeric" MaxLength="14"
+                                               IsReadOnly="{Binding IsEditMode}"/>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                        <Label Text="Data de nascimento" Style="{StaticResource FieldLabel}"/>
+                                        <DatePicker Date="{Binding Colaborador.DataNascimento, Converter={StaticResource DateOnlyConverter}, Mode=TwoWay}"
+                                                    Format="dd/MM/yyyy"
+                                                    Style="{StaticResource FormDatePicker}"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
+                                    <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                        <Label Text="Telefone" Style="{StaticResource FieldLabel}"/>
+                                        <Entry Text="{Binding Colaborador.Telefone}"
+                                               Placeholder="(00) 00000-0000"
+                                               Keyboard="Telephone" MaxLength="15"/>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                        <Label Text="E-mail" Style="{StaticResource FieldLabel}"/>
+                                        <Entry Text="{Binding Colaborador.Email}"
+                                               Placeholder="exemplo@email.com"
+                                               Keyboard="Email" MaxLength="100"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+
+                                <Grid ColumnDefinitions="*,*" ColumnSpacing="14">
+                                    <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                        <Label Text="Senha" Style="{StaticResource FieldLabel}"/>
+                                        <Entry Text="{Binding Colaborador.Senha}"
+                                               Placeholder="Mínimo 6 caracteres e uma maiúscula"
+                                               IsPassword="True" MaxLength="50"/>
+                                        <Label Text="Deixe em branco para manter a senha atual."
+                                               IsVisible="{Binding IsEditMode}"
+                                               Style="{StaticResource MutedText}" FontSize="11"/>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                        <Label Text="Confirmar senha" Style="{StaticResource FieldLabel}"/>
+                                        <Entry Text="{Binding ConfirmarSenha}"
+                                               Placeholder="Repita a senha"
+                                               IsPassword="True" MaxLength="50"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource FlatSection}">
+                    <VerticalStackLayout Spacing="16">
+                        <Label Text="Endereço" Style="{StaticResource CardTitle}"/>
+                        <BoxView Style="{StaticResource SectionRule}"/>
+
+                        <Grid ColumnDefinitions="*,132" ColumnSpacing="12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="CEP" Style="{StaticResource FieldLabel}"/>
+                                <Entry Text="{Binding Colaborador.Endereco.Cep}"
+                                       Placeholder="00000-000"
+                                       Keyboard="Numeric" MaxLength="9"
+                                       ReturnType="Search"
+                                       ReturnCommand="{Binding SearchByCepCommand}"/>
+                            </VerticalStackLayout>
+                            <Button Grid.Column="1"
+                                    Text="Buscar CEP"
+                                    Command="{Binding SearchByCepCommand}"
+                                    Style="{StaticResource ButtonPrimary}"
+                                    VerticalOptions="End"/>
+                        </Grid>
+
+                        <Border Padding="12" StrokeShape="RoundRectangle 6"
+                                BackgroundColor="{AppThemeBinding Light=#FFF3CD, Dark=#332701}"
+                                IsVisible="{Binding HasNoEnderecoVinculado}">
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                <Label Text="&#xe002;" FontFamily="MaterialIcons" FontSize="20"
+                                       TextColor="#D97706" VerticalOptions="Center"/>
+                                <Label Grid.Column="1"
+                                       Text="Digite o CEP e clique em Buscar CEP para vincular um logradouro cadastrado."
+                                       TextColor="{AppThemeBinding Light=#92400E, Dark=#FCD34D}"
+                                       FontSize="13" LineBreakMode="WordWrap"/>
+                            </Grid>
+                        </Border>
+
+                        <Border Padding="12" StrokeShape="RoundRectangle 6"
+                                BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark=#302C27}"
+                                IsVisible="{Binding HasEnderecoVinculado}">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="Logradouro vinculado" Style="{StaticResource FieldLabel}"
+                                       TextColor="{StaticResource Success}"/>
+                                <Label Text="{Binding Colaborador.Endereco.Nome, StringFormat='Rua: {0}'}"/>
+                                <Label Text="{Binding Colaborador.Endereco.Bairro, StringFormat='Bairro: {0}'}"
+                                       Style="{StaticResource MutedText}"/>
+                                <Label Text="{Binding Colaborador.Endereco.Cidade, StringFormat='Cidade: {0}'}"
+                                       Style="{StaticResource MutedText}"/>
+                                <Label Text="{Binding Colaborador.Endereco.Estado, StringFormat='Estado: {0}'}"
+                                       Style="{StaticResource MutedText}"/>
+                            </VerticalStackLayout>
+                        </Border>
+
+                        <Grid ColumnDefinitions="180,*" ColumnSpacing="14">
+                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                <Label Text="Número" Style="{StaticResource FieldLabel}"/>
+                                <Entry Text="{Binding Colaborador.Numero}"
+                                       Placeholder="Número" MaxLength="20"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                <Label Text="Complemento" Style="{StaticResource FieldLabel}"/>
+                                <Entry Text="{Binding Colaborador.Complemento}"
+                                       Placeholder="Complemento (opcional)" MaxLength="50"/>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource FlatSection}">
+                    <VerticalStackLayout Spacing="16">
+                        <Label Text="Dados de trabalho" Style="{StaticResource CardTitle}"/>
+                        <BoxView Style="{StaticResource SectionRule}"/>
+
+                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="14">
+                            <VerticalStackLayout Grid.Column="0" Spacing="4">
+                                <Label Text="Data de admissão" Style="{StaticResource FieldLabel}"/>
+                                <DatePicker Date="{Binding Colaborador.DataAdmissao, Converter={StaticResource DateOnlyConverter}, Mode=TwoWay}"
+                                            Format="dd/MM/yyyy"
+                                            Style="{StaticResource FormDatePicker}"/>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                <Label Text="Tipo" Style="{StaticResource FieldLabel}"/>
+                                <Picker ItemsSource="{Binding ColaboradorTipos}"
+                                        SelectedItem="{Binding Colaborador.Tipo, Mode=TwoWay}"
+                                        Style="{StaticResource FormPicker}">
+                                    <Picker.ItemDisplayBinding>
+                                        <Binding Converter="{StaticResource EnumDisplay}"/>
+                                    </Picker.ItemDisplayBinding>
+                                </Picker>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2" Spacing="4">
+                                <Label Text="Vínculo" Style="{StaticResource FieldLabel}"/>
+                                <Picker ItemsSource="{Binding ColaboradorVinculos}"
+                                        SelectedItem="{Binding Colaborador.Vinculo, Mode=TwoWay}"
+                                        Style="{StaticResource FormPicker}">
+                                    <Picker.ItemDisplayBinding>
+                                        <Binding Converter="{StaticResource EnumDisplay}"/>
+                                    </Picker.ItemDisplayBinding>
+                                </Picker>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+
+                <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                    <Button Text="Cancelar"
+                            Command="{Binding CancelCommand}"
+                            Style="{StaticResource ButtonSecondary}"
+                            WidthRequest="118"/>
+                    <Button Text="Salvar colaborador"
+                            Command="{Binding SaveColaboradorCommand}"
+                            Style="{StaticResource ButtonPrimary}"
+                            WidthRequest="190"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+    </Grid>
+</ContentPage>

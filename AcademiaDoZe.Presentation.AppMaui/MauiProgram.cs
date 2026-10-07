@@ -22,10 +22,14 @@ public static class MauiProgram
         ConfigurationHelper.ConfigureServices(builder.Services);
 
         builder.Services.AddTransient<DashboardListViewModel>();
+        builder.Services.AddTransient<ColaboradorListViewModel>();
+        builder.Services.AddTransient<ColaboradorViewModel>();
         builder.Services.AddTransient<LogradouroListViewModel>();
         builder.Services.AddTransient<LogradouroViewModel>();
 
         builder.Services.AddTransient<DashboardListPage>();
+        builder.Services.AddTransient<ColaboradorListPage>();
+        builder.Services.AddTransient<ColaboradorPage>();
         builder.Services.AddTransient<LogradouroListPage>();
         builder.Services.AddTransient<LogradouroPage>();
         builder.Services.AddTransient<ConfigPage>();

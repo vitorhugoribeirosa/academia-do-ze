@@ -602,4 +602,17 @@
         <Setter Property="MinimumHeightRequest" Value="42"/>
     </Style>
 
+    <Style TargetType="DatePicker" x:Key="FormDatePicker">
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="MinimumHeightRequest" Value="42"/>
+    </Style>
+
+    <Style TargetType="Image" x:Key="PhotoPreview">
+        <Setter Property="Aspect" Value="AspectFill"/>
+        <Setter Property="HeightRequest" Value="120"/>
+        <Setter Property="WidthRequest" Value="120"/>
+        <Setter Property="HorizontalOptions" Value="Center"/>
+    </Style>
+
 </ResourceDictionary>
