@@ -1,6 +1,9 @@
 using AcademiaDoZe.Presentation.AppMaui.Configuration;
 using AcademiaDoZe.Presentation.AppMaui.ViewModels;
 using AcademiaDoZe.Presentation.AppMaui.Views;
+#if WINDOWS
+using CommunityToolkit.Maui;
+#endif
 using Microsoft.Extensions.Logging;
 
 namespace AcademiaDoZe.Presentation.AppMaui;
@@ -18,6 +21,10 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("MaterialIcons-Regular.ttf", "MaterialIcons");
             });
+
+#if WINDOWS
+        builder.UseMauiCommunityToolkitCamera();
+#endif
 
         ConfigurationHelper.ConfigureServices(builder.Services);
 

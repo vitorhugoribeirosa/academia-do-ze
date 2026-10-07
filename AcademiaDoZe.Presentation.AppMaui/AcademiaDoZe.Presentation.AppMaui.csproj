@@ -80,6 +80,10 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.12" />
 	</ItemGroup>
 
+	<ItemGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">
+		<PackageReference Include="CommunityToolkit.Maui.Camera" Version="5.0.0" />
+	</ItemGroup>
+
 	<ItemGroup>
 	  <ProjectReference Include="..\AcademiaDoZe.Application\AcademiaDoZe.Application.csproj" />
 	</ItemGroup>

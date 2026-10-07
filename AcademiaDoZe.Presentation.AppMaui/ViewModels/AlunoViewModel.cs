@@ -186,20 +186,7 @@ public partial class AlunoViewModel : BaseViewModel
 
         try
         {
-            var permission = await Permissions.CheckStatusAsync<Permissions.Camera>();
-            if (permission != PermissionStatus.Granted)
-                permission = await Permissions.RequestAsync<Permissions.Camera>();
-
-            if (permission != PermissionStatus.Granted)
-            {
-                await InAppDialogService.ShowAsync(
-                    "Permissão Necessária",
-                    "Autorize o acesso à câmera para tirar a foto do aluno.",
-                    "OK");
-                return;
-            }
-
-            var photo = await MediaPicker.Default.CapturePhotoAsync();
+            var photo = await PhotoCaptureService.CaptureAsync("Tirar foto do aluno");
             if (photo is not null)
                 await ApplyPhotoAsync(photo);
         }
@@ -217,7 +204,10 @@ public partial class AlunoViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await InAppDialogService.ShowAsync("Erro", $"Não foi possível capturar a foto: {ex.Message}", "OK");
+            await InAppDialogService.ShowAsync(
+                "Erro",
+                $"Não foi possível capturar a foto. {DetalharErro(ex)}",
+                "OK");
         }
     }
 
@@ -254,6 +244,15 @@ public partial class AlunoViewModel : BaseViewModel
         {
             await InAppDialogService.ShowAsync("Erro", $"Não foi possível selecionar a foto: {ex.Message}", "OK");
         }
+    }
+
+    [RelayCommand]
+    private void RemovePhoto()
+    {
+        Aluno.Foto = null;
+        OnPropertyChanged(nameof(Aluno));
+        OnPropertyChanged(nameof(HasFoto));
+        OnPropertyChanged(nameof(HasNoFoto));
     }
 
     [RelayCommand]
@@ -374,7 +373,7 @@ public partial class AlunoViewModel : BaseViewModel
 
     private async Task ApplyPhotoAsync(FileResult photo)
     {
-        await using var source = await photo.OpenReadAsync();
+        await using var source = await PhotoCaptureService.OpenReadAsync(photo);
         using var destination = new MemoryStream();
         var buffer = new byte[81920];
         var totalBytes = 0;
@@ -409,6 +408,14 @@ public partial class AlunoViewModel : BaseViewModel
 
     private static string ApenasDigitos(string? value) =>
         new([.. (value ?? string.Empty).Where(char.IsDigit)]);
+
+    private static string DetalharErro(Exception ex)
+    {
+        var erro = ex.GetBaseException();
+        return string.IsNullOrWhiteSpace(erro.Message)
+            ? $"Código: 0x{erro.HResult:X8}."
+            : erro.Message;
+    }
 
     private static AlunoDto CriarNovoAluno() => new()
     {

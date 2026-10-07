@@ -45,6 +45,9 @@
                                         Style="{StaticResource ButtonSmall}" WidthRequest="132"/>
                                 <Button Text="Abrir galeria" Command="{Binding PickPhotoCommand}"
                                         Style="{StaticResource ButtonSecondary}" WidthRequest="132"/>
+                                <Button Text="Remover foto" Command="{Binding RemovePhotoCommand}"
+                                        IsVisible="{Binding HasFoto}"
+                                        Style="{StaticResource ButtonDanger}" WidthRequest="132"/>
                                 <Label Text="Foto selecionada" IsVisible="{Binding HasFoto}"
                                        TextColor="{StaticResource Success}" FontFamily="OpenSansSemibold"
                                        FontSize="11" HorizontalTextAlignment="Center"/>

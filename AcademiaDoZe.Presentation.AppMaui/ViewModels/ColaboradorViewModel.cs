@@ -216,20 +216,7 @@ public partial class ColaboradorViewModel : BaseViewModel
 
         try
         {
-            var permission = await Permissions.CheckStatusAsync<Permissions.Camera>();
-            if (permission != PermissionStatus.Granted)
-                permission = await Permissions.RequestAsync<Permissions.Camera>();
-
-            if (permission != PermissionStatus.Granted)
-            {
-                await InAppDialogService.ShowAsync(
-                    "Permissão Necessária",
-                    "Autorize o acesso à câmera para tirar a foto do colaborador.",
-                    "OK");
-                return;
-            }
-
-            var photo = await MediaPicker.Default.CapturePhotoAsync();
+            var photo = await PhotoCaptureService.CaptureAsync("Tirar foto do colaborador");
             if (photo is not null)
                 await ApplyPhotoAsync(photo);
         }
@@ -255,7 +242,7 @@ public partial class ColaboradorViewModel : BaseViewModel
         {
             await InAppDialogService.ShowAsync(
                 "Erro",
-                $"Não foi possível capturar a foto: {ex.Message}",
+                $"Não foi possível capturar a foto. {DetalharErro(ex)}",
                 "OK");
         }
     }
@@ -303,6 +290,15 @@ public partial class ColaboradorViewModel : BaseViewModel
                 $"Não foi possível selecionar a foto: {ex.Message}",
                 "OK");
         }
+    }
+
+    [RelayCommand]
+    private void RemovePhoto()
+    {
+        Colaborador.Foto = null;
+        OnPropertyChanged(nameof(Colaborador));
+        OnPropertyChanged(nameof(HasFoto));
+        OnPropertyChanged(nameof(HasNoFoto));
     }
 
     [RelayCommand]
@@ -443,7 +439,7 @@ public partial class ColaboradorViewModel : BaseViewModel
 
     private async Task ApplyPhotoAsync(FileResult photo)
     {
-        await using var source = await photo.OpenReadAsync();
+        await using var source = await PhotoCaptureService.OpenReadAsync(photo);
         using var destination = new MemoryStream();
         var buffer = new byte[81920];
         var totalBytes = 0;
@@ -484,6 +480,14 @@ public partial class ColaboradorViewModel : BaseViewModel
 
     private static string ApenasDigitos(string? value) =>
         new([.. (value ?? string.Empty).Where(char.IsDigit)]);
+
+    private static string DetalharErro(Exception ex)
+    {
+        var erro = ex.GetBaseException();
+        return string.IsNullOrWhiteSpace(erro.Message)
+            ? $"Código: 0x{erro.HResult:X8}."
+            : erro.Message;
+    }
 
     private static ColaboradorDto CriarNovoColaborador() => new()
     {

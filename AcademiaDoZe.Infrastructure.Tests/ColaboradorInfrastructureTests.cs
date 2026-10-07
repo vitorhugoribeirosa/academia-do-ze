@@ -203,4 +203,60 @@ public class ColaboradorInfrastructureTests : TestBase
         Assert.Equal(novaSenha.Valor, (await _repository.ObterPorId(inserido.Id))!.Senha.Valor);
         Assert.False(await _repository.TrocarSenha(int.MaxValue, novaSenha));
     }
+
+    [Fact]
+    public async Task Colaborador_FluxoParte8_CadastrarFiltrarEditarFotoBuscarEExcluir()
+    {
+        byte[] fotoDaCamera = [1, 2, 3, 4];
+        byte[] fotoDaGaleria = [9, 8, 7, 6];
+        var dadosIniciais = await CriarColaboradorAsync();
+        var logradouro = await _logradouroRepository.ObterPorId(dadosIniciais.Endereco.LogradouroId);
+        Assert.NotNull(logradouro);
+        var colaboradorComFoto = Colaborador.Criar(
+            0,
+            dadosIniciais.Nome,
+            dadosIniciais.Cpf.Valor,
+            dadosIniciais.DataNascimento,
+            dadosIniciais.Telefone.Valor,
+            dadosIniciais.Email.Valor,
+            logradouro,
+            dadosIniciais.Endereco.Numero,
+            dadosIniciais.Endereco.Complemento,
+            dadosIniciais.Senha.Valor,
+            Arquivo.Criar(fotoDaCamera).Value!,
+            dadosIniciais.DataAdmissao,
+            dadosIniciais.Tipo,
+            dadosIniciais.Vinculo).Value!;
+
+        var cadastrado = await _repository.Adicionar(colaboradorComFoto);
+        var filtrado = await _repository.ObterPorCpf(cadastrado.Cpf);
+
+        Assert.NotNull(filtrado);
+        Assert.True(fotoDaCamera.SequenceEqual(filtrado.Foto.Conteudo));
+
+        var editado = Colaborador.Criar(
+            filtrado.Id,
+            "Zé dos Testes",
+            filtrado.Cpf.Valor,
+            filtrado.DataNascimento,
+            filtrado.Telefone.Valor,
+            filtrado.Email.Valor,
+            logradouro,
+            filtrado.Endereco.Numero,
+            filtrado.Endereco.Complemento,
+            filtrado.Senha.Valor,
+            Arquivo.Criar(fotoDaGaleria).Value!,
+            filtrado.DataAdmissao,
+            filtrado.Tipo,
+            filtrado.Vinculo).Value!;
+
+        await _repository.Atualizar(editado);
+        var encontradoNovamente = await _repository.ObterPorCpf(cadastrado.Cpf);
+
+        Assert.NotNull(encontradoNovamente);
+        Assert.Equal("Zé dos Testes", encontradoNovamente.Nome);
+        Assert.True(fotoDaGaleria.SequenceEqual(encontradoNovamente.Foto.Conteudo));
+        Assert.True(await _repository.Remover(encontradoNovamente.Id));
+        Assert.Null(await _repository.ObterPorCpf(cadastrado.Cpf));
+    }
 }
