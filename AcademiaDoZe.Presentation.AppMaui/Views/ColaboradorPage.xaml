@@ -7,7 +7,7 @@
              Title="{Binding Title}">
     <Grid>
         <ScrollView>
-            <VerticalStackLayout Padding="32,26,32,40"
+            <VerticalStackLayout Padding="{StaticResource PageContentPadding}"
                                  Spacing="24"
                                  MaximumWidthRequest="960"
                                  HorizontalOptions="Fill">

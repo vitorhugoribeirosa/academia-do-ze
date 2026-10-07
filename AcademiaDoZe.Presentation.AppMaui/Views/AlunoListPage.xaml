@@ -7,7 +7,7 @@
              x:DataType="vm:AlunoListViewModel"
              Title="{Binding Title}">
     <Grid RowDefinitions="Auto,Auto,Auto,*">
-        <Grid Grid.Row="0" Margin="28,24,28,18" ColumnDefinitions="*,Auto" ColumnSpacing="20">
+        <Grid Grid.Row="0" Margin="{StaticResource ListHeaderMargin}" ColumnDefinitions="*,Auto" ColumnSpacing="20">
             <VerticalStackLayout Spacing="5">
                 <Label Text="Alunos" Style="{StaticResource HeaderTitle}"/>
                 <Label Text="Cadastros dos alunos da academia." Style="{StaticResource HeaderSubtitle}"/>
@@ -23,7 +23,7 @@
             </Button>
         </Grid>
 
-        <Border Grid.Row="1" Margin="28,0,28,16"
+        <Border Grid.Row="1" Margin="{StaticResource ListSideMargin}"
                 Style="{StaticResource FlatSection}" Padding="14">
             <Grid ColumnDefinitions="134,*,98" ColumnSpacing="10">
                 <Border Grid.Column="0" HeightRequest="44" Padding="12,0"
@@ -70,17 +70,25 @@
             </VerticalStackLayout>
         </Border>
 
-        <Grid Grid.Row="2" Margin="28,0" ColumnDefinitions="64,*,170,174"
+        <Grid Grid.Row="2" Margin="{StaticResource ListSideMargin}"
               ColumnSpacing="12" Padding="14,9"
               BackgroundColor="{AppThemeBinding Light=#EAE5DD, Dark=#282622}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{OnIdiom Phone=52, Default=64}" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="{OnIdiom Phone=0, Default=170}" />
+                <ColumnDefinition Width="{OnIdiom Phone=150, Default=174}" />
+            </Grid.ColumnDefinitions>
             <Label Grid.Column="1" Text="Aluno" Style="{StaticResource FieldLabel}"/>
-            <Label Grid.Column="2" Text="Endereço" Style="{StaticResource FieldLabel}"/>
+            <Label Grid.Column="2" Text="Endereço" Style="{StaticResource FieldLabel}"
+                   IsVisible="{OnIdiom Phone=False, Default=True}"/>
             <Label Grid.Column="3" Text="Ações" Style="{StaticResource FieldLabel}"/>
         </Grid>
 
         <Grid Grid.Row="3">
             <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshCommand}">
-                <CollectionView ItemsSource="{Binding Alunos}" SelectionMode="None" Margin="28,0,28,20">
+                <CollectionView ItemsSource="{Binding Alunos}" SelectionMode="None"
+                                Margin="{StaticResource ListSideMargin}">
                     <CollectionView.EmptyView>
                         <VerticalStackLayout VerticalOptions="Center" Spacing="8" Padding="24">
                             <Label Text="&#xe7fd;" FontFamily="MaterialIcons" FontSize="34"
@@ -101,7 +109,13 @@
                             <Border BackgroundColor="{AppThemeBinding Light={StaticResource Surface}, Dark={StaticResource SurfaceDark}}"
                                     Stroke="{AppThemeBinding Light={StaticResource Line}, Dark={StaticResource LineDark}}"
                                     StrokeThickness="1" StrokeShape="Rectangle" Padding="14,12">
-                                <Grid ColumnDefinitions="64,*,170,174" ColumnSpacing="12">
+                                <Grid ColumnSpacing="12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="{OnIdiom Phone=52, Default=64}" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="{OnIdiom Phone=0, Default=170}" />
+                                        <ColumnDefinition Width="{OnIdiom Phone=150, Default=174}" />
+                                    </Grid.ColumnDefinitions>
                                     <Border Grid.Column="0" HeightRequest="52" WidthRequest="52" Padding="0"
                                             HorizontalOptions="Center" VerticalOptions="Center"
                                             BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark=#302C27}"
@@ -126,7 +140,8 @@
                                         <Label Text="{Binding Email}" Style="{StaticResource MutedText}" FontSize="12"/>
                                     </VerticalStackLayout>
 
-                                    <VerticalStackLayout Grid.Column="2" Spacing="3" VerticalOptions="Center">
+                                    <VerticalStackLayout Grid.Column="2" Spacing="3" VerticalOptions="Center"
+                                                         IsVisible="{OnIdiom Phone=False, Default=True}">
                                         <Label Text="{Binding Endereco.Cidade}"
                                                FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="13"/>
                                         <Label Text="{Binding Endereco.Estado}" Style="{StaticResource MutedText}" FontSize="12"/>

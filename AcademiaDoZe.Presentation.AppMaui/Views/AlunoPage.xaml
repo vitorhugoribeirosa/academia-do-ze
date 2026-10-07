@@ -7,7 +7,7 @@
              Title="{Binding Title}">
     <Grid>
         <ScrollView>
-            <VerticalStackLayout Padding="32,26,32,40" Spacing="24"
+            <VerticalStackLayout Padding="{StaticResource PageContentPadding}" Spacing="24"
                                  MaximumWidthRequest="960" HorizontalOptions="Fill">
                 <VerticalStackLayout Spacing="6">
                     <Label Text="{Binding Title}" Style="{StaticResource HeaderTitle}"/>

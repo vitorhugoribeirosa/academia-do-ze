@@ -10,6 +10,27 @@
             <converters:DateOnlyToDateTimeConverter x:Key="DateOnlyConverter" />
             <converters:FotoToImageSourceConverter x:Key="FotoToImageSourceConverter" />
 
+            <OnIdiom x:Key="PageContentPadding" x:TypeArguments="Thickness">
+                <OnIdiom.Phone>16,18,16,28</OnIdiom.Phone>
+                <OnIdiom.Tablet>24,22,24,34</OnIdiom.Tablet>
+                <OnIdiom.Desktop>32,26,32,40</OnIdiom.Desktop>
+                <OnIdiom.Default>20,20,20,30</OnIdiom.Default>
+            </OnIdiom>
+
+            <OnIdiom x:Key="ListHeaderMargin" x:TypeArguments="Thickness">
+                <OnIdiom.Phone>16,18,16,14</OnIdiom.Phone>
+                <OnIdiom.Tablet>24,22,24,16</OnIdiom.Tablet>
+                <OnIdiom.Desktop>28,24,28,18</OnIdiom.Desktop>
+                <OnIdiom.Default>20,20,20,16</OnIdiom.Default>
+            </OnIdiom>
+
+            <OnIdiom x:Key="ListSideMargin" x:TypeArguments="Thickness">
+                <OnIdiom.Phone>16,0,16,14</OnIdiom.Phone>
+                <OnIdiom.Tablet>24,0,24,16</OnIdiom.Tablet>
+                <OnIdiom.Desktop>28,0,28,16</OnIdiom.Desktop>
+                <OnIdiom.Default>20,0,20,16</OnIdiom.Default>
+            </OnIdiom>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
