@@ -1,33 +1,26 @@
 using AcademiaDoZe.Application.DTOs;
-using AcademiaDoZe.Application.Enums;
 using AcademiaDoZe.Application.Interfaces;
 using AcademiaDoZe.Presentation.AppMaui.Services;
 using CommunityToolkit.Mvvm.Input;
 
 namespace AcademiaDoZe.Presentation.AppMaui.ViewModels;
 
-[QueryProperty(nameof(ColaboradorId), "Id")]
-public partial class ColaboradorViewModel : BaseViewModel
+[QueryProperty(nameof(AlunoId), "Id")]
+public partial class AlunoViewModel : BaseViewModel
 {
     private const int MaxPhotoSizeBytes = 15 * 1024 * 1024;
 
-    private readonly IColaboradorService _colaboradorService;
+    private readonly IAlunoService _alunoService;
     private readonly ILogradouroService _logradouroService;
     private bool _initialized;
 
-    public IReadOnlyList<AppColaboradorTipo> ColaboradorTipos { get; } =
-        Enum.GetValues<AppColaboradorTipo>();
-
-    public IReadOnlyList<AppColaboradorVinculo> ColaboradorVinculos { get; } =
-        Enum.GetValues<AppColaboradorVinculo>();
-
-    private ColaboradorDto _colaborador = CriarNovoColaborador();
-    public ColaboradorDto Colaborador
+    private AlunoDto _aluno = CriarNovoAluno();
+    public AlunoDto Aluno
     {
-        get => _colaborador;
+        get => _aluno;
         set
         {
-            if (SetProperty(ref _colaborador, value))
+            if (SetProperty(ref _aluno, value))
             {
                 OnPropertyChanged(nameof(HasEnderecoVinculado));
                 OnPropertyChanged(nameof(HasNoEnderecoVinculado));
@@ -37,11 +30,11 @@ public partial class ColaboradorViewModel : BaseViewModel
         }
     }
 
-    private int _colaboradorId;
-    public int ColaboradorId
+    private int _alunoId;
+    public int AlunoId
     {
-        get => _colaboradorId;
-        set => SetProperty(ref _colaboradorId, value);
+        get => _alunoId;
+        set => SetProperty(ref _alunoId, value);
     }
 
     private bool _isEditMode;
@@ -58,18 +51,16 @@ public partial class ColaboradorViewModel : BaseViewModel
         set => SetProperty(ref _confirmarSenha, value);
     }
 
-    public bool HasEnderecoVinculado => Colaborador.Endereco?.Id > 0;
+    public bool HasEnderecoVinculado => Aluno.Endereco?.Id > 0;
     public bool HasNoEnderecoVinculado => !HasEnderecoVinculado;
-    public bool HasFoto => Colaborador.Foto?.Conteudo is { Length: > 0 };
+    public bool HasFoto => Aluno.Foto?.Conteudo is { Length: > 0 };
     public bool HasNoFoto => !HasFoto;
 
-    public ColaboradorViewModel(
-        IColaboradorService colaboradorService,
-        ILogradouroService logradouroService)
+    public AlunoViewModel(IAlunoService alunoService, ILogradouroService logradouroService)
     {
-        _colaboradorService = colaboradorService;
+        _alunoService = alunoService;
         _logradouroService = logradouroService;
-        Title = "Novo Colaborador";
+        Title = "Novo Aluno";
     }
 
     public async Task InitializeAsync()
@@ -80,62 +71,53 @@ public partial class ColaboradorViewModel : BaseViewModel
         _initialized = true;
         ConfirmarSenha = string.Empty;
 
-        if (ColaboradorId > 0)
+        if (AlunoId > 0)
         {
             IsEditMode = true;
-            Title = "Editar Colaborador";
-            await LoadColaboradorAsync();
+            Title = "Editar Aluno";
+            await LoadAlunoAsync();
             return;
         }
 
         IsEditMode = false;
-        Title = "Novo Colaborador";
-        Colaborador = CriarNovoColaborador();
+        Title = "Novo Aluno";
+        Aluno = CriarNovoAluno();
     }
 
     [RelayCommand]
     private async Task CancelAsync() => await Shell.Current.GoToAsync("..");
 
     [RelayCommand]
-    private async Task LoadColaboradorAsync()
+    private async Task LoadAlunoAsync()
     {
-        if (ColaboradorId <= 0 || IsBusy)
+        if (AlunoId <= 0 || IsBusy)
             return;
 
         try
         {
             IsBusy = true;
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+            var aluno = await _alunoService.ObterPorIdAsync(AlunoId, cts.Token);
 
-            var colaborador = await _colaboradorService.ObterPorIdAsync(ColaboradorId, cts.Token);
-            if (colaborador is null)
+            if (aluno is null)
             {
-                await InAppDialogService.ShowAsync(
-                    "Não Encontrado",
-                    $"O colaborador de ID {ColaboradorId} não foi encontrado.",
-                    "OK");
+                await InAppDialogService.ShowAsync("Não Encontrado", $"O aluno de ID {AlunoId} não foi encontrado.", "OK");
                 await Shell.Current.GoToAsync("..");
                 return;
             }
 
-            colaborador.Senha = string.Empty;
-            colaborador.Foto ??= new ArquivoDto { Conteudo = [] };
-            colaborador.Endereco ??= CriarEnderecoVazio();
-            Colaborador = colaborador;
+            aluno.Senha = string.Empty;
+            aluno.Foto ??= new ArquivoDto { Conteudo = [] };
+            aluno.Endereco ??= CriarEnderecoVazio();
+            Aluno = aluno;
         }
         catch (OperationCanceledException)
         {
-            await InAppDialogService.ShowAsync(
-                "Tempo Esgotado",
-                "O carregamento do colaborador expirou. Verifique a conexão.",
-                "OK");
+            await InAppDialogService.ShowAsync("Tempo Esgotado", "O carregamento do aluno expirou.", "OK");
         }
         catch (Exception ex)
         {
-            await InAppDialogService.ShowAsync(
-                "Erro",
-                $"Erro ao carregar colaborador: {ex.Message}",
-                "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Erro ao carregar aluno: {ex.Message}", "OK");
         }
         finally
         {
@@ -149,13 +131,10 @@ public partial class ColaboradorViewModel : BaseViewModel
         if (IsBusy)
             return;
 
-        var cep = ApenasDigitos(Colaborador.Endereco?.Cep);
+        var cep = ApenasDigitos(Aluno.Endereco?.Cep);
         if (cep.Length != 8)
         {
-            await InAppDialogService.ShowAsync(
-                "Validação",
-                "Informe um CEP com exatamente 8 dígitos.",
-                "OK");
+            await InAppDialogService.ShowAsync("Validação", "Informe um CEP com exatamente 8 dígitos.", "OK");
             return;
         }
 
@@ -163,8 +142,8 @@ public partial class ColaboradorViewModel : BaseViewModel
         {
             IsBusy = true;
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
-
             var endereco = await _logradouroService.ObterPorCepAsync(cep, cts.Token);
+
             if (endereco is null)
             {
                 await InAppDialogService.ShowAsync(
@@ -174,24 +153,18 @@ public partial class ColaboradorViewModel : BaseViewModel
                 return;
             }
 
-            Colaborador.Endereco = endereco;
-            OnPropertyChanged(nameof(Colaborador));
+            Aluno.Endereco = endereco;
+            OnPropertyChanged(nameof(Aluno));
             OnPropertyChanged(nameof(HasEnderecoVinculado));
             OnPropertyChanged(nameof(HasNoEnderecoVinculado));
         }
         catch (OperationCanceledException)
         {
-            await InAppDialogService.ShowAsync(
-                "Tempo Esgotado",
-                "A busca do CEP expirou. Verifique a conexão.",
-                "OK");
+            await InAppDialogService.ShowAsync("Tempo Esgotado", "A busca do CEP expirou.", "OK");
         }
         catch (Exception ex)
         {
-            await InAppDialogService.ShowAsync(
-                "Erro",
-                $"Erro ao buscar CEP: {ex.Message}",
-                "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Erro ao buscar CEP: {ex.Message}", "OK");
         }
         finally
         {
@@ -207,10 +180,7 @@ public partial class ColaboradorViewModel : BaseViewModel
 
         if (!MediaPicker.Default.IsCaptureSupported)
         {
-            await InAppDialogService.ShowAsync(
-                "Câmera Indisponível",
-                "Este dispositivo não possui suporte para captura de fotos.",
-                "OK");
+            await InAppDialogService.ShowAsync("Câmera Indisponível", "Este dispositivo não suporta captura de fotos.", "OK");
             return;
         }
 
@@ -224,7 +194,7 @@ public partial class ColaboradorViewModel : BaseViewModel
             {
                 await InAppDialogService.ShowAsync(
                     "Permissão Necessária",
-                    "Autorize o acesso à câmera para tirar a foto do colaborador.",
+                    "Autorize o acesso à câmera para tirar a foto do aluno.",
                     "OK");
                 return;
             }
@@ -235,28 +205,19 @@ public partial class ColaboradorViewModel : BaseViewModel
         }
         catch (FeatureNotSupportedException)
         {
-            await InAppDialogService.ShowAsync(
-                "Câmera Indisponível",
-                "A captura de fotos não é suportada neste dispositivo.",
-                "OK");
+            await InAppDialogService.ShowAsync("Câmera Indisponível", "A captura não é suportada neste dispositivo.", "OK");
         }
         catch (PermissionException)
         {
-            await InAppDialogService.ShowAsync(
-                "Permissão Necessária",
-                "Não foi possível acessar a câmera. Verifique as permissões do aplicativo.",
-                "OK");
+            await InAppDialogService.ShowAsync("Permissão Necessária", "Verifique a permissão de câmera do aplicativo.", "OK");
         }
         catch (OperationCanceledException)
         {
-            // O usuário cancelou a captura; o formulário deve permanecer inalterado.
+            // O usuário cancelou a captura.
         }
         catch (Exception ex)
         {
-            await InAppDialogService.ShowAsync(
-                "Erro",
-                $"Não foi possível capturar a foto: {ex.Message}",
-                "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Não foi possível capturar a foto: {ex.Message}", "OK");
         }
     }
 
@@ -270,45 +231,35 @@ public partial class ColaboradorViewModel : BaseViewModel
         {
             var photos = await MediaPicker.Default.PickPhotosAsync(new MediaPickerOptions
             {
-                Title = "Selecione a foto do colaborador",
+                Title = "Selecione a foto do aluno",
                 SelectionLimit = 1
             });
             var photo = photos.FirstOrDefault();
-
             if (photo is not null)
                 await ApplyPhotoAsync(photo);
         }
         catch (FeatureNotSupportedException)
         {
-            await InAppDialogService.ShowAsync(
-                "Galeria Indisponível",
-                "A seleção de imagens não é suportada neste dispositivo.",
-                "OK");
+            await InAppDialogService.ShowAsync("Galeria Indisponível", "A seleção de imagens não é suportada.", "OK");
         }
         catch (PermissionException)
         {
-            await InAppDialogService.ShowAsync(
-                "Permissão Necessária",
-                "Não foi possível acessar suas fotos. Verifique as permissões do aplicativo.",
-                "OK");
+            await InAppDialogService.ShowAsync("Permissão Necessária", "Verifique a permissão de fotos do aplicativo.", "OK");
         }
         catch (OperationCanceledException)
         {
-            // O usuário cancelou a seleção; o formulário deve permanecer inalterado.
+            // O usuário cancelou a seleção.
         }
         catch (Exception ex)
         {
-            await InAppDialogService.ShowAsync(
-                "Erro",
-                $"Não foi possível selecionar a foto: {ex.Message}",
-                "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Não foi possível selecionar a foto: {ex.Message}", "OK");
         }
     }
 
     [RelayCommand]
-    private async Task SaveColaboradorAsync()
+    private async Task SaveAlunoAsync()
     {
-        if (IsBusy || !await ValidateColaboradorAsync())
+        if (IsBusy || !await ValidateAlunoAsync())
             return;
 
         NormalizarDados();
@@ -320,29 +271,20 @@ public partial class ColaboradorViewModel : BaseViewModel
 
             if (IsEditMode)
             {
-                await _colaboradorService.AtualizarAsync(Colaborador, cts.Token);
-                await InAppDialogService.ShowAsync(
-                    "Sucesso",
-                    "Colaborador atualizado com sucesso!",
-                    "OK");
+                await _alunoService.AtualizarAsync(Aluno, cts.Token);
+                await InAppDialogService.ShowAsync("Sucesso", "Aluno atualizado com sucesso!", "OK");
             }
             else
             {
-                await _colaboradorService.AdicionarAsync(Colaborador, cts.Token);
-                await InAppDialogService.ShowAsync(
-                    "Sucesso",
-                    "Colaborador cadastrado com sucesso!",
-                    "OK");
+                await _alunoService.AdicionarAsync(Aluno, cts.Token);
+                await InAppDialogService.ShowAsync("Sucesso", "Aluno cadastrado com sucesso!", "OK");
             }
 
             await Shell.Current.GoToAsync("..");
         }
         catch (OperationCanceledException)
         {
-            await InAppDialogService.ShowAsync(
-                "Tempo Esgotado",
-                "A gravação do colaborador expirou. Verifique a conexão.",
-                "OK");
+            await InAppDialogService.ShowAsync("Tempo Esgotado", "A gravação do aluno expirou.", "OK");
         }
         catch (InvalidOperationException ex)
         {
@@ -354,10 +296,7 @@ public partial class ColaboradorViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            await InAppDialogService.ShowAsync(
-                "Erro",
-                $"Erro ao salvar colaborador: {ex.Message}",
-                "OK");
+            await InAppDialogService.ShowAsync("Erro", $"Erro ao salvar aluno: {ex.Message}", "OK");
         }
         finally
         {
@@ -365,55 +304,49 @@ public partial class ColaboradorViewModel : BaseViewModel
         }
     }
 
-    private async Task<bool> ValidateColaboradorAsync()
+    private async Task<bool> ValidateAlunoAsync()
     {
         var errors = new List<string>();
 
-        if (string.IsNullOrWhiteSpace(Colaborador.Nome))
+        if (string.IsNullOrWhiteSpace(Aluno.Nome))
             errors.Add("- Nome é obrigatório.");
 
-        if (ApenasDigitos(Colaborador.Cpf).Length != 11)
+        if (ApenasDigitos(Aluno.Cpf).Length != 11)
             errors.Add("- CPF deve conter 11 dígitos.");
 
         var limiteNascimento = DateOnly.FromDateTime(DateTime.Today.AddYears(-12));
-        if (Colaborador.DataNascimento == default || Colaborador.DataNascimento > limiteNascimento)
-            errors.Add("- O colaborador deve ter pelo menos 12 anos.");
+        if (Aluno.DataNascimento == default || Aluno.DataNascimento > limiteNascimento)
+            errors.Add("- O aluno deve ter pelo menos 12 anos.");
 
-        if (ApenasDigitos(Colaborador.Telefone).Length != 11)
+        if (ApenasDigitos(Aluno.Telefone).Length != 11)
             errors.Add("- Telefone deve conter 11 dígitos, incluindo o DDD.");
 
-        if (string.IsNullOrWhiteSpace(Colaborador.Email) ||
-            !Colaborador.Email.Contains('@') ||
-            !Colaborador.Email[(Colaborador.Email.IndexOf('@') + 1)..].Contains('.'))
+        if (string.IsNullOrWhiteSpace(Aluno.Email) ||
+            !Aluno.Email.Contains('@') ||
+            !Aluno.Email[(Aluno.Email.IndexOf('@') + 1)..].Contains('.'))
         {
             errors.Add("- Informe um e-mail válido.");
         }
 
-        if (Colaborador.Endereco?.Id is null or <= 0)
+        if (Aluno.Endereco?.Id is null or <= 0)
             errors.Add("- Busque e vincule um logradouro pelo CEP.");
 
-        if (string.IsNullOrWhiteSpace(Colaborador.Numero))
+        if (string.IsNullOrWhiteSpace(Aluno.Numero))
             errors.Add("- Número do endereço é obrigatório.");
 
-        if (Colaborador.DataAdmissao == default ||
-            Colaborador.DataAdmissao > DateOnly.FromDateTime(DateTime.Today))
-        {
-            errors.Add("- Data de admissão deve ser igual ou anterior à data atual.");
-        }
-
         if (!IsEditMode && !HasFoto)
-            errors.Add("- Selecione ou tire uma foto do colaborador.");
+            errors.Add("- Selecione ou tire uma foto do aluno.");
 
-        var informouSenha = !string.IsNullOrWhiteSpace(Colaborador.Senha);
+        var informouSenha = !string.IsNullOrWhiteSpace(Aluno.Senha);
         if (!IsEditMode && !informouSenha)
             errors.Add("- Senha é obrigatória no cadastro.");
 
         if (informouSenha)
         {
-            if (Colaborador.Senha!.Trim().Length < 6 || !Colaborador.Senha.Any(char.IsUpper))
+            if (Aluno.Senha!.Trim().Length < 6 || !Aluno.Senha.Any(char.IsUpper))
                 errors.Add("- Senha deve ter pelo menos 6 caracteres e uma letra maiúscula.");
 
-            if (!string.Equals(Colaborador.Senha, ConfirmarSenha, StringComparison.Ordinal))
+            if (!string.Equals(Aluno.Senha, ConfirmarSenha, StringComparison.Ordinal))
                 errors.Add("- Senha e confirmação devem ser iguais.");
         }
 
@@ -429,16 +362,14 @@ public partial class ColaboradorViewModel : BaseViewModel
 
     private void NormalizarDados()
     {
-        Colaborador.Nome = Colaborador.Nome.Trim();
-        Colaborador.Cpf = ApenasDigitos(Colaborador.Cpf);
-        Colaborador.Telefone = ApenasDigitos(Colaborador.Telefone);
-        Colaborador.Email = Colaborador.Email?.Trim();
-        Colaborador.Numero = Colaborador.Numero.Trim();
-        Colaborador.Complemento = Colaborador.Complemento?.Trim();
-        Colaborador.Senha = string.IsNullOrWhiteSpace(Colaborador.Senha)
-            ? null
-            : Colaborador.Senha.Trim();
-        Colaborador.Foto ??= new ArquivoDto { Conteudo = [] };
+        Aluno.Nome = Aluno.Nome.Trim();
+        Aluno.Cpf = ApenasDigitos(Aluno.Cpf);
+        Aluno.Telefone = ApenasDigitos(Aluno.Telefone);
+        Aluno.Email = Aluno.Email?.Trim();
+        Aluno.Numero = Aluno.Numero.Trim();
+        Aluno.Complemento = Aluno.Complemento?.Trim();
+        Aluno.Senha = string.IsNullOrWhiteSpace(Aluno.Senha) ? null : Aluno.Senha.Trim();
+        Aluno.Foto ??= new ArquivoDto { Conteudo = [] };
     }
 
     private async Task ApplyPhotoAsync(FileResult photo)
@@ -457,10 +388,7 @@ public partial class ColaboradorViewModel : BaseViewModel
             totalBytes += bytesRead;
             if (totalBytes > MaxPhotoSizeBytes)
             {
-                await InAppDialogService.ShowAsync(
-                    "Imagem Muito Grande",
-                    "A foto deve possuir no máximo 15 MB.",
-                    "OK");
+                await InAppDialogService.ShowAsync("Imagem Muito Grande", "A foto deve possuir no máximo 15 MB.", "OK");
                 return;
             }
 
@@ -469,15 +397,12 @@ public partial class ColaboradorViewModel : BaseViewModel
 
         if (totalBytes == 0)
         {
-            await InAppDialogService.ShowAsync(
-                "Imagem Inválida",
-                "O arquivo selecionado está vazio.",
-                "OK");
+            await InAppDialogService.ShowAsync("Imagem Inválida", "O arquivo selecionado está vazio.", "OK");
             return;
         }
 
-        Colaborador.Foto = new ArquivoDto { Conteudo = destination.ToArray() };
-        OnPropertyChanged(nameof(Colaborador));
+        Aluno.Foto = new ArquivoDto { Conteudo = destination.ToArray() };
+        OnPropertyChanged(nameof(Aluno));
         OnPropertyChanged(nameof(HasFoto));
         OnPropertyChanged(nameof(HasNoFoto));
     }
@@ -485,7 +410,7 @@ public partial class ColaboradorViewModel : BaseViewModel
     private static string ApenasDigitos(string? value) =>
         new([.. (value ?? string.Empty).Where(char.IsDigit)]);
 
-    private static ColaboradorDto CriarNovoColaborador() => new()
+    private static AlunoDto CriarNovoAluno() => new()
     {
         Nome = string.Empty,
         Cpf = string.Empty,
@@ -496,10 +421,7 @@ public partial class ColaboradorViewModel : BaseViewModel
         Numero = string.Empty,
         Complemento = string.Empty,
         Senha = string.Empty,
-        Foto = new ArquivoDto { Conteudo = [] },
-        DataAdmissao = DateOnly.FromDateTime(DateTime.Today),
-        Tipo = AppColaboradorTipo.Atendente,
-        Vinculo = AppColaboradorVinculo.CLT
+        Foto = new ArquivoDto { Conteudo = [] }
     };
 
     private static LogradouroDto CriarEnderecoVazio() => new()
