@@ -47,21 +47,40 @@
                 StrokeShape="RoundRectangle 9"
                 Padding="12">
             <VerticalStackLayout Spacing="9">
-                <Grid ColumnDefinitions="44,*,44">
-                    <Button Text="&#xe5cb;" Clicked="OnPreviousMonthClicked"
-                            FontFamily="MaterialIcons" FontSize="22"
+                <Grid ColumnDefinitions="40,40,*,40,40" ColumnSpacing="2">
+                    <Button Text="«" Clicked="OnPreviousYearClicked"
+                            FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="22"
+                            SemanticProperties.Description="Voltar um ano"
                             BackgroundColor="Transparent"
                             TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
                             Padding="0" HeightRequest="40" WidthRequest="40" />
-                    <Label x:Name="MonthText" Grid.Column="1"
+                    <Button Grid.Column="1" Text="&#xe5cb;" Clicked="OnPreviousMonthClicked"
+                            FontFamily="MaterialIcons" FontSize="22"
+                            SemanticProperties.Description="Voltar um mês"
+                            BackgroundColor="Transparent"
+                            TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
+                            Padding="0" HeightRequest="40" WidthRequest="40" />
+                    <Label x:Name="MonthText" Grid.Column="2"
                            HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
                            FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="15" />
-                    <Button Grid.Column="2" Text="&#xe5cc;" Clicked="OnNextMonthClicked"
+                    <Button Grid.Column="3" Text="&#xe5cc;" Clicked="OnNextMonthClicked"
                             FontFamily="MaterialIcons" FontSize="22"
+                            SemanticProperties.Description="Avançar um mês"
+                            BackgroundColor="Transparent"
+                            TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
+                            Padding="0" HeightRequest="40" WidthRequest="40" />
+                    <Button Grid.Column="4" Text="»" Clicked="OnNextYearClicked"
+                            FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="22"
+                            SemanticProperties.Description="Avançar um ano"
                             BackgroundColor="Transparent"
                             TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
                             Padding="0" HeightRequest="40" WidthRequest="40" />
                 </Grid>
+
+                <Label Text="«  ano anterior     ‹  mês anterior     mês seguinte  ›     próximo ano  »"
+                       HorizontalTextAlignment="Center"
+                       Style="{StaticResource MutedText}"
+                       FontSize="10" />
 
                 <Grid ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="3">
                     <Label Text="D" HorizontalTextAlignment="Center" Style="{StaticResource MutedText}" FontSize="12" />

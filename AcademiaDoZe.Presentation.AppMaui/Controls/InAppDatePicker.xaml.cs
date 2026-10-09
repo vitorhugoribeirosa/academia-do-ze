@@ -54,9 +54,21 @@ public partial class InAppDatePicker : ContentView
         BuildCalendar();
     }
 
+    private void OnPreviousYearClicked(object? sender, EventArgs e)
+    {
+        _visibleMonth = _visibleMonth.AddYears(-1);
+        BuildCalendar();
+    }
+
     private void OnNextMonthClicked(object? sender, EventArgs e)
     {
         _visibleMonth = _visibleMonth.AddMonths(1);
+        BuildCalendar();
+    }
+
+    private void OnNextYearClicked(object? sender, EventArgs e)
+    {
+        _visibleMonth = _visibleMonth.AddYears(1);
         BuildCalendar();
     }
 
