@@ -58,6 +58,43 @@ public partial class ColaboradorViewModel : BaseViewModel
         set => SetProperty(ref _confirmarSenha, value);
     }
 
+    private bool _isSenhaOculta = true;
+    public bool IsSenhaOculta
+    {
+        get => _isSenhaOculta;
+        set
+        {
+            if (SetProperty(ref _isSenhaOculta, value))
+                OnPropertyChanged(nameof(SenhaVisibilityIcon));
+        }
+    }
+
+    private bool _isConfirmarSenhaOculta = true;
+    public bool IsConfirmarSenhaOculta
+    {
+        get => _isConfirmarSenhaOculta;
+        set
+        {
+            if (SetProperty(ref _isConfirmarSenhaOculta, value))
+                OnPropertyChanged(nameof(ConfirmarSenhaVisibilityIcon));
+        }
+    }
+
+    private string _validationMessage = string.Empty;
+    public string ValidationMessage
+    {
+        get => _validationMessage;
+        set
+        {
+            if (SetProperty(ref _validationMessage, value))
+                OnPropertyChanged(nameof(HasValidationErrors));
+        }
+    }
+
+    public bool HasValidationErrors => !string.IsNullOrWhiteSpace(ValidationMessage);
+    public string SenhaVisibilityIcon => IsSenhaOculta ? "\ue8f4" : "\ue8f5";
+    public string ConfirmarSenhaVisibilityIcon => IsConfirmarSenhaOculta ? "\ue8f4" : "\ue8f5";
+
     public bool HasEnderecoVinculado => Colaborador.Endereco?.Id > 0;
     public bool HasNoEnderecoVinculado => !HasEnderecoVinculado;
     public bool HasFoto => Colaborador.Foto?.Conteudo is { Length: > 0 };
@@ -79,6 +116,9 @@ public partial class ColaboradorViewModel : BaseViewModel
 
         _initialized = true;
         ConfirmarSenha = string.Empty;
+        IsSenhaOculta = true;
+        IsConfirmarSenhaOculta = true;
+        ValidationMessage = string.Empty;
 
         if (ColaboradorId > 0)
         {
@@ -95,6 +135,13 @@ public partial class ColaboradorViewModel : BaseViewModel
 
     [RelayCommand]
     private async Task CancelAsync() => await Shell.Current.GoToAsync("..");
+
+    [RelayCommand]
+    private void ToggleSenhaVisibility() => IsSenhaOculta = !IsSenhaOculta;
+
+    [RelayCommand]
+    private void ToggleConfirmarSenhaVisibility() =>
+        IsConfirmarSenhaOculta = !IsConfirmarSenhaOculta;
 
     [RelayCommand]
     private async Task LoadColaboradorAsync()
@@ -152,6 +199,7 @@ public partial class ColaboradorViewModel : BaseViewModel
         var cep = ApenasDigitos(Colaborador.Endereco?.Cep);
         if (cep.Length != 8)
         {
+            ValidationMessage = "Informe um CEP com exatamente 8 dígitos.";
             await InAppDialogService.ShowAsync(
                 "Validação",
                 "Informe um CEP com exatamente 8 dígitos.",
@@ -175,6 +223,7 @@ public partial class ColaboradorViewModel : BaseViewModel
             }
 
             Colaborador.Endereco = endereco;
+            ValidationMessage = string.Empty;
             OnPropertyChanged(nameof(Colaborador));
             OnPropertyChanged(nameof(HasEnderecoVinculado));
             OnPropertyChanged(nameof(HasNoEnderecoVinculado));
@@ -307,6 +356,7 @@ public partial class ColaboradorViewModel : BaseViewModel
         if (IsBusy || !await ValidateColaboradorAsync())
             return;
 
+        ValidationMessage = string.Empty;
         NormalizarDados();
 
         try
@@ -397,6 +447,12 @@ public partial class ColaboradorViewModel : BaseViewModel
             errors.Add("- Data de admissão deve ser igual ou anterior à data atual.");
         }
 
+        if (Colaborador.Tipo == AppColaboradorTipo.Administrador &&
+            Colaborador.Vinculo != AppColaboradorVinculo.CLT)
+        {
+            errors.Add("- Colaborador administrador deve possuir vínculo CLT.");
+        }
+
         if (!IsEditMode && !HasFoto)
             errors.Add("- Selecione ou tire uma foto do colaborador.");
 
@@ -414,7 +470,12 @@ public partial class ColaboradorViewModel : BaseViewModel
         }
 
         if (errors.Count == 0)
+        {
+            ValidationMessage = string.Empty;
             return true;
+        }
+
+        ValidationMessage = string.Join("\n", errors);
 
         await InAppDialogService.ShowAsync(
             "Erros de Validação",

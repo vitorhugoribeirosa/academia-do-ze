@@ -51,6 +51,43 @@ public partial class AlunoViewModel : BaseViewModel
         set => SetProperty(ref _confirmarSenha, value);
     }
 
+    private bool _isSenhaOculta = true;
+    public bool IsSenhaOculta
+    {
+        get => _isSenhaOculta;
+        set
+        {
+            if (SetProperty(ref _isSenhaOculta, value))
+                OnPropertyChanged(nameof(SenhaVisibilityIcon));
+        }
+    }
+
+    private bool _isConfirmarSenhaOculta = true;
+    public bool IsConfirmarSenhaOculta
+    {
+        get => _isConfirmarSenhaOculta;
+        set
+        {
+            if (SetProperty(ref _isConfirmarSenhaOculta, value))
+                OnPropertyChanged(nameof(ConfirmarSenhaVisibilityIcon));
+        }
+    }
+
+    private string _validationMessage = string.Empty;
+    public string ValidationMessage
+    {
+        get => _validationMessage;
+        set
+        {
+            if (SetProperty(ref _validationMessage, value))
+                OnPropertyChanged(nameof(HasValidationErrors));
+        }
+    }
+
+    public bool HasValidationErrors => !string.IsNullOrWhiteSpace(ValidationMessage);
+    public string SenhaVisibilityIcon => IsSenhaOculta ? "\ue8f4" : "\ue8f5";
+    public string ConfirmarSenhaVisibilityIcon => IsConfirmarSenhaOculta ? "\ue8f4" : "\ue8f5";
+
     public bool HasEnderecoVinculado => Aluno.Endereco?.Id > 0;
     public bool HasNoEnderecoVinculado => !HasEnderecoVinculado;
     public bool HasFoto => Aluno.Foto?.Conteudo is { Length: > 0 };
@@ -70,6 +107,9 @@ public partial class AlunoViewModel : BaseViewModel
 
         _initialized = true;
         ConfirmarSenha = string.Empty;
+        IsSenhaOculta = true;
+        IsConfirmarSenhaOculta = true;
+        ValidationMessage = string.Empty;
 
         if (AlunoId > 0)
         {
@@ -86,6 +126,13 @@ public partial class AlunoViewModel : BaseViewModel
 
     [RelayCommand]
     private async Task CancelAsync() => await Shell.Current.GoToAsync("..");
+
+    [RelayCommand]
+    private void ToggleSenhaVisibility() => IsSenhaOculta = !IsSenhaOculta;
+
+    [RelayCommand]
+    private void ToggleConfirmarSenhaVisibility() =>
+        IsConfirmarSenhaOculta = !IsConfirmarSenhaOculta;
 
     [RelayCommand]
     private async Task LoadAlunoAsync()
@@ -134,6 +181,7 @@ public partial class AlunoViewModel : BaseViewModel
         var cep = ApenasDigitos(Aluno.Endereco?.Cep);
         if (cep.Length != 8)
         {
+            ValidationMessage = "Informe um CEP com exatamente 8 dígitos.";
             await InAppDialogService.ShowAsync("Validação", "Informe um CEP com exatamente 8 dígitos.", "OK");
             return;
         }
@@ -154,6 +202,7 @@ public partial class AlunoViewModel : BaseViewModel
             }
 
             Aluno.Endereco = endereco;
+            ValidationMessage = string.Empty;
             OnPropertyChanged(nameof(Aluno));
             OnPropertyChanged(nameof(HasEnderecoVinculado));
             OnPropertyChanged(nameof(HasNoEnderecoVinculado));
@@ -261,6 +310,7 @@ public partial class AlunoViewModel : BaseViewModel
         if (IsBusy || !await ValidateAlunoAsync())
             return;
 
+        ValidationMessage = string.Empty;
         NormalizarDados();
 
         try
@@ -350,7 +400,12 @@ public partial class AlunoViewModel : BaseViewModel
         }
 
         if (errors.Count == 0)
+        {
+            ValidationMessage = string.Empty;
             return true;
+        }
+
+        ValidationMessage = string.Join("\n", errors);
 
         await InAppDialogService.ShowAsync(
             "Erros de Validação",

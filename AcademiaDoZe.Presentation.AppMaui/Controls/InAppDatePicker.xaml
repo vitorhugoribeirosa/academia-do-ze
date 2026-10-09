@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AcademiaDoZe.Presentation.AppMaui.Controls.InAppDatePicker"
+             x:Name="Root">
+    <VerticalStackLayout Spacing="6">
+        <Border BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#191815}"
+                Stroke="{AppThemeBinding Light=#BDB6AC, Dark=#5A554D}"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 7"
+                Padding="13,1"
+                MinimumHeightRequest="52">
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                <Label x:Name="LeadingIcon"
+                       Text="&#xe878;"
+                       FontFamily="MaterialIcons"
+                       FontSize="22"
+                       WidthRequest="30"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}" />
+                <Label x:Name="DateText"
+                       Grid.Column="1"
+                       FontSize="15"
+                       VerticalTextAlignment="Center"
+                       TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}" />
+                <Label x:Name="ChevronIcon"
+                       Grid.Column="2"
+                       Text="&#xe5cf;"
+                       FontFamily="MaterialIcons"
+                       FontSize="22"
+                       WidthRequest="30"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource Gold}}" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnFieldTapped" />
+                </Grid.GestureRecognizers>
+            </Grid>
+        </Border>
+
+        <Border x:Name="CalendarPanel"
+                IsVisible="False"
+                BackgroundColor="{AppThemeBinding Light=#FFFEFC, Dark=#252422}"
+                Stroke="{AppThemeBinding Light=#D8D0C5, Dark=#5A554D}"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 9"
+                Padding="12">
+            <VerticalStackLayout Spacing="9">
+                <Grid ColumnDefinitions="44,*,44">
+                    <Button Text="&#xe5cb;" Clicked="OnPreviousMonthClicked"
+                            FontFamily="MaterialIcons" FontSize="22"
+                            BackgroundColor="Transparent"
+                            TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
+                            Padding="0" HeightRequest="40" WidthRequest="40" />
+                    <Label x:Name="MonthText" Grid.Column="1"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="15" />
+                    <Button Grid.Column="2" Text="&#xe5cc;" Clicked="OnNextMonthClicked"
+                            FontFamily="MaterialIcons" FontSize="22"
+                            BackgroundColor="Transparent"
+                            TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
+                            Padding="0" HeightRequest="40" WidthRequest="40" />
+                </Grid>
+
+                <Grid ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="3">
+                    <Label Text="D" HorizontalTextAlignment="Center" Style="{StaticResource MutedText}" FontSize="12" />
+                    <Label Grid.Column="1" Text="S" HorizontalTextAlignment="Center" Style="{StaticResource MutedText}" FontSize="12" />
+                    <Label Grid.Column="2" Text="T" HorizontalTextAlignment="Center" Style="{StaticResource MutedText}" FontSize="12" />
+                    <Label Grid.Column="3" Text="Q" HorizontalTextAlignment="Center" Style="{StaticResource MutedText}" FontSize="12" />
+                    <Label Grid.Column="4" Text="Q" HorizontalTextAlignment="Center" Style="{StaticResource MutedText}" FontSize="12" />
+                    <Label Grid.Column="5" Text="S" HorizontalTextAlignment="Center" Style="{StaticResource MutedText}" FontSize="12" />
+                    <Label Grid.Column="6" Text="S" HorizontalTextAlignment="Center" Style="{StaticResource MutedText}" FontSize="12" />
+                </Grid>
+
+                <Grid x:Name="DaysHost"
+                      RowDefinitions="40,40,40,40,40,40"
+                      ColumnDefinitions="*,*,*,*,*,*,*"
+                      RowSpacing="3" ColumnSpacing="3" />
+
+                <Button Text="Hoje" Clicked="OnTodayClicked"
+                        HorizontalOptions="End" HeightRequest="38" WidthRequest="90"
+                        Style="{StaticResource ButtonSecondary}" CornerRadius="6" />
+            </VerticalStackLayout>
+        </Border>
+    </VerticalStackLayout>
+</ContentView>

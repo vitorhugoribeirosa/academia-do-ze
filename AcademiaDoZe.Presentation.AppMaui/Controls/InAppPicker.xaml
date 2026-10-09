@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AcademiaDoZe.Presentation.AppMaui.Controls.InAppPicker"
+             x:Name="Root">
+    <VerticalStackLayout Spacing="6">
+        <Border x:Name="FieldBorder"
+                BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#191815}"
+                Stroke="{AppThemeBinding Light=#BDB6AC, Dark=#5A554D}"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 7"
+                Padding="13,1"
+                MinimumHeightRequest="52">
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                <Label x:Name="LeadingIcon"
+                       FontFamily="MaterialIcons"
+                       FontSize="22"
+                       WidthRequest="30"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}" />
+                <Label x:Name="SelectedText"
+                       Grid.Column="1"
+                       FontSize="15"
+                       VerticalTextAlignment="Center"
+                       LineBreakMode="TailTruncation"
+                       TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}" />
+                <Label x:Name="ChevronIcon"
+                       Grid.Column="2"
+                       Text="&#xe5cf;"
+                       FontFamily="MaterialIcons"
+                       FontSize="22"
+                       WidthRequest="30"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource Gold}}" />
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnFieldTapped" />
+                </Grid.GestureRecognizers>
+            </Grid>
+        </Border>
+
+        <Border x:Name="OptionsPanel"
+                IsVisible="False"
+                BackgroundColor="{AppThemeBinding Light=#FFFEFC, Dark=#252422}"
+                Stroke="{AppThemeBinding Light=#D8D0C5, Dark=#5A554D}"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 8"
+                Padding="7">
+            <VerticalStackLayout x:Name="OptionsHost" Spacing="3" />
+        </Border>
+    </VerticalStackLayout>
+</ContentView>
