@@ -74,7 +74,8 @@
 
     <Grid>
         <ScrollView>
-            <Grid Padding="{StaticResource PageContentPadding}"
+            <Grid x:Name="AnimatedContent"
+                  Padding="{StaticResource PageContentPadding}"
                   RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto"
                   RowSpacing="16"
                   MaximumWidthRequest="1220"
@@ -100,11 +101,11 @@
                         <Border Style="{StaticResource ColaboradorSectionHeader}">
                             <Grid ColumnDefinitions="68,*">
                                 <Border Grid.Column="0" Margin="5" Padding="0"
-                                        BackgroundColor="{AppThemeBinding Light=#F0DFBF, Dark=#3A2B12}"
-                                        Stroke="{AppThemeBinding Light=#DDC28C, Dark=#5B431C}"
+                                        BackgroundColor="{AppThemeBinding Light=#24211D, Dark=#3A2B12}"
+                                        Stroke="{AppThemeBinding Light=#3A3530, Dark=#5B431C}"
                                         StrokeThickness="1" StrokeShape="RoundRectangle 9">
                                     <Label Text="&#xe0c8;" FontFamily="MaterialIcons" FontSize="34"
-                                           TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
+                                           TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gold}}"
                                            HorizontalOptions="Center" VerticalOptions="Center" />
                                 </Border>
                                 <VerticalStackLayout Grid.Column="1" Margin="16,10" Spacing="2" VerticalOptions="Center">
@@ -150,16 +151,16 @@
                         </Grid>
 
                         <Border Padding="14,12"
-                                BackgroundColor="{AppThemeBinding Light=#FFF7DE, Dark=#2B2100}"
-                                Stroke="{AppThemeBinding Light=#D6A900, Dark=#896D00}"
+                                BackgroundColor="{AppThemeBinding Light=#24211D, Dark=#2B2100}"
+                                Stroke="{AppThemeBinding Light=#3A3530, Dark=#896D00}"
                                 StrokeThickness="1" StrokeShape="RoundRectangle 7"
                                 IsVisible="{Binding HasNoEnderecoVinculado}">
                             <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
                                 <Label Text="&#xe002;" FontFamily="MaterialIcons" FontSize="23"
-                                       TextColor="#F5A000" VerticalOptions="Center" />
+                                       TextColor="{AppThemeBinding Light={StaticResource White}, Dark=#F5A000}" VerticalOptions="Center" />
                                 <Label Grid.Column="1"
                                        Text="Digite o CEP e clique em Buscar CEP para vincular um logradouro cadastrado."
-                                       TextColor="{AppThemeBinding Light=#755600, Dark=#F3BE00}"
+                                       TextColor="{AppThemeBinding Light={StaticResource White}, Dark=#F3BE00}"
                                        FontSize="13" VerticalTextAlignment="Center" />
                             </Grid>
                         </Border>
@@ -223,11 +224,11 @@
                         <Border Style="{StaticResource ColaboradorSectionHeader}">
                             <Grid ColumnDefinitions="68,*,Auto">
                                 <Border Grid.Column="0" Margin="5" Padding="0"
-                                        BackgroundColor="{AppThemeBinding Light=#F0DFBF, Dark=#3A2B12}"
-                                        Stroke="{AppThemeBinding Light=#DDC28C, Dark=#5B431C}"
+                                        BackgroundColor="{AppThemeBinding Light=#24211D, Dark=#3A2B12}"
+                                        Stroke="{AppThemeBinding Light=#3A3530, Dark=#5B431C}"
                                         StrokeThickness="1" StrokeShape="RoundRectangle 9">
                                     <Label Text="&#xe7fd;" FontFamily="MaterialIcons" FontSize="34"
-                                           TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
+                                           TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gold}}"
                                            HorizontalOptions="Center" VerticalOptions="Center" />
                                 </Border>
                                 <VerticalStackLayout Grid.Column="1" Margin="16,10" Spacing="2" VerticalOptions="Center">
@@ -259,12 +260,12 @@
                                 <VerticalStackLayout Spacing="9">
                                     <Border HeightRequest="146" WidthRequest="146" Padding="0"
                                             HorizontalOptions="Center" Margin="0,10,0,2"
-                                            BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark=#292620}"
+                                            BackgroundColor="{AppThemeBinding Light=#24211D, Dark=#292620}"
                                             StrokeThickness="0" StrokeShape="RoundRectangle 73">
                                         <Grid>
                                             <Label Text="&#xe7fd;" FontFamily="MaterialIcons" FontSize="62"
                                                    HorizontalOptions="Center" VerticalOptions="Center"
-                                                   TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}" />
+                                                   TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gold}}" />
                                             <Image Source="{Binding Colaborador.Foto, Converter={StaticResource FotoToImageSourceConverter}}"
                                                    Aspect="AspectFill" HeightRequest="146" WidthRequest="146" />
                                         </Grid>
@@ -422,11 +423,11 @@
                         <Border Style="{StaticResource ColaboradorSectionHeader}">
                             <Grid ColumnDefinitions="68,*">
                                 <Border Grid.Column="0" Margin="5" Padding="0"
-                                        BackgroundColor="{AppThemeBinding Light=#F0DFBF, Dark=#3A2B12}"
-                                        Stroke="{AppThemeBinding Light=#DDC28C, Dark=#5B431C}"
+                                        BackgroundColor="{AppThemeBinding Light=#24211D, Dark=#3A2B12}"
+                                        Stroke="{AppThemeBinding Light=#3A3530, Dark=#5B431C}"
                                         StrokeThickness="1" StrokeShape="RoundRectangle 9">
                                     <Label Text="&#xe8f9;" FontFamily="MaterialIcons" FontSize="34"
-                                           TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
+                                           TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gold}}"
                                            HorizontalOptions="Center" VerticalOptions="Center" />
                                 </Border>
                                 <VerticalStackLayout Grid.Column="1" Margin="16,10" Spacing="2" VerticalOptions="Center">

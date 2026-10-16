@@ -18,11 +18,12 @@ public partial class ConfigPage : ContentPage
         CarregarBanco();
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
         CarregarTema();
         CarregarBanco();
+        await UiAnimationService.EnterPageAsync(AnimatedContent);
     }
 
     private void CarregarTema()

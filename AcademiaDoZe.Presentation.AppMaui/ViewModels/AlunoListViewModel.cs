@@ -217,7 +217,10 @@ public partial class AlunoListViewModel : BaseViewModel
 
     private async Task SubstituirListaAsync(IEnumerable<AlunoDto> alunos)
     {
-        var ordenados = alunos.OrderBy(item => item.Nome).ToList();
+        var ordenados = alunos
+            .OrderBy(item => ObterOrdemVisual(item.Id))
+            .ThenBy(item => item.Nome)
+            .ToList();
         await MainThread.InvokeOnMainThreadAsync(() =>
         {
             Alunos.Clear();
@@ -227,6 +230,9 @@ public partial class AlunoListViewModel : BaseViewModel
             OnPropertyChanged(nameof(Alunos));
         });
     }
+
+    private static int ObterOrdemVisual(int id) =>
+        unchecked((id * 1103515245 + 12345) & int.MaxValue);
 
     private static string ApenasDigitos(string? value) =>
         new([.. (value ?? string.Empty).Where(char.IsDigit)]);

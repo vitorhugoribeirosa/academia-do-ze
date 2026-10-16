@@ -17,6 +17,8 @@ public partial class AlunoListPage : ContentPage
         base.OnAppearing();
         if (BindingContext is AlunoListViewModel viewModel)
             await viewModel.LoadAlunosCommand.ExecuteAsync(null);
+
+        await UiAnimationService.EnterPageAsync(AnimatedContent);
     }
 
     private async void OnEditButtonClicked(object? sender, EventArgs e)
@@ -51,18 +53,26 @@ public partial class AlunoListPage : ContentPage
         }
     }
 
-    private void OnFilterSelectorTapped(object? sender, TappedEventArgs e)
+    private async void OnFilterSelectorTapped(object? sender, TappedEventArgs e)
     {
-        FilterOptionsPanel.IsVisible = !FilterOptionsPanel.IsVisible;
-        FilterArrowLabel.Text = FilterOptionsPanel.IsVisible ? "▲" : "▼";
+        if (FilterOptionsPanel.IsVisible)
+        {
+            await UiAnimationService.HidePopupAsync(FilterOptionsPanel);
+            FilterArrowLabel.Text = "▼";
+        }
+        else
+        {
+            FilterArrowLabel.Text = "▲";
+            await UiAnimationService.ShowPopupAsync(FilterOptionsPanel);
+        }
     }
 
-    private void OnFilterOptionTapped(object? sender, TappedEventArgs e)
+    private async void OnFilterOptionTapped(object? sender, TappedEventArgs e)
     {
         if (e.Parameter is string filterType && BindingContext is AlunoListViewModel viewModel)
             viewModel.SelectedFilterType = filterType;
 
-        FilterOptionsPanel.IsVisible = false;
+        await UiAnimationService.HidePopupAsync(FilterOptionsPanel);
         FilterArrowLabel.Text = "▼";
     }
 }

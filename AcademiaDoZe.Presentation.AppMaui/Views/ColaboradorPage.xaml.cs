@@ -1,3 +1,4 @@
+using AcademiaDoZe.Presentation.AppMaui.Services;
 using AcademiaDoZe.Presentation.AppMaui.ViewModels;
 
 namespace AcademiaDoZe.Presentation.AppMaui.Views;
@@ -16,5 +17,7 @@ public partial class ColaboradorPage : ContentPage
 
         if (BindingContext is ColaboradorViewModel viewModel)
             await viewModel.InitializeAsync();
+
+        await UiAnimationService.EnterPageAsync(AnimatedContent);
     }
 }

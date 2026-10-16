@@ -44,7 +44,10 @@ public static class InAppDialogService
 
             try
             {
-                return await completion.Task;
+                await UiAnimationService.ShowDialogAsync(overlay);
+                var result = await completion.Task;
+                await UiAnimationService.HideDialogAsync(overlay);
+                return result;
             }
             finally
             {

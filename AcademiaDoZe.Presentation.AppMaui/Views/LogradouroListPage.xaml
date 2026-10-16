@@ -6,7 +6,7 @@
              x:DataType="vm:LogradouroListViewModel"
              xmlns:dto="clr-namespace:AcademiaDoZe.Application.DTOs;assembly=AcademiaDoZe.Application"
              Title="{Binding Title}">
-    <Grid RowDefinitions="Auto,Auto,Auto,*">
+    <Grid x:Name="AnimatedContent" RowDefinitions="Auto,Auto,Auto,*">
         <Grid Grid.Row="0" Margin="28,24,28,18" ColumnDefinitions="*,Auto" ColumnSpacing="20">
             <VerticalStackLayout Spacing="5">
                 <Label Text="Logradouros" Style="{StaticResource HeaderTitle}"/>
@@ -31,8 +31,8 @@
                 Padding="14">
             <Grid ColumnDefinitions="134,*,98" ColumnSpacing="10">
                 <Border Grid.Column="0"
-                        BackgroundColor="{AppThemeBinding Light={StaticResource Surface}, Dark={StaticResource SurfaceDark}}"
-                        Stroke="{AppThemeBinding Light={StaticResource Line}, Dark={StaticResource LineDark}}"
+                        BackgroundColor="{AppThemeBinding Light=#24211D, Dark={StaticResource SurfaceDark}}"
+                        Stroke="{AppThemeBinding Light=#3A3530, Dark={StaticResource LineDark}}"
                         StrokeThickness="1"
                         StrokeShape="RoundRectangle 4"
                         HeightRequest="44"
@@ -41,9 +41,11 @@
                         <TapGestureRecognizer Tapped="OnFilterSelectorTapped"/>
                     </Border.GestureRecognizers>
                     <Grid ColumnDefinitions="*,Auto" ColumnSpacing="6">
-                        <Label Text="{Binding SelectedFilterType}" VerticalTextAlignment="Center"/>
+                        <Label Text="{Binding SelectedFilterType}"
+                               TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}"
+                               VerticalTextAlignment="Center"/>
                         <Label x:Name="FilterArrowLabel" Grid.Column="1" Text="▼" FontSize="10"
-                               TextColor="{AppThemeBinding Light={StaticResource TextMuted}, Dark={StaticResource TextMutedDark}}"
+                               TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource TextMutedDark}}"
                                VerticalTextAlignment="Center"/>
                     </Grid>
                 </Border>
@@ -72,7 +74,9 @@
                                 <TapGestureRecognizer CommandParameter="{Binding .}"
                                                       Tapped="OnFilterOptionTapped"/>
                             </Border.GestureRecognizers>
-                            <Label Text="{Binding .}" VerticalTextAlignment="Center"/>
+                            <Label Text="{Binding .}"
+                                   TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}"
+                                   VerticalTextAlignment="Center"/>
                         </Border>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
@@ -127,13 +131,30 @@
                                     <VerticalStackLayout Grid.Column="1" Spacing="3">
                                         <Label Text="{Binding Nome}" FontFamily="OpenSansSemibold"
                                                FontAttributes="Bold" FontSize="14"/>
-                                        <HorizontalStackLayout Spacing="4">
-                                            <Label Text="{Binding Bairro}" Style="{StaticResource MutedText}" FontSize="12"/>
-                                            <Label Text="·" Style="{StaticResource MutedText}" FontSize="12"/>
-                                            <Label Text="{Binding Cidade}" Style="{StaticResource MutedText}" FontSize="12"/>
-                                            <Label Text="/" Style="{StaticResource MutedText}" FontSize="12"/>
-                                            <Label Text="{Binding Estado}" Style="{StaticResource MutedText}" FontSize="12"/>
-                                        </HorizontalStackLayout>
+                                        <Border BackgroundColor="{AppThemeBinding Light=#F7F4EF, Dark=#25221D}"
+                                                Stroke="{AppThemeBinding Light={StaticResource Line}, Dark={StaticResource LineDark}}"
+                                                StrokeThickness="1"
+                                                StrokeShape="RoundRectangle 6"
+                                                Padding="8,5"
+                                                Margin="0,2,10,0">
+                                            <Grid ColumnDefinitions="18,*" ColumnSpacing="6">
+                                                <Label Text="&#xe0c8;" FontFamily="MaterialIcons" FontSize="14"
+                                                       TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
+                                                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                                <HorizontalStackLayout Grid.Column="1" Spacing="4">
+                                                    <Label Text="{Binding Bairro}" Style="{StaticResource MutedText}" FontSize="12"
+                                                           TextColor="{AppThemeBinding Light=#24211D, Dark={StaticResource TextMutedDark}}"/>
+                                                    <Label Text="·" Style="{StaticResource MutedText}" FontSize="12"
+                                                           TextColor="{AppThemeBinding Light=#24211D, Dark={StaticResource TextMutedDark}}"/>
+                                                    <Label Text="{Binding Cidade}" Style="{StaticResource MutedText}" FontSize="12"
+                                                           TextColor="{AppThemeBinding Light=#24211D, Dark={StaticResource TextMutedDark}}"/>
+                                                    <Label Text="/" Style="{StaticResource MutedText}" FontSize="12"
+                                                           TextColor="{AppThemeBinding Light=#24211D, Dark={StaticResource TextMutedDark}}"/>
+                                                    <Label Text="{Binding Estado}" Style="{StaticResource MutedText}" FontSize="12"
+                                                           TextColor="{AppThemeBinding Light=#24211D, Dark={StaticResource TextMutedDark}}"/>
+                                                </HorizontalStackLayout>
+                                            </Grid>
+                                        </Border>
                                     </VerticalStackLayout>
                                     <Label Grid.Column="2" Text="{Binding Cep}"
                                            VerticalOptions="Center" FontFamily="OpenSansSemibold"/>

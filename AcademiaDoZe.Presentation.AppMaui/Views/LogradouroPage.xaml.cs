@@ -1,3 +1,4 @@
+using AcademiaDoZe.Presentation.AppMaui.Services;
 using AcademiaDoZe.Presentation.AppMaui.ViewModels;
 
 namespace AcademiaDoZe.Presentation.AppMaui.Views;
@@ -16,5 +17,7 @@ public partial class LogradouroPage : ContentPage
 
         if (BindingContext is LogradouroViewModel viewModel)
             await viewModel.InitializeAsync();
+
+        await UiAnimationService.EnterPageAsync(AnimatedContent);
     }
 }

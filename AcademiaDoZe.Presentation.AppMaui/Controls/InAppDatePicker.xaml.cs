@@ -123,7 +123,7 @@ public partial class InAppDatePicker : ContentView
     {
         button.SetAppThemeColor(
             Button.BackgroundColorProperty,
-            selected ? Color.FromArgb("#E8A62D") : Colors.Transparent,
+            selected ? Color.FromArgb("#24211D") : Colors.Transparent,
             selected ? Color.FromArgb("#E8A62D") : Colors.Transparent);
         button.SetAppThemeColor(
             Button.TextColorProperty,
@@ -131,7 +131,7 @@ public partial class InAppDatePicker : ContentView
                 ? Color.FromArgb("#1A1712")
                 : currentMonth ? Color.FromArgb("#2A2722") : Color.FromArgb("#9A948B"),
             selected
-                ? Color.FromArgb("#1A1712")
+                ? Color.FromArgb("#FFFFFF")
                 : currentMonth ? Color.FromArgb("#FFFFFF") : Color.FromArgb("#77736D"));
     }
 }

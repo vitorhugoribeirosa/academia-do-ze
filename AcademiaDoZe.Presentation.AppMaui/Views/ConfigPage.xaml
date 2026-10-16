@@ -5,7 +5,8 @@
              Title="Configurações">
 
     <ScrollView>
-        <VerticalStackLayout Padding="32,26,32,40"
+        <VerticalStackLayout x:Name="AnimatedContent"
+                             Padding="32,26,32,40"
                              Spacing="26"
                              MaximumWidthRequest="940"
                              HorizontalOptions="Fill">

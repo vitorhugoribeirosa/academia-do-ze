@@ -72,9 +72,8 @@
     </FlyoutItem>
 
     <Shell.FlyoutFooter>
-        <VerticalStackLayout Padding="18,12,18,18" Spacing="7">
+        <VerticalStackLayout Padding="18,12,18,18" Spacing="5">
             <BoxView Style="{StaticResource SectionRule}"/>
-            <Label Text="Projeto acadêmico" Style="{StaticResource MutedText}" FontSize="11"/>
             <Label Text="Vitor Hugo Ribeiro Sá"
                    TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}"
                    FontFamily="OpenSansSemibold"

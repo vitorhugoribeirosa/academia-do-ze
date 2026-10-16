@@ -262,7 +262,10 @@ public partial class ColaboradorListViewModel : BaseViewModel
 
     private async Task SubstituirListaAsync(IEnumerable<ColaboradorDto> colaboradores)
     {
-        var ordenados = colaboradores.OrderBy(item => item.Nome).ToList();
+        var ordenados = colaboradores
+            .OrderBy(item => ObterOrdemVisual(item.Id))
+            .ThenBy(item => item.Nome)
+            .ToList();
 
         await MainThread.InvokeOnMainThreadAsync(() =>
         {
@@ -273,6 +276,9 @@ public partial class ColaboradorListViewModel : BaseViewModel
             OnPropertyChanged(nameof(Colaboradores));
         });
     }
+
+    private static int ObterOrdemVisual(int id) =>
+        unchecked((id * 1103515245 + 12345) & int.MaxValue);
 
     private static string ApenasDigitos(string? value) =>
         new([.. (value ?? string.Empty).Where(char.IsDigit)]);

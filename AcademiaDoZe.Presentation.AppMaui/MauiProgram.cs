@@ -5,6 +5,9 @@ using AcademiaDoZe.Presentation.AppMaui.Views;
 using CommunityToolkit.Maui;
 #endif
 using Microsoft.Extensions.Logging;
+#if WINDOWS
+using Microsoft.Maui.Handlers;
+#endif
 
 namespace AcademiaDoZe.Presentation.AppMaui;
 
@@ -24,6 +27,32 @@ public static class MauiProgram
 
 #if WINDOWS
         builder.UseMauiCommunityToolkitCamera();
+
+        // FormEntry already sits inside our own Border. Remove the native
+        // Windows TextBox chrome so it does not render a second raised box
+        // or the default blue focus underline inside the designed field.
+        EntryHandler.Mapper.AppendToMapping("FlatFormEntry", (handler, entry) =>
+        {
+            if (entry is not Entry formEntry || formEntry.ClassId != "FlatFormEntry")
+            {
+                return;
+            }
+
+            handler.PlatformView.Background =
+                new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent);
+            handler.PlatformView.BorderThickness = new Microsoft.UI.Xaml.Thickness(0);
+            handler.PlatformView.Padding = new Microsoft.UI.Xaml.Thickness(0);
+            handler.PlatformView.CornerRadius = new Microsoft.UI.Xaml.CornerRadius(0);
+
+            var transparentBrush =
+                new Microsoft.UI.Xaml.Media.SolidColorBrush(Microsoft.UI.Colors.Transparent);
+            var noBorder = new Microsoft.UI.Xaml.Thickness(0);
+            handler.PlatformView.Resources["TextControlBorderBrush"] = transparentBrush;
+            handler.PlatformView.Resources["TextControlBorderBrushPointerOver"] = transparentBrush;
+            handler.PlatformView.Resources["TextControlBorderBrushFocused"] = transparentBrush;
+            handler.PlatformView.Resources["TextControlBorderThemeThickness"] = noBorder;
+            handler.PlatformView.Resources["TextControlBorderThemeThicknessFocused"] = noBorder;
+        });
 #endif
 
         ConfigurationHelper.ConfigureServices(builder.Services);

@@ -1,3 +1,4 @@
+using AcademiaDoZe.Presentation.AppMaui.Services;
 using AcademiaDoZe.Presentation.AppMaui.ViewModels;
 
 namespace AcademiaDoZe.Presentation.AppMaui.Views;
@@ -15,5 +16,7 @@ public partial class AlunoPage : ContentPage
         base.OnAppearing();
         if (BindingContext is AlunoViewModel viewModel)
             await viewModel.InitializeAsync();
+
+        await UiAnimationService.EnterPageAsync(AnimatedContent);
     }
 }

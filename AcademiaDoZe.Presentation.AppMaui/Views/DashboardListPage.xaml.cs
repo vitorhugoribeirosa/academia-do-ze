@@ -1,3 +1,4 @@
+using AcademiaDoZe.Presentation.AppMaui.Services;
 using AcademiaDoZe.Presentation.AppMaui.ViewModels;
 
 namespace AcademiaDoZe.Presentation.AppMaui.Views;
@@ -18,5 +19,7 @@ public partial class DashboardListPage : ContentPage
         {
             await viewModel.LoadDashboardDataCommand.ExecuteAsync(null);
         }
+
+        await UiAnimationService.EnterPageAsync(AnimatedContent);
     }
 }

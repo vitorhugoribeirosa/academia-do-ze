@@ -5,10 +5,10 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
-    <Color x:Key="Primary">#B6541C</Color>
+    <Color x:Key="Primary">#24211D</Color>
     <Color x:Key="PrimaryDark">#E2A33B</Color>
     <Color x:Key="PrimaryDarkText">#171512</Color>
-    <Color x:Key="Secondary">#EEE7DC</Color>
+    <Color x:Key="Secondary">#F0E9DE</Color>
     <Color x:Key="SecondaryDarkText">#E2A33B</Color>
     <Color x:Key="Tertiary">#24211D</Color>
 
@@ -17,19 +17,19 @@
     <Color x:Key="Magenta">#A33B35</Color>
     <Color x:Key="MidnightBlue">#24211D</Color>
     <Color x:Key="OffBlack">#11100E</Color>
-    <Color x:Key="WarmWhite">#F4F1EB</Color>
-    <Color x:Key="Surface">#FFFEFC</Color>
+    <Color x:Key="WarmWhite">#F7F4EF</Color>
+    <Color x:Key="Surface">#FFFFFF</Color>
     <Color x:Key="SurfaceDark">#1C1A17</Color>
     <Color x:Key="Gold">#D99A2B</Color>
-    <Color x:Key="Orange">#B6541C</Color>
-    <Color x:Key="TextMuted">#6F685F</Color>
+    <Color x:Key="Orange">#D99A2B</Color>
+    <Color x:Key="TextMuted">#24211D</Color>
     <Color x:Key="TextMutedDark">#BDB6AC</Color>
-    <Color x:Key="BrandCream">#F1EADF</Color>
+    <Color x:Key="BrandCream">#F5EFE5</Color>
     <Color x:Key="BrandSand">#D9D0C4</Color>
     <Color x:Key="BrandBrown">#3B3128</Color>
     <Color x:Key="BrandRed">#9B3832</Color>
     <Color x:Key="Success">#2E7D5A</Color>
-    <Color x:Key="Line">#D7D0C6</Color>
+    <Color x:Key="Line">#DDD6CC</Color>
     <Color x:Key="LineDark">#3A3732</Color>
 
     <Color x:Key="Gray100">#E1E1E1</Color>
