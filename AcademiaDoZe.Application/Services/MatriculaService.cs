@@ -101,7 +101,7 @@ public class MatriculaService : IMatriculaService
         if (await _matriculaRepoFactory().PossuiMatriculaAtiva(aluno.Id, cancellationToken))
             throw new InvalidOperationException("Já existe uma matrícula ativa para este aluno.");
 
-        ValidarLaudo(matriculaDto, aluno, matriculaExistente: null);
+        ValidarLaudo(matriculaDto, aluno);
         var adicionada = await _matriculaRepoFactory().Adicionar(
             matriculaDto.ToEntity(aluno), cancellationToken);
         return adicionada.ToDto(aluno.ToDto());
@@ -117,7 +117,7 @@ public class MatriculaService : IMatriculaService
         var existente = await _matriculaRepoFactory().ObterPorId(matriculaDto.Id, cancellationToken)
             ?? throw new KeyNotFoundException($"Matrícula com ID {matriculaDto.Id} não encontrada.");
         var aluno = await ObterAlunoAsync(existente.AlunoId, cancellationToken);
-        ValidarLaudo(matriculaDto, aluno, existente);
+        ValidarLaudo(matriculaDto, aluno);
 
         var atualizada = await _matriculaRepoFactory().Atualizar(
             existente.UpdateFromDto(matriculaDto, aluno), cancellationToken);
@@ -160,11 +160,9 @@ public class MatriculaService : IMatriculaService
 
     private static void ValidarLaudo(
         MatriculaDto dto,
-        Aluno aluno,
-        Matricula? matriculaExistente)
+        Aluno aluno)
     {
-        var possuiNovoLaudo = dto.LaudoMedico?.Conteudo is { Length: > 0 };
-        var possuiLaudo = possuiNovoLaudo || (dto.LaudoMedico == null && matriculaExistente?.LaudoMedico != null);
+        var possuiLaudo = dto.LaudoMedico?.Conteudo is { Length: > 0 };
         var menorDe16 = aluno.DataNascimento > DateOnly.FromDateTime(DateTime.Today.AddYears(-16));
 
         if (menorDe16 && !possuiLaudo)

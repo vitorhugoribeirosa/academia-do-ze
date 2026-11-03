@@ -186,7 +186,7 @@
                         <BoxView Style="{StaticResource SectionRule}" Margin="0,2,0,4" />
 
                         <Grid ColumnDefinitions="Auto,*,Auto,Auto"
-                              RowDefinitions="Auto,12,Auto,12,Auto"
+                              RowDefinitions="Auto,12,Auto,12,Auto,12,Auto"
                               ColumnSpacing="14">
                             <Border Grid.Row="0"
                                     Grid.ColumnSpan="4"
@@ -251,7 +251,7 @@
                                     Grid.Column="0"
                                     Style="{StaticResource QuickActionBadge}"
                                     Margin="16,12,0,12">
-                                <Label Text="&#xea67;"
+                                <Label Text="&#xe85d;"
                                        FontFamily="MaterialIcons"
                                        FontSize="23"
                                        TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gold}}"
@@ -263,15 +263,15 @@
                                                  Margin="0,12"
                                                  VerticalOptions="Center"
                                                  Spacing="2">
-                                <Label Text="Colaboradores" Style="{StaticResource QuickActionTitle}" />
-                                <Label Text="Equipe, função e vínculo de trabalho"
+                                <Label Text="Matrículas" Style="{StaticResource QuickActionTitle}" />
+                                <Label Text="Planos, vigências e condições de saúde"
                                        Style="{StaticResource QuickActionDescription}" />
                             </VerticalStackLayout>
                             <Button Grid.Row="2"
                                     Grid.Column="2"
                                     Margin="0,12"
-                                    Text="Novo colaborador"
-                                    Command="{Binding NavigateToNovoColaboradorCommand}"
+                                    Text="Nova matrícula"
+                                    Command="{Binding NavigateToNovaMatriculaCommand}"
                                     Style="{StaticResource ButtonPrimary}"
                                     MinimumWidthRequest="175"
                                     HorizontalOptions="Fill">
@@ -285,8 +285,8 @@
                             <Button Grid.Row="2"
                                     Grid.Column="3"
                                     Margin="0,12,16,12"
-                                    Text="Consultar colaboradores"
-                                    Command="{Binding NavigateToColaboradoresCommand}"
+                                    Text="Consultar matrículas"
+                                    Command="{Binding NavigateToMatriculasCommand}"
                                     Style="{StaticResource ButtonSecondary}"
                                     MinimumWidthRequest="175"
                                     HorizontalOptions="Fill">
@@ -306,7 +306,7 @@
                                     Grid.Column="0"
                                     Style="{StaticResource QuickActionBadge}"
                                     Margin="16,12,0,12">
-                                <Label Text="&#xe0c8;"
+                                <Label Text="&#xea67;"
                                        FontFamily="MaterialIcons"
                                        FontSize="23"
                                        TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gold}}"
@@ -318,11 +318,66 @@
                                                  Margin="0,12"
                                                  VerticalOptions="Center"
                                                  Spacing="2">
+                                <Label Text="Colaboradores" Style="{StaticResource QuickActionTitle}" />
+                                <Label Text="Equipe, função e vínculo de trabalho"
+                                       Style="{StaticResource QuickActionDescription}" />
+                            </VerticalStackLayout>
+                            <Button Grid.Row="4"
+                                    Grid.Column="2"
+                                    Margin="0,12"
+                                    Text="Novo colaborador"
+                                    Command="{Binding NavigateToNovoColaboradorCommand}"
+                                    Style="{StaticResource ButtonPrimary}"
+                                    MinimumWidthRequest="175"
+                                    HorizontalOptions="Fill">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="MaterialIcons"
+                                                     Glyph="&#xe145;"
+                                                     Size="18"
+                                                     Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
+                                </Button.ImageSource>
+                            </Button>
+                            <Button Grid.Row="4"
+                                    Grid.Column="3"
+                                    Margin="0,12,16,12"
+                                    Text="Consultar colaboradores"
+                                    Command="{Binding NavigateToColaboradoresCommand}"
+                                    Style="{StaticResource ButtonSecondary}"
+                                    MinimumWidthRequest="175"
+                                    HorizontalOptions="Fill">
+                                <Button.ImageSource>
+                                    <FontImageSource FontFamily="MaterialIcons"
+                                                     Glyph="&#xe8b6;"
+                                                     Size="18"
+                                                     Color="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}" />
+                                </Button.ImageSource>
+                            </Button>
+
+                            <Border Grid.Row="6"
+                                    Grid.ColumnSpan="4"
+                                    Style="{StaticResource QuickActionRow}"
+                                    Padding="0" />
+                            <Border Grid.Row="6"
+                                    Grid.Column="0"
+                                    Style="{StaticResource QuickActionBadge}"
+                                    Margin="16,12,0,12">
+                                <Label Text="&#xe0c8;"
+                                       FontFamily="MaterialIcons"
+                                       FontSize="23"
+                                       TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gold}}"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center" />
+                            </Border>
+                            <VerticalStackLayout Grid.Row="6"
+                                                 Grid.Column="1"
+                                                 Margin="0,12"
+                                                 VerticalOptions="Center"
+                                                 Spacing="2">
                                 <Label Text="Logradouros" Style="{StaticResource QuickActionTitle}" />
                                 <Label Text="Endereços e CEPs disponíveis"
                                        Style="{StaticResource QuickActionDescription}" />
                             </VerticalStackLayout>
-                            <Button Grid.Row="4"
+                            <Button Grid.Row="6"
                                     Grid.Column="2"
                                     Margin="0,12"
                                     Text="Novo logradouro"
@@ -337,7 +392,7 @@
                                                      Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
                                 </Button.ImageSource>
                             </Button>
-                            <Button Grid.Row="4"
+                            <Button Grid.Row="6"
                                     Grid.Column="3"
                                     Margin="0,12,16,12"
                                     Text="Consultar logradouros"

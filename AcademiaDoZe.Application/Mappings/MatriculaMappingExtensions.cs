@@ -55,9 +55,7 @@ public static class MatriculaMappingExtensions
         ArgumentNullException.ThrowIfNull(matriculaDto);
         ArgumentNullException.ThrowIfNull(aluno);
 
-        var laudo = matriculaDto.LaudoMedico?.Conteudo != null
-            ? CriarArquivoOpcional(matriculaDto.LaudoMedico.Conteudo)
-            : matricula.LaudoMedico;
+        var laudo = CriarArquivoOpcional(matriculaDto.LaudoMedico?.Conteudo);
         var result = Matricula.Criar(
             matricula.Id,
             aluno,
