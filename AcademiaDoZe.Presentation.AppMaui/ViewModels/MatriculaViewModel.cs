@@ -5,6 +5,8 @@ using AcademiaDoZe.Presentation.AppMaui.Services;
 using CommunityToolkit.Mvvm.Input;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
+using System.Text;
 
 namespace AcademiaDoZe.Presentation.AppMaui.ViewModels;
 
@@ -22,6 +24,21 @@ public partial class MatriculaViewModel : BaseViewModel
         [.. Enum.GetValues<AppMatriculaPlano>()];
 
     public ObservableCollection<RestricaoSelectable> RestricoesMulti { get; } = [];
+    public ObservableCollection<RestricaoSelectable> RestricoesFiltradas { get; } = [];
+
+    private string _restricaoSearchText = string.Empty;
+    public string RestricaoSearchText
+    {
+        get => _restricaoSearchText;
+        set
+        {
+            if (SetProperty(ref _restricaoSearchText, value))
+                FiltrarRestricoes();
+        }
+    }
+
+    public bool HasRestricoesFiltradas => RestricoesFiltradas.Count > 0;
+    public bool HasNoRestricoesFiltradas => !HasRestricoesFiltradas;
 
     private MatriculaDto _matricula = CriarNovaMatricula();
     public MatriculaDto Matricula
@@ -420,6 +437,36 @@ public partial class MatriculaViewModel : BaseViewModel
         {
             _sincronizandoRestricoes = false;
         }
+
+        FiltrarRestricoes();
+    }
+
+    private void FiltrarRestricoes()
+    {
+        var termo = NormalizarTexto(RestricaoSearchText);
+        var itens = string.IsNullOrEmpty(termo)
+            ? RestricoesMulti
+            : RestricoesMulti.Where(item =>
+                NormalizarTexto(item.Value.GetDisplayName()).Contains(termo, StringComparison.Ordinal));
+
+        RestricoesFiltradas.Clear();
+        foreach (var item in itens)
+            RestricoesFiltradas.Add(item);
+
+        OnPropertyChanged(nameof(HasRestricoesFiltradas));
+        OnPropertyChanged(nameof(HasNoRestricoesFiltradas));
+    }
+
+    private static string NormalizarTexto(string? texto)
+    {
+        if (string.IsNullOrWhiteSpace(texto))
+            return string.Empty;
+
+        var caracteres = texto.Trim().Normalize(NormalizationForm.FormD)
+            .Where(caractere => CharUnicodeInfo.GetUnicodeCategory(caractere) != UnicodeCategory.NonSpacingMark)
+            .ToArray();
+
+        return new string(caracteres).ToUpperInvariant();
     }
 
     private void RestricaoItemPropertyChanged(object? sender, PropertyChangedEventArgs e)

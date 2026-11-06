@@ -181,103 +181,140 @@
                         <Label Text="Selecione todas as condições médicas diagnosticadas."
                                Style="{StaticResource MutedText}" FontSize="12" />
 
-                        <CollectionView ItemsSource="{Binding RestricoesMulti}"
-                                        SelectionMode="None" HeightRequest="250">
-                            <CollectionView.ItemsLayout>
-                                <GridItemsLayout Orientation="Vertical" Span="2"
-                                                 VerticalItemSpacing="8" HorizontalItemSpacing="12" />
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="vm:RestricaoSelectable">
-                                    <Border Padding="11,7"
-                                            BackgroundColor="{AppThemeBinding Light=#FAF7F2, Dark=#211F1B}"
-                                            Stroke="{AppThemeBinding Light={StaticResource Line}, Dark={StaticResource LineDark}}"
-                                            StrokeThickness="1" StrokeShape="RoundRectangle 7">
-                                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="9">
-                                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                                                      VerticalOptions="Center"
-                                                      Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}" />
-                                            <Label Grid.Column="1"
-                                                   Text="{Binding Value, Converter={StaticResource EnumDisplay}}"
-                                                   VerticalTextAlignment="Center" FontSize="13" />
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-
-                        <VerticalStackLayout Spacing="5">
-                            <Label Text="Observações e recomendações" Style="{StaticResource FieldLabel}" />
-                            <Border Style="{StaticResource MatriculaFieldBorder}" Padding="12,7">
-                                <Editor Text="{Binding Matricula.ObservacoesRestricoes}"
-                                        Placeholder="Descreva cuidados específicos para o treino"
-                                        AutoSize="TextChanges" MaxLength="500"
-                                        MinimumHeightRequest="82" />
-                            </Border>
-                        </VerticalStackLayout>
-
-                        <Border Padding="12" IsVisible="{Binding HasRestricoes}"
-                                BackgroundColor="{AppThemeBinding Light=#FFF5E2, Dark=#35270F}"
-                                StrokeThickness="0" StrokeShape="RoundRectangle 8">
-                            <Label Text="Restrições selecionadas: a apresentação de laudo médico é obrigatória."
-                                   TextColor="{AppThemeBinding Light=#7A4D00, Dark=#F2C46D}"
-                                   FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="12" />
-                        </Border>
-                    </VerticalStackLayout>
-                </Border>
-
-                <Border Style="{StaticResource MatriculaSectionCard}">
-                    <VerticalStackLayout Spacing="14">
-                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                            <VerticalStackLayout Spacing="2">
-                                <Label Text="Laudo médico" Style="{StaticResource CardTitle}" />
-                                <Label Text="Fotografe ou selecione uma imagem legível do documento."
-                                       Style="{StaticResource MutedText}" FontSize="12" />
-                            </VerticalStackLayout>
-                            <Border Grid.Column="1" Padding="9,5" IsVisible="{Binding HasLaudo}"
-                                    BackgroundColor="{AppThemeBinding Light=#DFF3E8, Dark=#163A2B}"
-                                    StrokeThickness="0" StrokeShape="RoundRectangle 7">
-                                <Label Text="Laudo anexado" FontFamily="OpenSansSemibold" FontAttributes="Bold"
-                                       FontSize="11" TextColor="{StaticResource Success}" />
-                            </Border>
-                        </Grid>
-
-                        <Border HeightRequest="230" Padding="8"
-                                BackgroundColor="{AppThemeBinding Light=#F4F0E9, Dark=#211F1B}"
-                                Stroke="{AppThemeBinding Light={StaticResource Line}, Dark={StaticResource LineDark}}"
-                                StrokeThickness="1" StrokeShape="RoundRectangle 9">
-                            <Grid>
-                                <VerticalStackLayout IsVisible="{Binding HasNoLaudo}"
-                                                     HorizontalOptions="Center" VerticalOptions="Center" Spacing="8">
-                                    <Label Text="&#xe415;" FontFamily="MaterialIcons" FontSize="48"
-                                           TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray600}}"
-                                           HorizontalTextAlignment="Center" />
-                                    <Label Text="Nenhum laudo anexado" Style="{StaticResource MutedText}" />
-                                </VerticalStackLayout>
-                                <Image IsVisible="{Binding HasLaudo}"
-                                       Source="{Binding Matricula.LaudoMedico, Converter={StaticResource FotoToImageSourceConverter}}"
-                                       Aspect="AspectFit" />
+                        <Border Style="{StaticResource MatriculaFieldBorder}" Padding="12,0">
+                            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="9">
+                                <Label Text="&#xe8b6;" FontFamily="MaterialIcons" FontSize="20"
+                                       TextColor="{AppThemeBinding Light={StaticResource TextMuted}, Dark={StaticResource TextMutedDark}}"
+                                       VerticalTextAlignment="Center" />
+                                <Entry Grid.Column="1"
+                                       Text="{Binding RestricaoSearchText}"
+                                       Style="{StaticResource FormEntry}"
+                                       Placeholder="Pesquisar condição de saúde"
+                                       ClearButtonVisibility="WhileEditing" />
                             </Grid>
                         </Border>
 
-                        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
-                            <Button Text="Usar câmera" Command="{Binding CaptureLaudoCommand}"
-                                    Style="{StaticResource ButtonPrimary}" HeightRequest="46" />
-                            <Button Grid.Column="1" Text="Abrir galeria" Command="{Binding PickLaudoCommand}"
-                                    Style="{StaticResource ButtonSecondary}" HeightRequest="46" />
-                            <Button Grid.Column="2" Text="Remover laudo" Command="{Binding RemoveLaudoCommand}"
-                                    Style="{StaticResource ButtonDanger}" HeightRequest="46"
-                                    IsVisible="{Binding HasLaudo}" />
-                        </Grid>
+                        <Grid RowDefinitions="Auto,Auto" ColumnSpacing="18" RowSpacing="18">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{OnIdiom Phone=*, Default=1.05*}" />
+                                <ColumnDefinition Width="{OnIdiom Phone=0, Default=0.95*}" />
+                            </Grid.ColumnDefinitions>
 
-                        <Border Padding="12" IsVisible="{Binding LaudoPendente}"
-                                BackgroundColor="{AppThemeBinding Light=#FCEAE8, Dark=#331A18}"
-                                Stroke="{AppThemeBinding Light=#DCA9A5, Dark=#713B36}"
-                                StrokeThickness="1" StrokeShape="RoundRectangle 8">
-                            <Label Text="Laudo obrigatório pendente. Anexe o documento antes de salvar."
-                                   TextColor="{AppThemeBinding Light=#702D29, Dark=#F0AAA4}"
-                                   FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="12" />
-                        </Border>
+                            <VerticalStackLayout Grid.Row="0" Grid.Column="0" Spacing="13">
+                                <CollectionView ItemsSource="{Binding RestricoesFiltradas}"
+                                                IsVisible="{Binding HasRestricoesFiltradas}"
+                                                SelectionMode="None" HeightRequest="280">
+                                    <CollectionView.ItemsLayout>
+                                        <GridItemsLayout Orientation="Vertical" Span="1"
+                                                         VerticalItemSpacing="8" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:RestricaoSelectable">
+                                            <Border Padding="11,7"
+                                                    BackgroundColor="{AppThemeBinding Light=#FAF7F2, Dark=#211F1B}"
+                                                    Stroke="{AppThemeBinding Light={StaticResource Line}, Dark={StaticResource LineDark}}"
+                                                    StrokeThickness="1" StrokeShape="RoundRectangle 7">
+                                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="9">
+                                                    <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                                              VerticalOptions="Center"
+                                                              Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}" />
+                                                    <Label Grid.Column="1"
+                                                           Text="{Binding Value, Converter={StaticResource EnumDisplay}}"
+                                                           VerticalTextAlignment="Center" FontSize="13" />
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+
+                                <Border Padding="18" IsVisible="{Binding HasNoRestricoesFiltradas}"
+                                        BackgroundColor="{AppThemeBinding Light=#FAF7F2, Dark=#211F1B}"
+                                        Stroke="{AppThemeBinding Light={StaticResource Line}, Dark={StaticResource LineDark}}"
+                                        StrokeThickness="1" StrokeShape="RoundRectangle 7">
+                                    <Label Text="Nenhuma condição encontrada."
+                                           HorizontalTextAlignment="Center"
+                                           Style="{StaticResource MutedText}" />
+                                </Border>
+
+                                <VerticalStackLayout Spacing="5">
+                                    <Label Text="Observações e recomendações" Style="{StaticResource FieldLabel}" />
+                                    <Border Style="{StaticResource MatriculaFieldBorder}" Padding="12,7">
+                                        <Editor Text="{Binding Matricula.ObservacoesRestricoes}"
+                                                Placeholder="Descreva cuidados específicos para o treino"
+                                                AutoSize="TextChanges" MaxLength="500"
+                                                MinimumHeightRequest="82" />
+                                    </Border>
+                                </VerticalStackLayout>
+
+                                <Border Padding="12" IsVisible="{Binding HasRestricoes}"
+                                        BackgroundColor="{AppThemeBinding Light=#FFF5E2, Dark=#35270F}"
+                                        StrokeThickness="0" StrokeShape="RoundRectangle 8">
+                                    <Label Text="Restrições selecionadas: a apresentação de laudo médico é obrigatória."
+                                           TextColor="{AppThemeBinding Light=#7A4D00, Dark=#F2C46D}"
+                                           FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="12" />
+                                </Border>
+                            </VerticalStackLayout>
+
+                            <Border Grid.Row="{OnIdiom Phone=1, Default=0}"
+                                    Grid.Column="{OnIdiom Phone=0, Default=1}"
+                                    Padding="18"
+                                    BackgroundColor="{AppThemeBinding Light=#FAF7F2, Dark=#211F1B}"
+                                    Stroke="{AppThemeBinding Light={StaticResource Line}, Dark={StaticResource LineDark}}"
+                                    StrokeThickness="1" StrokeShape="RoundRectangle 9">
+                                <VerticalStackLayout Spacing="14">
+                                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                                        <VerticalStackLayout Spacing="2">
+                                            <Label Text="Laudo médico" Style="{StaticResource CardTitle}" />
+                                            <Label Text="Fotografe ou selecione uma imagem legível do documento."
+                                                   Style="{StaticResource MutedText}" FontSize="12" />
+                                        </VerticalStackLayout>
+                                        <Border Grid.Column="1" Padding="9,5" IsVisible="{Binding HasLaudo}"
+                                                BackgroundColor="{AppThemeBinding Light=#DFF3E8, Dark=#163A2B}"
+                                                StrokeThickness="0" StrokeShape="RoundRectangle 7">
+                                            <Label Text="Laudo anexado" FontFamily="OpenSansSemibold" FontAttributes="Bold"
+                                                   FontSize="11" TextColor="{StaticResource Success}" />
+                                        </Border>
+                                    </Grid>
+
+                                    <Border HeightRequest="230" Padding="8"
+                                            BackgroundColor="{AppThemeBinding Light=#F4F0E9, Dark=#1A1815}"
+                                            Stroke="{AppThemeBinding Light={StaticResource Line}, Dark={StaticResource LineDark}}"
+                                            StrokeThickness="1" StrokeShape="RoundRectangle 9">
+                                        <Grid>
+                                            <VerticalStackLayout IsVisible="{Binding HasNoLaudo}"
+                                                                 HorizontalOptions="Center" VerticalOptions="Center" Spacing="8">
+                                                <Label Text="&#xe415;" FontFamily="MaterialIcons" FontSize="48"
+                                                       TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray600}}"
+                                                       HorizontalTextAlignment="Center" />
+                                                <Label Text="Nenhum laudo anexado" Style="{StaticResource MutedText}" />
+                                            </VerticalStackLayout>
+                                            <Image IsVisible="{Binding HasLaudo}"
+                                                   Source="{Binding Matricula.LaudoMedico, Converter={StaticResource FotoToImageSourceConverter}}"
+                                                   Aspect="AspectFit" />
+                                        </Grid>
+                                    </Border>
+
+                                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
+                                        <Button Text="Usar câmera" Command="{Binding CaptureLaudoCommand}"
+                                                Style="{StaticResource ButtonPrimary}" HeightRequest="46" FontSize="12" />
+                                        <Button Grid.Column="1" Text="Abrir galeria" Command="{Binding PickLaudoCommand}"
+                                                Style="{StaticResource ButtonSecondary}" HeightRequest="46" FontSize="12" />
+                                        <Button Grid.Column="2" Text="Remover" Command="{Binding RemoveLaudoCommand}"
+                                                Style="{StaticResource ButtonDanger}" HeightRequest="46" FontSize="12"
+                                                IsVisible="{Binding HasLaudo}" />
+                                    </Grid>
+
+                                    <Border Padding="12" IsVisible="{Binding LaudoPendente}"
+                                            BackgroundColor="{AppThemeBinding Light=#FCEAE8, Dark=#331A18}"
+                                            Stroke="{AppThemeBinding Light=#DCA9A5, Dark=#713B36}"
+                                            StrokeThickness="1" StrokeShape="RoundRectangle 8">
+                                        <Label Text="Laudo obrigatório pendente. Anexe o documento antes de salvar."
+                                               TextColor="{AppThemeBinding Light=#702D29, Dark=#F0AAA4}"
+                                               FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="12" />
+                                    </Border>
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
                     </VerticalStackLayout>
                 </Border>
 

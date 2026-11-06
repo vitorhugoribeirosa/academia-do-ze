@@ -11,7 +11,7 @@ public partial class MatriculaListViewModel : BaseViewModel
     private readonly IMatriculaService _matriculaService;
 
     public ObservableCollection<string> FilterTypes { get; } =
-        ["Ativas", "Todas", "Id", "Id Aluno", "Vencendo em dias"];
+        ["Ativas", "Todas", "ID da matrícula", "ID do aluno", "Vencendo em dias"];
 
     public ObservableCollection<MatriculaDto> Matriculas { get; } = [];
 
@@ -38,8 +38,8 @@ public partial class MatriculaListViewModel : BaseViewModel
 
     public string SearchPlaceholder => SelectedFilterType switch
     {
-        "Id" => "Digite o ID da matrícula",
-        "Id Aluno" => "Digite o ID do aluno",
+        "ID da matrícula" => "Digite o ID da matrícula",
+        "ID do aluno" => "Digite o ID do aluno",
         "Vencendo em dias" => "Digite a quantidade de dias",
         "Todas" => "Nenhum valor necessário",
         _ => "ID do aluno"
@@ -121,8 +121,8 @@ public partial class MatriculaListViewModel : BaseViewModel
             IEnumerable<MatriculaDto> resultados = SelectedFilterType switch
             {
                 "Todas" => await _matriculaService.ObterTodasAsync(cts.Token),
-                "Id" => await BuscarPorIdAsync(valorNumerico, cts.Token),
-                "Id Aluno" => await _matriculaService.ObterPorAlunoIdAsync(valorNumerico, cts.Token),
+                "ID da matrícula" => await BuscarPorIdAsync(valorNumerico, cts.Token),
+                "ID do aluno" => await _matriculaService.ObterPorAlunoIdAsync(valorNumerico, cts.Token),
                 "Vencendo em dias" => await _matriculaService.ObterVencendoEmDiasAsync(valorNumerico, cts.Token),
                 _ => await _matriculaService.ObterAtivasAsync(valorNumerico, cts.Token)
             };
@@ -189,7 +189,7 @@ public partial class MatriculaListViewModel : BaseViewModel
     private async Task<(bool IsValid, int Value)> ValidarFiltroAsync()
     {
         var valorNumerico = 0;
-        var exigeNumero = SelectedFilterType is "Id" or "Id Aluno" or "Vencendo em dias";
+        var exigeNumero = SelectedFilterType is "ID da matrícula" or "ID do aluno" or "Vencendo em dias";
 
         if (!exigeNumero)
         {
