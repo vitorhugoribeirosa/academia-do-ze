@@ -1,5 +1,6 @@
 #if WINDOWS
 using CommunityToolkit.Maui.Views;
+using AcademiaDoZe.Presentation.AppMaui.Helpers;
 
 namespace AcademiaDoZe.Presentation.AppMaui.Views;
 
@@ -13,7 +14,7 @@ public sealed class CameraCapturePage : ContentPage
 
     private readonly Label _status = new()
     {
-        Text = "Preparando a câmera...",
+        Text = LocalizationManager.Instance.TranslateSource("Preparando a câmera..."),
         TextColor = Color.FromArgb("#BDB6AC"),
         HorizontalTextAlignment = TextAlignment.Center,
         FontSize = 14
@@ -21,7 +22,7 @@ public sealed class CameraCapturePage : ContentPage
 
     private readonly Button _captureButton = new()
     {
-        Text = "Tirar foto",
+        Text = LocalizationManager.Instance.TranslateSource("Tirar foto"),
         IsEnabled = false,
         BackgroundColor = Color.FromArgb("#E2A33B"),
         TextColor = Color.FromArgb("#171512"),
@@ -39,12 +40,12 @@ public sealed class CameraCapturePage : ContentPage
 
     public CameraCapturePage()
     {
-        Title = "Tirar foto";
+        Title = LocalizationManager.Instance.TranslateSource("Tirar foto");
         BackgroundColor = Color.FromArgb("#0B0B0B");
 
         var cancelButton = new Button
         {
-            Text = "Cancelar",
+            Text = LocalizationManager.Instance.TranslateSource("Cancelar"),
             BackgroundColor = Colors.Transparent,
             TextColor = Colors.White,
             BorderColor = Color.FromArgb("#4A4640"),
@@ -84,7 +85,7 @@ public sealed class CameraCapturePage : ContentPage
 
         layout.Add(new Label
         {
-            Text = "Posicione o rosto e tire a foto",
+            Text = LocalizationManager.Instance.TranslateSource("Posicione o rosto e tire a foto"),
             TextColor = Colors.White,
             FontSize = 22,
             FontAttributes = FontAttributes.Bold
@@ -116,17 +117,18 @@ public sealed class CameraCapturePage : ContentPage
 
             if (_camera.SelectedCamera is null)
             {
-                _status.Text = "Nenhuma câmera foi encontrada neste computador.";
+                _status.Text = LocalizationManager.Instance.TranslateSource("Nenhuma câmera foi encontrada neste computador.");
                 return;
             }
 
             await StartCameraPreviewAsync(cts.Token);
-            _status.Text = "Câmera pronta";
+            _status.Text = LocalizationManager.Instance.TranslateSource("Câmera pronta");
             _captureButton.IsEnabled = true;
         }
         catch (Exception ex)
         {
-            _status.Text = $"Não foi possível iniciar a câmera: {GetErrorMessage(ex)}";
+            _status.Text = LocalizationManager.Instance.TranslateSource(
+                $"Não foi possível iniciar a câmera: {GetErrorMessage(ex)}");
         }
     }
 
@@ -153,7 +155,7 @@ public sealed class CameraCapturePage : ContentPage
         try
         {
             _captureButton.IsEnabled = false;
-            _status.Text = "Capturando foto...";
+            _status.Text = LocalizationManager.Instance.TranslateSource("Capturando foto...");
 
             await using var image = await _camera.CaptureImage(CancellationToken.None);
             var path = Path.Combine(
@@ -167,7 +169,8 @@ public sealed class CameraCapturePage : ContentPage
         }
         catch (Exception ex)
         {
-            _status.Text = $"Não foi possível tirar a foto: {GetErrorMessage(ex)}";
+            _status.Text = LocalizationManager.Instance.TranslateSource(
+                $"Não foi possível tirar a foto: {GetErrorMessage(ex)}");
             _captureButton.IsEnabled = true;
         }
     }

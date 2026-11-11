@@ -1,6 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:AcademiaDoZe.Presentation.AppMaui.Helpers"
              x:Class="AcademiaDoZe.Presentation.AppMaui.MainPage">
 
     <ScrollView>
@@ -11,22 +12,22 @@
                 Source="dotnet_bot.png"
                 HeightRequest="185"
                 Aspect="AspectFit"
-                SemanticProperties.Description="dot net bot in a submarine number ten" />
+                SemanticProperties.Description="{helpers:Translate S_d644d2ce6cb7}" />
 
             <Label
-                Text="Hello, World!"
+                Text="{helpers:Translate S_0a0a9f2a6772}"
                 Style="{StaticResource Headline}"
                 SemanticProperties.HeadingLevel="Level1" />
 
             <Label
-                Text="Welcome to &#10;.NET Multi-platform App UI"
+                Text="{helpers:Translate S_04e4a69ee833}"
                 Style="{StaticResource SubHeadline}"
                 SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I" />
+                SemanticProperties.Description="{helpers:Translate S_a809ad91f71d}" />
 
             <Button
                 x:Name="CounterBtn"
-                Text="Click me" 
+                Text="{helpers:Translate S_88cc8212a340}"
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Fill" />

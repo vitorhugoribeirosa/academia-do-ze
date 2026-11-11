@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:AcademiaDoZe.Presentation.AppMaui.Helpers"
              x:Class="AcademiaDoZe.Presentation.AppMaui.Controls.InAppDatePicker"
              x:Name="Root">
     <VerticalStackLayout Spacing="6">
@@ -50,13 +51,13 @@
                 <Grid ColumnDefinitions="40,40,*,40,40" ColumnSpacing="2">
                     <Button Text="«" Clicked="OnPreviousYearClicked"
                             FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="22"
-                            SemanticProperties.Description="Voltar um ano"
+                            SemanticProperties.Description="{helpers:Translate S_196619a45826}"
                             BackgroundColor="Transparent"
                             TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
                             Padding="0" HeightRequest="40" WidthRequest="40" />
                     <Button Grid.Column="1" Text="&#xe5cb;" Clicked="OnPreviousMonthClicked"
                             FontFamily="MaterialIcons" FontSize="22"
-                            SemanticProperties.Description="Voltar um mês"
+                            SemanticProperties.Description="{helpers:Translate S_e860553b8136}"
                             BackgroundColor="Transparent"
                             TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
                             Padding="0" HeightRequest="40" WidthRequest="40" />
@@ -65,24 +66,24 @@
                            FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="15" />
                     <Button Grid.Column="3" Text="&#xe5cc;" Clicked="OnNextMonthClicked"
                             FontFamily="MaterialIcons" FontSize="22"
-                            SemanticProperties.Description="Avançar um mês"
+                            SemanticProperties.Description="{helpers:Translate S_158568f9d745}"
                             BackgroundColor="Transparent"
                             TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
                             Padding="0" HeightRequest="40" WidthRequest="40" />
                     <Button Grid.Column="4" Text="»" Clicked="OnNextYearClicked"
                             FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="22"
-                            SemanticProperties.Description="Avançar um ano"
+                            SemanticProperties.Description="{helpers:Translate S_2673b812b65a}"
                             BackgroundColor="Transparent"
                             TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
                             Padding="0" HeightRequest="40" WidthRequest="40" />
                 </Grid>
 
-                <Label Text="«  ano anterior     ‹  mês anterior     mês seguinte  ›     próximo ano  »"
+                <Label Text="{helpers:Translate S_7c868f4c4151}"
                        HorizontalTextAlignment="Center"
                        Style="{StaticResource MutedText}"
                        FontSize="10" />
 
-                <Grid ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="3">
+                <Grid x:Name="WeekdayHeaders" ColumnDefinitions="*,*,*,*,*,*,*" ColumnSpacing="3">
                     <Label Text="D" HorizontalTextAlignment="Center" Style="{StaticResource MutedText}" FontSize="12" />
                     <Label Grid.Column="1" Text="S" HorizontalTextAlignment="Center" Style="{StaticResource MutedText}" FontSize="12" />
                     <Label Grid.Column="2" Text="T" HorizontalTextAlignment="Center" Style="{StaticResource MutedText}" FontSize="12" />
@@ -97,7 +98,7 @@
                       ColumnDefinitions="*,*,*,*,*,*,*"
                       RowSpacing="3" ColumnSpacing="3" />
 
-                <Button Text="Hoje" Clicked="OnTodayClicked"
+                <Button Text="{helpers:Translate S_ba0084278453}" Clicked="OnTodayClicked"
                         HorizontalOptions="End" HeightRequest="38" WidthRequest="90"
                         Style="{StaticResource ButtonSecondary}" CornerRadius="6" />
             </VerticalStackLayout>

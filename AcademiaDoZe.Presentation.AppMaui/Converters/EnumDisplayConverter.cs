@@ -1,4 +1,5 @@
 using AcademiaDoZe.Application.Enums;
+using AcademiaDoZe.Presentation.AppMaui.Helpers;
 using System.Globalization;
 
 namespace AcademiaDoZe.Presentation.AppMaui.Converters;
@@ -6,7 +7,9 @@ namespace AcademiaDoZe.Presentation.AppMaui.Converters;
 public sealed class EnumDisplayConverter : IValueConverter
 {
     public object Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
-        value is Enum enumValue ? enumValue.GetDisplayName() : string.Empty;
+        value is Enum enumValue
+            ? LocalizationManager.Instance.TranslateSource(enumValue.GetDisplayName())
+            : string.Empty;
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>
         throw new NotSupportedException("A conversão de texto para enum não é suportada.");

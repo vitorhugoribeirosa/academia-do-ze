@@ -4,8 +4,9 @@
     x:Name="AppShellRoot"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:AcademiaDoZe.Presentation.AppMaui.Helpers"
     xmlns:views="clr-namespace:AcademiaDoZe.Presentation.AppMaui.Views"
-    Title="Academia do Zé"
+    Title="{helpers:Translate S_da8ee2fa1a33}"
     FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource Surface}, Dark={StaticResource SurfaceDark}}">
 
     <Shell.FlyoutHeader>
@@ -19,19 +20,19 @@
                    WidthRequest="48"
                    Aspect="AspectFit"/>
             <VerticalStackLayout Grid.Column="1" Spacing="1" VerticalOptions="Center">
-                <Label Text="Academia do Zé"
+                <Label Text="{helpers:Translate S_da8ee2fa1a33}"
                        TextColor="{StaticResource White}"
                        FontFamily="OpenSansSemibold"
                        FontAttributes="Bold"
                        FontSize="17"/>
-                <Label Text="Administração"
+                <Label Text="{helpers:Translate S_855dc3dcbe0a}"
                        TextColor="#C9C3BA"
                        FontSize="12"/>
             </VerticalStackLayout>
         </Grid>
     </Shell.FlyoutHeader>
 
-    <FlyoutItem Title="Início">
+    <FlyoutItem Title="{helpers:Translate S_fc2c74003cb1}">
         <FlyoutItem.Icon>
             <FontImageSource FontFamily="MaterialIcons" Glyph="&#xe871;" Size="21"
                              Color="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource PrimaryDark}}"/>
@@ -39,7 +40,7 @@
         <ShellContent ContentTemplate="{DataTemplate views:DashboardListPage}" Route="dashboard" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Logradouros">
+    <FlyoutItem Title="{helpers:Translate S_3d7d9bebda59}">
         <FlyoutItem.Icon>
             <FontImageSource FontFamily="MaterialIcons" Glyph="&#xe0c8;" Size="21"
                              Color="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource PrimaryDark}}"/>
@@ -47,7 +48,7 @@
         <ShellContent ContentTemplate="{DataTemplate views:LogradouroListPage}" Route="logradouros" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Alunos">
+    <FlyoutItem Title="{helpers:Translate S_f72f85e18dee}">
         <FlyoutItem.Icon>
             <FontImageSource FontFamily="MaterialIcons" Glyph="&#xe7fd;" Size="21"
                              Color="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource PrimaryDark}}"/>
@@ -55,7 +56,7 @@
         <ShellContent ContentTemplate="{DataTemplate views:AlunoListPage}" Route="alunos" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Matrículas">
+    <FlyoutItem Title="{helpers:Translate S_ecee9ee28669}">
         <FlyoutItem.Icon>
             <FontImageSource FontFamily="MaterialIcons" Glyph="&#xe85d;" Size="21"
                              Color="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource PrimaryDark}}"/>
@@ -63,7 +64,7 @@
         <ShellContent ContentTemplate="{DataTemplate views:MatriculaListPage}" Route="matriculas" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Colaboradores">
+    <FlyoutItem Title="{helpers:Translate S_8a975827b9be}">
         <FlyoutItem.Icon>
             <FontImageSource FontFamily="MaterialIcons" Glyph="&#xea67;" Size="21"
                              Color="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource PrimaryDark}}"/>
@@ -71,7 +72,7 @@
         <ShellContent ContentTemplate="{DataTemplate views:ColaboradorListPage}" Route="colaboradores" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Configurações">
+    <FlyoutItem Title="{helpers:Translate S_871f24c4cdaf}">
         <FlyoutItem.Icon>
             <FontImageSource FontFamily="MaterialIcons" Glyph="&#xe8b8;" Size="21"
                              Color="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource PrimaryDark}}"/>
@@ -82,7 +83,7 @@
     <Shell.FlyoutFooter>
         <VerticalStackLayout Padding="18,12,18,18" Spacing="5">
             <BoxView Style="{StaticResource SectionRule}"/>
-            <Label Text="Vitor Hugo Ribeiro Sá"
+            <Label Text="{helpers:Translate S_192edbec9710}"
                    TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}"
                    FontFamily="OpenSansSemibold"
                    FontSize="12"/>

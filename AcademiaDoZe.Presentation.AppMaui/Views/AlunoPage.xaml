@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:AcademiaDoZe.Presentation.AppMaui.Helpers"
              x:Class="AcademiaDoZe.Presentation.AppMaui.Views.AlunoPage"
              xmlns:controls="clr-namespace:AcademiaDoZe.Presentation.AppMaui.Controls"
              xmlns:vm="clr-namespace:AcademiaDoZe.Presentation.AppMaui.ViewModels"
@@ -91,7 +92,7 @@
                                FontFamily="OpenSansSemibold" FontAttributes="Bold"
                                FontSize="29"
                                TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}" />
-                        <Label Text="Informe os dados pessoais e o endereço do aluno."
+                        <Label Text="{helpers:Translate S_eb008927889a}"
                                Style="{StaticResource HeaderSubtitle}" FontSize="14" />
                     </VerticalStackLayout>
                 </Grid>
@@ -109,8 +110,8 @@
                                            HorizontalOptions="Center" VerticalOptions="Center" />
                                 </Border>
                                 <VerticalStackLayout Grid.Column="1" Margin="16,10" Spacing="2" VerticalOptions="Center">
-                                    <Label Text="Endereço" Style="{StaticResource CardTitle}" FontSize="21" />
-                                    <Label Text="Informe o CEP para buscar o endereço automaticamente."
+                                    <Label Text="{helpers:Translate S_ef764c1db7f8}" Style="{StaticResource CardTitle}" FontSize="21" />
+                                    <Label Text="{helpers:Translate S_e36c27fbad71}"
                                            Style="{StaticResource HeaderSubtitle}" FontSize="13" />
                                 </VerticalStackLayout>
                             </Grid>
@@ -122,7 +123,7 @@
                                 <ColumnDefinition Width="{OnIdiom Phone=0, Default=184}" />
                             </Grid.ColumnDefinitions>
                             <VerticalStackLayout Spacing="5">
-                                <Label Text="CEP" Style="{StaticResource FieldLabel}" />
+                                <Label Text="{helpers:Translate S_2cbe9f1f9067}" Style="{StaticResource FieldLabel}" />
                                 <Border Style="{StaticResource AlunoFieldBorder}">
                                     <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
                                         <Label Text="&#xe8b6;" Style="{StaticResource AlunoFieldIcon}" />
@@ -138,7 +139,7 @@
                             </VerticalStackLayout>
                             <Button Grid.Row="{OnIdiom Phone=1, Default=0}"
                                     Grid.Column="{OnIdiom Phone=0, Default=1}"
-                                    Text="Buscar CEP"
+                                    Text="{helpers:Translate S_804157cb11ea}"
                                     Command="{Binding SearchByCepCommand}"
                                     Style="{StaticResource ButtonPrimary}"
                                     CornerRadius="7" HeightRequest="52"
@@ -159,7 +160,7 @@
                                 <Label Text="&#xe002;" FontFamily="MaterialIcons" FontSize="23"
                                        TextColor="{AppThemeBinding Light={StaticResource White}, Dark=#F5A000}" VerticalOptions="Center" />
                                 <Label Grid.Column="1"
-                                       Text="Digite o CEP e clique em Buscar CEP para vincular um logradouro cadastrado."
+                                       Text="{helpers:Translate S_deed34404875}"
                                        TextColor="{AppThemeBinding Light={StaticResource White}, Dark=#F3BE00}"
                                        FontSize="13" VerticalTextAlignment="Center" />
                             </Grid>
@@ -174,7 +175,7 @@
                                 <Label Text="&#xe86c;" FontFamily="MaterialIcons" FontSize="24"
                                        TextColor="{StaticResource Success}" VerticalOptions="Center" />
                                 <VerticalStackLayout Grid.Column="1" Spacing="3">
-                                    <Label Text="Endereço localizado" FontFamily="OpenSansSemibold"
+                                    <Label Text="{helpers:Translate S_ca54c1743777}" FontFamily="OpenSansSemibold"
                                            FontAttributes="Bold" FontSize="13" TextColor="{StaticResource Success}" />
                                     <Label Text="{Binding Aluno.Endereco.Nome, StringFormat='Rua: {0}'}" FontSize="13" />
                                     <Label Text="{Binding Aluno.Endereco.Bairro, StringFormat='Bairro: {0}'}"
@@ -193,25 +194,25 @@
                                 <ColumnDefinition Width="{OnIdiom Phone=0, Default=*}" />
                             </Grid.ColumnDefinitions>
                             <VerticalStackLayout Spacing="5">
-                                <Label Text="Número" Style="{StaticResource FieldLabel}" />
+                                <Label Text="{helpers:Translate S_1d91f4b8d8d6}" Style="{StaticResource FieldLabel}" />
                                 <Border Style="{StaticResource AlunoFieldBorder}">
                                     <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
                                         <Label Text="&#xe88a;" Style="{StaticResource AlunoFieldIcon}" />
                                         <Entry Grid.Column="1" Text="{Binding Aluno.Numero}"
                                                Style="{StaticResource FormEntry}"
-                                               Placeholder="Número" MaxLength="20" />
+                                               Placeholder="{helpers:Translate S_1d91f4b8d8d6}" MaxLength="20" />
                                     </Grid>
                                 </Border>
                             </VerticalStackLayout>
                             <VerticalStackLayout Grid.Row="{OnIdiom Phone=1, Default=0}"
                                                  Grid.Column="{OnIdiom Phone=0, Default=1}" Spacing="5">
-                                <Label Text="Complemento" Style="{StaticResource FieldLabel}" />
+                                <Label Text="{helpers:Translate S_ba75e2e6719b}" Style="{StaticResource FieldLabel}" />
                                 <Border Style="{StaticResource AlunoFieldBorder}">
                                     <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
                                         <Label Text="&#xe873;" Style="{StaticResource AlunoFieldIcon}" />
                                         <Entry Grid.Column="1" Text="{Binding Aluno.Complemento}"
                                                Style="{StaticResource FormEntry}"
-                                               Placeholder="Complemento (opcional)" MaxLength="50" />
+                                               Placeholder="{helpers:Translate S_2f4cfad71d36}" MaxLength="50" />
                                     </Grid>
                                 </Border>
                             </VerticalStackLayout>
@@ -232,8 +233,8 @@
                                            HorizontalOptions="Center" VerticalOptions="Center" />
                                 </Border>
                                 <VerticalStackLayout Grid.Column="1" Margin="16,10" Spacing="2" VerticalOptions="Center">
-                                    <Label Text="Dados pessoais" Style="{StaticResource CardTitle}" FontSize="21" />
-                                    <Label Text="Informe os dados pessoais do aluno."
+                                    <Label Text="{helpers:Translate S_d54d68a7fe9a}" Style="{StaticResource CardTitle}" FontSize="21" />
+                                    <Label Text="{helpers:Translate S_8dcdc90b9160}"
                                            Style="{StaticResource HeaderSubtitle}" FontSize="13" />
                                 </VerticalStackLayout>
                                 <Border Grid.Column="2" Margin="10" Padding="11,5"
@@ -271,7 +272,7 @@
                                         </Grid>
                                     </Border>
 
-                                    <Button Text="Usar câmera" Command="{Binding CapturePhotoCommand}"
+                                    <Button Text="{helpers:Translate S_03541389dff4}" Command="{Binding CapturePhotoCommand}"
                                             Style="{StaticResource ButtonPrimary}"
                                             CornerRadius="7" HeightRequest="44">
                                         <Button.ImageSource>
@@ -279,7 +280,7 @@
                                                              Color="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
                                         </Button.ImageSource>
                                     </Button>
-                                    <Button Text="Abrir galeria" Command="{Binding PickPhotoCommand}"
+                                    <Button Text="{helpers:Translate S_82670a3e0332}" Command="{Binding PickPhotoCommand}"
                                             Style="{StaticResource ButtonSecondary}"
                                             CornerRadius="7" HeightRequest="44">
                                         <Button.ImageSource>
@@ -287,16 +288,16 @@
                                                              Color="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}" />
                                         </Button.ImageSource>
                                     </Button>
-                                    <Button Text="Remover foto" Command="{Binding RemovePhotoCommand}"
+                                    <Button Text="{helpers:Translate S_4f88b73b9d17}" Command="{Binding RemovePhotoCommand}"
                                             IsVisible="{Binding HasFoto}"
                                             Style="{StaticResource ButtonDanger}"
                                             CornerRadius="7" WidthRequest="-1" HeightRequest="42" />
 
-                                    <Label Text="Foto obrigatória no cadastro"
+                                    <Label Text="{helpers:Translate S_79cf97c8fb90}"
                                            IsVisible="{Binding HasNoFoto}"
                                            Style="{StaticResource MutedText}" FontSize="11"
                                            HorizontalTextAlignment="Center" />
-                                    <Label Text="Foto pronta para salvar"
+                                    <Label Text="{helpers:Translate S_d4900d16e162}"
                                            IsVisible="{Binding HasFoto}"
                                            TextColor="{StaticResource Success}"
                                            FontFamily="OpenSansSemibold" FontSize="11"
@@ -308,13 +309,13 @@
                                                  Grid.Column="{OnIdiom Phone=0, Default=1}"
                                                  Spacing="11">
                                 <VerticalStackLayout Spacing="5">
-                                    <Label Text="Nome" Style="{StaticResource FieldLabel}" />
+                                    <Label Text="{helpers:Translate S_13030dd962f4}" Style="{StaticResource FieldLabel}" />
                                     <Border Style="{StaticResource AlunoFieldBorder}">
                                         <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
                                             <Label Text="&#xe7fd;" Style="{StaticResource AlunoFieldIcon}" />
                                             <Entry Grid.Column="1" Text="{Binding Aluno.Nome}"
                                                    Style="{StaticResource FormEntry}"
-                                                   Placeholder="Nome completo" MaxLength="150" />
+                                                   Placeholder="{helpers:Translate S_695fc3f31688}" MaxLength="150" />
                                         </Grid>
                                     </Border>
                                 </VerticalStackLayout>
@@ -325,7 +326,7 @@
                                         <ColumnDefinition Width="{OnIdiom Phone=0, Default=*}" />
                                     </Grid.ColumnDefinitions>
                                     <VerticalStackLayout Spacing="5">
-                                        <Label Text="CPF" Style="{StaticResource FieldLabel}" />
+                                        <Label Text="{helpers:Translate S_9a9bf276b82f}" Style="{StaticResource FieldLabel}" />
                                         <Border Style="{StaticResource AlunoFieldBorder}">
                                             <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
                                                 <Label Text="&#xe8a6;" Style="{StaticResource AlunoFieldIcon}" />
@@ -338,7 +339,7 @@
                                     </VerticalStackLayout>
                                     <VerticalStackLayout Grid.Row="{OnIdiom Phone=1, Default=0}"
                                                          Grid.Column="{OnIdiom Phone=0, Default=1}" Spacing="5">
-                                        <Label Text="Data de nascimento" Style="{StaticResource FieldLabel}" />
+                                        <Label Text="{helpers:Translate S_d631e8cfef7a}" Style="{StaticResource FieldLabel}" />
                                         <controls:InAppDatePicker Date="{Binding Aluno.DataNascimento, Mode=TwoWay}" />
                                     </VerticalStackLayout>
                                 </Grid>
@@ -349,7 +350,7 @@
                                         <ColumnDefinition Width="{OnIdiom Phone=0, Default=*}" />
                                     </Grid.ColumnDefinitions>
                                     <VerticalStackLayout Spacing="5">
-                                        <Label Text="Telefone" Style="{StaticResource FieldLabel}" />
+                                        <Label Text="{helpers:Translate S_04e0410282ed}" Style="{StaticResource FieldLabel}" />
                                         <Border Style="{StaticResource AlunoFieldBorder}">
                                             <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
                                                 <Label Text="&#xe0cd;" Style="{StaticResource AlunoFieldIcon}" />
@@ -361,13 +362,13 @@
                                     </VerticalStackLayout>
                                     <VerticalStackLayout Grid.Row="{OnIdiom Phone=1, Default=0}"
                                                          Grid.Column="{OnIdiom Phone=0, Default=1}" Spacing="5">
-                                        <Label Text="E-mail" Style="{StaticResource FieldLabel}" />
+                                        <Label Text="{helpers:Translate S_0d01e2e86669}" Style="{StaticResource FieldLabel}" />
                                         <Border Style="{StaticResource AlunoFieldBorder}">
                                             <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
                                                 <Label Text="&#xe0be;" Style="{StaticResource AlunoFieldIcon}" />
                                                 <Entry Grid.Column="1" Text="{Binding Aluno.Email}"
                                                        Style="{StaticResource FormEntry}"
-                                                       Placeholder="exemplo@email.com" Keyboard="Email" MaxLength="100" />
+                                                       Placeholder="{helpers:Translate S_960109973683}" Keyboard="Email" MaxLength="100" />
                                             </Grid>
                                         </Border>
                                     </VerticalStackLayout>
@@ -379,32 +380,32 @@
                                         <ColumnDefinition Width="{OnIdiom Phone=0, Default=*}" />
                                     </Grid.ColumnDefinitions>
                                     <VerticalStackLayout Spacing="5">
-                                        <Label Text="Senha" Style="{StaticResource FieldLabel}" />
+                                        <Label Text="{helpers:Translate S_deba0172511d}" Style="{StaticResource FieldLabel}" />
                                         <Border Style="{StaticResource AlunoFieldBorder}">
                                             <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
                                                 <Label Text="&#xe897;" Style="{StaticResource AlunoFieldIcon}" />
                                                 <Entry Grid.Column="1" Text="{Binding Aluno.Senha}"
                                                        Style="{StaticResource FormEntry}"
-                                                       Placeholder="Mínimo 6 caracteres e uma maiúscula"
+                                                       Placeholder="{helpers:Translate S_0df87d977551}"
                                                        IsPassword="{Binding IsSenhaOculta}" MaxLength="50" />
                                                 <Button Grid.Column="2" Text="{Binding SenhaVisibilityIcon}"
                                                         Command="{Binding ToggleSenhaVisibilityCommand}"
                                                         Style="{StaticResource AlunoPasswordButton}" />
                                             </Grid>
                                         </Border>
-                                        <Label Text="Na edição, deixe em branco para manter a senha atual."
+                                        <Label Text="{helpers:Translate S_824300cb006d}"
                                                IsVisible="{Binding IsEditMode}"
                                                Style="{StaticResource MutedText}" FontSize="11" />
                                     </VerticalStackLayout>
                                     <VerticalStackLayout Grid.Row="{OnIdiom Phone=1, Default=0}"
                                                          Grid.Column="{OnIdiom Phone=0, Default=1}" Spacing="5">
-                                        <Label Text="Confirmar senha" Style="{StaticResource FieldLabel}" />
+                                        <Label Text="{helpers:Translate S_9c469e53fd34}" Style="{StaticResource FieldLabel}" />
                                         <Border Style="{StaticResource AlunoFieldBorder}">
                                             <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="8">
                                                 <Label Text="&#xe897;" Style="{StaticResource AlunoFieldIcon}" />
                                                 <Entry Grid.Column="1" Text="{Binding ConfirmarSenha}"
                                                        Style="{StaticResource FormEntry}"
-                                                       Placeholder="Repita a senha"
+                                                       Placeholder="{helpers:Translate S_85a9f1a88a5e}"
                                                        IsPassword="{Binding IsConfirmarSenhaOculta}" MaxLength="50" />
                                                 <Button Grid.Column="2" Text="{Binding ConfirmarSenhaVisibilityIcon}"
                                                         Command="{Binding ToggleConfirmarSenhaVisibilityCommand}"
@@ -427,7 +428,7 @@
                         <Label Text="&#xe000;" FontFamily="MaterialIcons" FontSize="23"
                                TextColor="{StaticResource Magenta}" VerticalOptions="Start" />
                         <VerticalStackLayout Grid.Column="1" Spacing="3">
-                            <Label Text="Revise os campos informados"
+                            <Label Text="{helpers:Translate S_ef9a21e2f662}"
                                    FontFamily="OpenSansSemibold" FontAttributes="Bold"
                                    FontSize="13" TextColor="{StaticResource Magenta}" />
                             <Label Text="{Binding ValidationMessage}"
@@ -438,14 +439,14 @@
                 </Border>
 
                 <Grid Grid.Row="4" ColumnDefinitions="*,Auto,Auto" ColumnSpacing="12" Margin="0,0,0,6">
-                    <Label Text="Os campos essenciais serão validados antes do cadastro."
+                    <Label Text="{helpers:Translate S_5e6e31464210}"
                            Style="{StaticResource MutedText}" FontSize="12"
                            VerticalTextAlignment="Center" />
-                    <Button Grid.Column="1" Text="Cancelar"
+                    <Button Grid.Column="1" Text="{helpers:Translate S_c111e0ab9ddb}"
                             Command="{Binding CancelCommand}"
                             Style="{StaticResource ButtonSecondary}"
                             CornerRadius="7" WidthRequest="134" HeightRequest="50" />
-                    <Button Grid.Column="2" Text="Salvar aluno"
+                    <Button Grid.Column="2" Text="{helpers:Translate S_fe4755da101e}"
                             Command="{Binding SaveAlunoCommand}"
                             Style="{StaticResource ButtonPrimary}"
                             CornerRadius="7" WidthRequest="182" HeightRequest="50">
@@ -468,7 +469,7 @@
                     <ActivityIndicator IsRunning="{Binding IsBusy}"
                                        Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
                                        VerticalOptions="Center" />
-                    <Label Text="Processando..." FontFamily="OpenSansSemibold"
+                    <Label Text="{helpers:Translate S_2e65a4197f3f}" FontFamily="OpenSansSemibold"
                            FontAttributes="Bold" VerticalTextAlignment="Center" />
                 </HorizontalStackLayout>
             </Border>

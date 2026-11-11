@@ -1,3 +1,4 @@
+using AcademiaDoZe.Presentation.AppMaui.Helpers;
 using AcademiaDoZe.Presentation.AppMaui.Messages;
 using CommunityToolkit.Mvvm.Messaging;
 
@@ -8,11 +9,28 @@ public partial class App : Microsoft.Maui.Controls.Application
     public App()
     {
         InitializeComponent();
+        Resources["LocalizedStrings"] = LocalizationManager.Instance;
         AplicarTema();
 
         WeakReferenceMessenger.Default.Register<TemaPreferencesUpdatedMessage>(this, (_, _) =>
         {
             AplicarTema();
+        });
+
+        WeakReferenceMessenger.Default.Register<CulturaPreferencesUpdatedMessage>(this, (_, message) =>
+        {
+            LocalizationManager.Instance.SetCulture(message.Value);
+            foreach (var window in Windows)
+            {
+                window.Title = LocalizationManager.Instance.TranslateSource("Academia do Zé");
+#if WINDOWS || MACCATALYST
+                if (window.TitleBar is TitleBar titleBar)
+                {
+                    titleBar.Title = LocalizationManager.Instance.TranslateSource("Academia do Zé");
+                    titleBar.Subtitle = LocalizationManager.Instance.TranslateSource("Gestão administrativa");
+                }
+#endif
+            }
         });
     }
 
@@ -20,7 +38,7 @@ public partial class App : Microsoft.Maui.Controls.Application
     {
         var window = new Window(new AppShell())
         {
-            Title = "Academia do Zé"
+            Title = LocalizationManager.Instance.TranslateSource("Academia do Zé")
         };
 
 #if WINDOWS || MACCATALYST
@@ -35,8 +53,8 @@ public partial class App : Microsoft.Maui.Controls.Application
     {
         return new TitleBar
         {
-            Title = "Academia do Zé",
-            Subtitle = "Gestão administrativa",
+            Title = LocalizationManager.Instance.TranslateSource("Academia do Zé"),
+            Subtitle = LocalizationManager.Instance.TranslateSource("Gestão administrativa"),
             BackgroundColor = Color.FromArgb("#24211D"),
             ForegroundColor = Colors.White,
             HeightRequest = 48

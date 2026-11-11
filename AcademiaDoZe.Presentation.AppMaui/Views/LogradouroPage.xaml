@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:AcademiaDoZe.Presentation.AppMaui.Helpers"
              x:Class="AcademiaDoZe.Presentation.AppMaui.Views.LogradouroPage"
              xmlns:vm="clr-namespace:AcademiaDoZe.Presentation.AppMaui.ViewModels"
              x:DataType="vm:LogradouroViewModel"
@@ -15,7 +16,7 @@
 
                 <VerticalStackLayout Spacing="6">
                     <Label Text="{Binding Title}" Style="{StaticResource HeaderTitle}"/>
-                    <Label Text="Informe os dados do endereço. A busca por CEP pode preencher parte do formulário."
+                    <Label Text="{helpers:Translate S_ae273c33f09c}"
                            Style="{StaticResource HeaderSubtitle}"/>
                     <BoxView Style="{StaticResource SectionRule}" Margin="0,10,0,0"/>
                 </VerticalStackLayout>
@@ -23,15 +24,15 @@
                 <Border Style="{StaticResource FlatSection}">
                     <Grid ColumnDefinitions="180,*,130" ColumnSpacing="12">
                         <VerticalStackLayout Grid.Column="0" Spacing="3" VerticalOptions="Center">
-                            <Label Text="Consulta por CEP" Style="{StaticResource CardTitle}" FontSize="16"/>
-                            <Label Text="Preenchimento automático" Style="{StaticResource MutedText}" FontSize="11"/>
+                            <Label Text="{helpers:Translate S_0a9c40dfeb7a}" Style="{StaticResource CardTitle}" FontSize="16"/>
+                            <Label Text="{helpers:Translate S_cdc85643fa9a}" Style="{StaticResource MutedText}" FontSize="11"/>
                         </VerticalStackLayout>
                         <Entry Grid.Column="1"
                                Text="{Binding Logradouro.Cep}"
                                Placeholder="00000-000"
                                Keyboard="Numeric"/>
                         <Button Grid.Column="2"
-                                Text="Buscar CEP"
+                                Text="{helpers:Translate S_804157cb11ea}"
                                 Command="{Binding SearchByCepCommand}"
                                 Style="{StaticResource ButtonPrimary}"/>
                     </Grid>
@@ -40,7 +41,7 @@
                 <Border Style="{StaticResource FlatSection}">
                     <VerticalStackLayout Spacing="18">
                         <Grid ColumnDefinitions="*,Auto">
-                            <Label Text="Dados do endereço" Style="{StaticResource CardTitle}"/>
+                            <Label Text="{helpers:Translate S_30e4c9cb1de5}" Style="{StaticResource CardTitle}"/>
                             <Label Grid.Column="1"
                                    Text="{Binding Logradouro.Id, StringFormat='ID {0}'}"
                                    Style="{StaticResource MutedText}"
@@ -49,39 +50,39 @@
                         <BoxView Style="{StaticResource SectionRule}"/>
 
                         <VerticalStackLayout Spacing="4">
-                            <Label Text="Nome / Rua" Style="{StaticResource FieldLabel}"/>
-                            <Entry Text="{Binding Logradouro.Nome}" Placeholder="Nome da rua"/>
+                            <Label Text="{helpers:Translate S_289e1964a6e9}" Style="{StaticResource FieldLabel}"/>
+                            <Entry Text="{Binding Logradouro.Nome}" Placeholder="{helpers:Translate S_0b688160cc5d}"/>
                         </VerticalStackLayout>
 
                         <VerticalStackLayout Spacing="4">
-                            <Label Text="Bairro" Style="{StaticResource FieldLabel}"/>
-                            <Entry Text="{Binding Logradouro.Bairro}" Placeholder="Bairro"/>
+                            <Label Text="{helpers:Translate S_49f7179a65c6}" Style="{StaticResource FieldLabel}"/>
+                            <Entry Text="{Binding Logradouro.Bairro}" Placeholder="{helpers:Translate S_49f7179a65c6}"/>
                         </VerticalStackLayout>
 
                         <Grid ColumnDefinitions="*,140" ColumnSpacing="14">
                             <VerticalStackLayout Grid.Column="0" Spacing="4">
-                                <Label Text="Cidade" Style="{StaticResource FieldLabel}"/>
-                                <Entry Text="{Binding Logradouro.Cidade}" Placeholder="Cidade"/>
+                                <Label Text="{helpers:Translate S_1a3285047365}" Style="{StaticResource FieldLabel}"/>
+                                <Entry Text="{Binding Logradouro.Cidade}" Placeholder="{helpers:Translate S_1a3285047365}"/>
                             </VerticalStackLayout>
                             <VerticalStackLayout Grid.Column="1" Spacing="4">
-                                <Label Text="Estado" Style="{StaticResource FieldLabel}"/>
-                                <Entry Text="{Binding Logradouro.Estado}" Placeholder="UF"/>
+                                <Label Text="{helpers:Translate S_87cf2a843e2e}" Style="{StaticResource FieldLabel}"/>
+                                <Entry Text="{Binding Logradouro.Estado}" Placeholder="{helpers:Translate S_e81f7a385039}"/>
                             </VerticalStackLayout>
                         </Grid>
 
                         <VerticalStackLayout Spacing="4">
-                            <Label Text="País" Style="{StaticResource FieldLabel}"/>
-                            <Entry Text="{Binding Logradouro.Pais}" Placeholder="País"/>
+                            <Label Text="{helpers:Translate S_0c664fca6df0}" Style="{StaticResource FieldLabel}"/>
+                            <Entry Text="{Binding Logradouro.Pais}" Placeholder="{helpers:Translate S_0c664fca6df0}"/>
                         </VerticalStackLayout>
                     </VerticalStackLayout>
                 </Border>
 
                 <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
-                    <Button Text="Cancelar"
+                    <Button Text="{helpers:Translate S_c111e0ab9ddb}"
                             Command="{Binding CancelCommand}"
                             Style="{StaticResource ButtonSecondary}"
                             WidthRequest="118"/>
-                    <Button Text="Salvar logradouro"
+                    <Button Text="{helpers:Translate S_e6585f78a4bf}"
                             Command="{Binding SaveLogradouroCommand}"
                             Style="{StaticResource ButtonPrimary}"
                             WidthRequest="174"/>

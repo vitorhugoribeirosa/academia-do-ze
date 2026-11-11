@@ -1,3 +1,4 @@
+using AcademiaDoZe.Presentation.AppMaui.Helpers;
 using Microsoft.Maui.Controls.Shapes;
 
 namespace AcademiaDoZe.Presentation.AppMaui.Services;
@@ -81,6 +82,11 @@ public static class InAppDialogService
         string? cancel,
         TaskCompletionSource<bool> completion)
     {
+        title = LocalizationManager.Instance.TranslateSource(title);
+        message = LocalizationManager.Instance.TranslateSource(message);
+        accept = LocalizationManager.Instance.TranslateSource(accept);
+        cancel = cancel is null ? null : LocalizationManager.Instance.TranslateSource(cancel);
+
         var dark = Microsoft.Maui.Controls.Application.Current?.RequestedTheme == AppTheme.Dark;
         var surface = Color.FromArgb(dark ? "#24211D" : "#FFFEFC");
         var line = Color.FromArgb(dark ? "#4A4640" : "#D7D0C6");

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:AcademiaDoZe.Presentation.AppMaui.Helpers"
              x:Class="AcademiaDoZe.Presentation.AppMaui.Views.ColaboradorListPage"
              xmlns:vm="clr-namespace:AcademiaDoZe.Presentation.AppMaui.ViewModels"
              xmlns:dto="clr-namespace:AcademiaDoZe.Application.DTOs;assembly=AcademiaDoZe.Application"
@@ -9,12 +10,12 @@
     <Grid x:Name="AnimatedContent" RowDefinitions="Auto,Auto,Auto,*">
         <Grid Grid.Row="0" Margin="{StaticResource ListHeaderMargin}" ColumnDefinitions="*,Auto" ColumnSpacing="20">
             <VerticalStackLayout Spacing="5">
-                <Label Text="Colaboradores" Style="{StaticResource HeaderTitle}"/>
-                <Label Text="Equipe responsável pelo atendimento e funcionamento da academia."
+                <Label Text="{helpers:Translate S_8a975827b9be}" Style="{StaticResource HeaderTitle}"/>
+                <Label Text="{helpers:Translate S_a72f1cc494a4}"
                        Style="{StaticResource HeaderSubtitle}"/>
             </VerticalStackLayout>
             <Button Grid.Column="1"
-                    Text="Novo colaborador"
+                    Text="{helpers:Translate S_e3d4a6a754c4}"
                     Command="{Binding AddColaboradorCommand}"
                     Style="{StaticResource ButtonPrimary}"
                     WidthRequest="196"
@@ -42,7 +43,7 @@
                         <TapGestureRecognizer Tapped="OnFilterSelectorTapped"/>
                     </Border.GestureRecognizers>
                     <Grid ColumnDefinitions="*,Auto" ColumnSpacing="6">
-                        <Label Text="{Binding SelectedFilterType}"
+                        <Label Text="{Binding SelectedFilterType, Converter={StaticResource LocalizedText}}"
                                TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource White}}"
                                VerticalTextAlignment="Center"/>
                         <Label x:Name="FilterArrowLabel" Grid.Column="1" Text="▼" FontSize="10"
@@ -52,11 +53,11 @@
                 </Border>
                 <Entry Grid.Column="1"
                        Text="{Binding SearchText}"
-                       Placeholder="Pesquisar pelo campo selecionado"
+                       Placeholder="{helpers:Translate S_45b37ef91e8d}"
                        ReturnType="Search"
                        ReturnCommand="{Binding SearchColaboradoresCommand}"/>
                 <Button Grid.Column="2"
-                        Text="Buscar"
+                        Text="{helpers:Translate S_a62405e2cefb}"
                         Style="{StaticResource ButtonPrimary}"
                         Command="{Binding SearchColaboradoresCommand}"/>
             </Grid>
@@ -79,7 +80,7 @@
                                 <TapGestureRecognizer CommandParameter="{Binding .}"
                                                       Tapped="OnFilterOptionTapped"/>
                             </Border.GestureRecognizers>
-                            <Label Text="{Binding .}"
+                            <Label Text="{Binding ., Converter={StaticResource LocalizedText}}"
                                    TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}"
                                    VerticalTextAlignment="Center"/>
                         </Border>
@@ -99,10 +100,10 @@
                 <ColumnDefinition Width="{OnIdiom Phone=0, Default=170}" />
                 <ColumnDefinition Width="{OnIdiom Phone=150, Default=174}" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="1" Text="Colaborador" Style="{StaticResource FieldLabel}"/>
-            <Label Grid.Column="2" Text="Trabalho" Style="{StaticResource FieldLabel}"
+            <Label Grid.Column="1" Text="{helpers:Translate S_71ce08a93219}" Style="{StaticResource FieldLabel}"/>
+            <Label Grid.Column="2" Text="{helpers:Translate S_0370d7f0c637}" Style="{StaticResource FieldLabel}"
                    IsVisible="{OnIdiom Phone=False, Default=True}"/>
-            <Label Grid.Column="3" Text="Ações" Style="{StaticResource FieldLabel}"/>
+            <Label Grid.Column="3" Text="{helpers:Translate S_66c341b3e963}" Style="{StaticResource FieldLabel}"/>
         </Grid>
 
         <Grid Grid.Row="3">
@@ -115,12 +116,12 @@
                             <Label Text="&#xea67;" FontFamily="MaterialIcons" FontSize="34"
                                    TextColor="{AppThemeBinding Light={StaticResource TextMuted}, Dark={StaticResource TextMutedDark}}"
                                    HorizontalOptions="Center"/>
-                            <Label Text="Nenhum colaborador encontrado"
+                            <Label Text="{helpers:Translate S_452f0ad41663}"
                                    HorizontalOptions="Center"
                                    FontFamily="OpenSansSemibold" FontAttributes="Bold" FontSize="17"/>
-                            <Label Text="Altere a busca ou cadastre um novo colaborador."
+                            <Label Text="{helpers:Translate S_c59b916c9864}"
                                    HorizontalTextAlignment="Center" Style="{StaticResource MutedText}"/>
-                            <Button Text="Novo colaborador"
+                            <Button Text="{helpers:Translate S_e3d4a6a754c4}"
                                     Command="{Binding AddColaboradorCommand}"
                                     Style="{StaticResource ButtonPrimary}"
                                     WidthRequest="180" HorizontalOptions="Center" Margin="0,8,0,0"/>
@@ -194,9 +195,9 @@
                                     </VerticalStackLayout>
 
                                     <HorizontalStackLayout Grid.Column="3" Spacing="8" VerticalOptions="Center">
-                                        <Button Text="Editar" Style="{StaticResource ButtonSmall}"
+                                        <Button Text="{helpers:Translate S_2b5f23437f58}" Style="{StaticResource ButtonSmall}"
                                                 Clicked="OnEditButtonClicked"/>
-                                        <Button Text="Excluir" Style="{StaticResource ButtonDanger}"
+                                        <Button Text="{helpers:Translate S_8e7c1314fe0b}" Style="{StaticResource ButtonDanger}"
                                                 Clicked="OnDeleteButtonClicked"/>
                                     </HorizontalStackLayout>
                                 </Grid>

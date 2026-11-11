@@ -9,6 +9,7 @@
             <converters:EnumDisplayConverter x:Key="EnumDisplay" />
             <converters:DateOnlyToDateTimeConverter x:Key="DateOnlyConverter" />
             <converters:FotoToImageSourceConverter x:Key="FotoToImageSourceConverter" />
+            <converters:LocalizedTextConverter x:Key="LocalizedText" />
 
             <OnIdiom x:Key="PageContentPadding" x:TypeArguments="Thickness">
                 <OnIdiom.Phone>16,18,16,28</OnIdiom.Phone>

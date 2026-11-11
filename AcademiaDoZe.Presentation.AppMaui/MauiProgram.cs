@@ -1,4 +1,5 @@
 using AcademiaDoZe.Presentation.AppMaui.Configuration;
+using AcademiaDoZe.Presentation.AppMaui.Helpers;
 using AcademiaDoZe.Presentation.AppMaui.ViewModels;
 using AcademiaDoZe.Presentation.AppMaui.Views;
 #if WINDOWS
@@ -15,6 +16,11 @@ public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {
+        var savedCulture = Preferences.Default.Get(
+            "Cultura",
+            LocalizationManager.NormalizeCulture(System.Globalization.CultureInfo.InstalledUICulture.Name));
+        LocalizationManager.Instance.SetCulture(savedCulture, persist: false);
+
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()

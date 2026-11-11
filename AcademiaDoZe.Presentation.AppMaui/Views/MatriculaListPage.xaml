@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:AcademiaDoZe.Presentation.AppMaui.Helpers"
              x:Class="AcademiaDoZe.Presentation.AppMaui.Views.MatriculaListPage"
              xmlns:vm="clr-namespace:AcademiaDoZe.Presentation.AppMaui.ViewModels"
              xmlns:dto="clr-namespace:AcademiaDoZe.Application.DTOs;assembly=AcademiaDoZe.Application"
@@ -16,12 +17,12 @@
     <Grid x:Name="AnimatedContent" RowDefinitions="Auto,Auto,*">
         <Grid Grid.Row="0" Margin="{StaticResource ListHeaderMargin}" ColumnDefinitions="*,Auto" ColumnSpacing="20">
             <VerticalStackLayout Spacing="5">
-                <Label Text="Matrículas" Style="{StaticResource HeaderTitle}" />
-                <Label Text="Planos, vigências e condições de saúde dos alunos."
+                <Label Text="{helpers:Translate S_ecee9ee28669}" Style="{StaticResource HeaderTitle}" />
+                <Label Text="{helpers:Translate S_8e51db6231bc}"
                        Style="{StaticResource HeaderSubtitle}" />
             </VerticalStackLayout>
             <Button Grid.Column="1"
-                    Text="Nova matrícula"
+                    Text="{helpers:Translate S_90b2f8d86fa9}"
                     Command="{Binding AddMatriculaCommand}"
                     Style="{StaticResource ButtonPrimary}"
                     WidthRequest="190"
@@ -44,7 +45,7 @@
                         <TapGestureRecognizer Tapped="OnFilterSelectorTapped" />
                     </Border.GestureRecognizers>
                     <Grid ColumnDefinitions="*,Auto" ColumnSpacing="6">
-                        <Label Text="{Binding SelectedFilterType}"
+                        <Label Text="{Binding SelectedFilterType, Converter={StaticResource LocalizedText}}"
                                TextColor="{StaticResource White}"
                                VerticalTextAlignment="Center" />
                         <Label x:Name="FilterArrowLabel" Grid.Column="1" Text="▼" FontSize="10"
@@ -58,7 +59,7 @@
                        ReturnType="Search"
                        ReturnCommand="{Binding SearchMatriculasCommand}" />
                 <Button Grid.Column="2"
-                        Text="Buscar"
+                        Text="{helpers:Translate S_a62405e2cefb}"
                         Style="{StaticResource ButtonPrimary}"
                         Command="{Binding SearchMatriculasCommand}" />
             </Grid>
@@ -78,7 +79,7 @@
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="OnFilterOptionTapped" />
                             </Border.GestureRecognizers>
-                            <Label Text="{Binding .}"
+                            <Label Text="{Binding ., Converter={StaticResource LocalizedText}}"
                                    TextColor="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource White}}"
                                    VerticalTextAlignment="Center" />
                         </Border>
@@ -99,10 +100,10 @@
                             <Label Text="&#xe85d;" FontFamily="MaterialIcons" FontSize="52"
                                    TextColor="{AppThemeBinding Light={StaticResource Gray400}, Dark={StaticResource Gray600}}"
                                    HorizontalTextAlignment="Center" />
-                            <Label Text="Nenhuma matrícula encontrada"
+                            <Label Text="{helpers:Translate S_6b7d7353e483}"
                                    Style="{StaticResource CardTitle}"
                                    HorizontalTextAlignment="Center" />
-                            <Label Text="Altere o filtro ou cadastre uma nova matrícula."
+                            <Label Text="{helpers:Translate S_9d65feddfc9e}"
                                    Style="{StaticResource MutedText}"
                                    HorizontalTextAlignment="Center" />
                         </VerticalStackLayout>
@@ -139,15 +140,15 @@
                                         </Grid>
                                         <Label Text="{Binding AlunoMatricula.Cpf, StringFormat='CPF: {0}'}"
                                                Style="{StaticResource MutedText}" FontSize="12" />
-                                        <Label Text="{Binding AlunoMatricula.DataNascimento, StringFormat='Nascimento: {0:dd/MM/yyyy}'}"
+                                        <Label Text="{Binding AlunoMatricula.DataNascimento, StringFormat='{0:d}'}"
                                                Style="{StaticResource MutedText}" FontSize="12" />
                                         <Label Style="{StaticResource MutedText}" FontSize="12">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="Vigência: " FontAttributes="Bold" />
-                                                    <Span Text="{Binding DataInicio, StringFormat='{0:dd/MM/yyyy}'}" />
-                                                    <Span Text=" até " />
-                                                    <Span Text="{Binding DataFim, StringFormat='{0:dd/MM/yyyy}'}" />
+                                                    <Span Text="{helpers:Translate S_2180ab81ae36}" FontAttributes="Bold" />
+                                                    <Span Text="{Binding DataInicio, StringFormat='{0:d}'}" />
+                                                    <Span Text="{helpers:Translate S_b2eeb387ba65}" />
+                                                    <Span Text="{Binding DataFim, StringFormat='{0:d}'}" />
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
@@ -162,10 +163,10 @@
                                         <Label Text="{Binding Id, StringFormat='ID {0}'}"
                                                Style="{StaticResource MutedText}" FontSize="11"
                                                HorizontalTextAlignment="Center" />
-                                        <Button Text="Editar" Clicked="OnEditButtonClicked"
+                                        <Button Text="{helpers:Translate S_2b5f23437f58}" Clicked="OnEditButtonClicked"
                                                 Style="{StaticResource ButtonSecondary}"
                                                 WidthRequest="112" HeightRequest="42" />
-                                        <Button Text="Excluir" Clicked="OnDeleteButtonClicked"
+                                        <Button Text="{helpers:Translate S_8e7c1314fe0b}" Clicked="OnDeleteButtonClicked"
                                                 Style="{StaticResource ButtonDanger}"
                                                 WidthRequest="112" HeightRequest="42" />
                                     </VerticalStackLayout>

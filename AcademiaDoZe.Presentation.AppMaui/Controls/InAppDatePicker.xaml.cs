@@ -1,11 +1,12 @@
+using AcademiaDoZe.Presentation.AppMaui.Helpers;
 using System.Globalization;
 
 namespace AcademiaDoZe.Presentation.AppMaui.Controls;
 
 public partial class InAppDatePicker : ContentView
 {
-    private static readonly CultureInfo PortugueseCulture = CultureInfo.GetCultureInfo("pt-BR");
     private DateOnly _visibleMonth;
+    private CultureInfo CurrentCulture => CultureInfo.CurrentCulture;
 
     public static readonly BindableProperty DateProperty = BindableProperty.Create(
         nameof(Date),
@@ -27,6 +28,11 @@ public partial class InAppDatePicker : ContentView
         _visibleMonth = new DateOnly(Date.Year, Date.Month, 1);
         RefreshDateText();
         BuildCalendar();
+        LocalizationManager.Instance.PropertyChanged += (_, _) =>
+        {
+            RefreshDateText();
+            BuildCalendar();
+        };
     }
 
     private void OnDateChanged(DateOnly value)
@@ -79,7 +85,8 @@ public partial class InAppDatePicker : ContentView
         if (DaysHost is null)
             return;
 
-        MonthText.Text = _visibleMonth.ToString("MMMM 'de' yyyy", PortugueseCulture);
+        MonthText.Text = _visibleMonth.ToString("Y", CurrentCulture);
+        UpdateWeekdayHeaders();
         DaysHost.Children.Clear();
 
         var startOffset = (int)_visibleMonth.DayOfWeek;
@@ -92,7 +99,7 @@ public partial class InAppDatePicker : ContentView
             var isCurrentMonth = day.Month == _visibleMonth.Month;
             var dayButton = new Button
             {
-                Text = day.Day.ToString(PortugueseCulture),
+                Text = day.Day.ToString(CurrentCulture),
                 FontSize = 12,
                 FontFamily = isSelected ? "OpenSansSemibold" : "OpenSansRegular",
                 FontAttributes = isSelected ? FontAttributes.Bold : FontAttributes.None,
@@ -117,7 +124,17 @@ public partial class InAppDatePicker : ContentView
         ChevronIcon.Text = "\ue5cf";
     }
 
-    private void RefreshDateText() => DateText.Text = Date.ToString("dd/MM/yyyy", PortugueseCulture);
+    private void RefreshDateText() => DateText.Text = Date.ToString("d", CurrentCulture);
+
+    private void UpdateWeekdayHeaders()
+    {
+        var names = CurrentCulture.DateTimeFormat.AbbreviatedDayNames;
+        for (var index = 0; index < WeekdayHeaders.Children.Count && index < names.Length; index++)
+        {
+            if (WeekdayHeaders.Children[index] is Label label)
+                label.Text = names[index];
+        }
+    }
 
     private static void ApplyDayColors(Button button, bool selected, bool currentMonth)
     {

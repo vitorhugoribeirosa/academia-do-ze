@@ -1,5 +1,6 @@
 using AcademiaDoZe.Presentation.AppMaui.Messages;
 using AcademiaDoZe.Presentation.AppMaui.Services;
+using AcademiaDoZe.Presentation.AppMaui.Helpers;
 using AcademiaDoZe.Infrastructure.Data;
 using CommunityToolkit.Mvvm.Messaging;
 
@@ -10,12 +11,14 @@ public partial class ConfigPage : ContentPage
     private const string SenhaPadraoBanco = "abcBolinhas12345";
     private int _temaSelecionadoIndex = 2;
     private int _databaseTypeSelecionadoIndex;
+    private string _culturaSelecionada = LocalizationManager.DefaultCulture;
 
     public ConfigPage()
     {
         InitializeComponent();
         CarregarTema();
         CarregarBanco();
+        CarregarCultura();
     }
 
     protected override async void OnAppearing()
@@ -23,7 +26,61 @@ public partial class ConfigPage : ContentPage
         base.OnAppearing();
         CarregarTema();
         CarregarBanco();
+        CarregarCultura();
         await UiAnimationService.EnterPageAsync(AnimatedContent);
+    }
+
+    private void CarregarCultura()
+    {
+        _culturaSelecionada = LocalizationManager.NormalizeCulture(
+            Preferences.Default.Get("Cultura", LocalizationManager.DefaultCulture));
+        AtualizarCartoesCultura();
+    }
+
+    private void OnCulturaOptionClicked(object? sender, EventArgs e)
+    {
+        if (sender is not Button { CommandParameter: string culture }
+            || !LocalizationManager.SupportedCultures.Contains(culture))
+        {
+            return;
+        }
+
+        _culturaSelecionada = culture;
+        AtualizarCartoesCultura();
+    }
+
+    private async void OnSalvarCulturaClicked(object? sender, EventArgs e)
+    {
+        if (!LocalizationManager.SupportedCultures.Contains(_culturaSelecionada))
+        {
+            await InAppDialogService.ShowAsync("Validação", "Selecione um idioma.", "OK");
+            return;
+        }
+
+        var culture = _culturaSelecionada;
+        Preferences.Default.Set("Cultura", culture);
+        WeakReferenceMessenger.Default.Send(new CulturaPreferencesUpdatedMessage(culture));
+        await InAppDialogService.ShowAsync(
+            "Idioma atualizado",
+            "O idioma e os formatos regionais foram atualizados.",
+            "OK");
+        await Shell.Current.GoToAsync("//dashboard");
+    }
+
+    private void AtualizarCartoesCultura()
+    {
+        AtualizarCartaoCultura(CulturaPtBrCard, CulturaPtBrCheck, "pt-BR");
+        AtualizarCartaoCultura(CulturaEnUsCard, CulturaEnUsCheck, "en-US");
+        AtualizarCartaoCultura(CulturaEsEsCard, CulturaEsEsCheck, "es-ES");
+    }
+
+    private void AtualizarCartaoCultura(Border cartao, Label indicador, string culture)
+    {
+        var selecionado = _culturaSelecionada.Equals(culture, StringComparison.OrdinalIgnoreCase);
+        cartao.Style = Resources[selecionado
+            ? "LanguageOptionCardSelected"
+            : "LanguageOptionCard"] as Style;
+        indicador.IsVisible = selecionado;
     }
 
     private void CarregarTema()
@@ -193,7 +250,8 @@ public partial class ConfigPage : ContentPage
 
     private static void AtualizarBotaoSelecao(Button button, bool selecionado, string texto)
     {
-        button.Text = selecionado ? $"✓ {texto}" : texto;
+        var traduzido = LocalizationManager.Instance.TranslateSource(texto);
+        button.Text = selecionado ? $"✓ {traduzido}" : traduzido;
         button.Style = Microsoft.Maui.Controls.Application.Current?
             .Resources[selecionado ? "ButtonPrimary" : "ButtonSecondary"] as Style;
     }

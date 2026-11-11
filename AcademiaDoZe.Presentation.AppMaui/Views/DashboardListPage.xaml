@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:helpers="clr-namespace:AcademiaDoZe.Presentation.AppMaui.Helpers"
              x:Class="AcademiaDoZe.Presentation.AppMaui.Views.DashboardListPage"
              xmlns:vm="clr-namespace:AcademiaDoZe.Presentation.AppMaui.ViewModels"
              x:DataType="vm:DashboardListViewModel"
@@ -55,7 +56,7 @@
                                  HorizontalOptions="Fill">
 
                 <Grid RowDefinitions="Auto,Auto">
-                    <Label Text="Início" Style="{StaticResource HeaderTitle}"/>
+                    <Label Text="{helpers:Translate S_fc2c74003cb1}" Style="{StaticResource HeaderTitle}"/>
                     <BoxView Grid.Row="1"
                              Style="{StaticResource SectionRule}"
                              Margin="0,10,0,0"/>
@@ -76,13 +77,13 @@
                             Padding="24">
                         <Grid RowDefinitions="Auto,*">
                             <VerticalStackLayout Spacing="4">
-                                <Label Text="ACADEMIA DO ZÉ"
+                                <Label Text="{helpers:Translate S_812792f53f88}"
                                        TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gold}}"
                                        FontFamily="OpenSansSemibold"
                                        FontAttributes="Bold"
                                        FontSize="12"
                                        CharacterSpacing="0.8"/>
-                                <Label Text="Painel administrativo"
+                                <Label Text="{helpers:Translate S_d27fc9c16bb4}"
                                        TextColor="{StaticResource White}"
                                        FontFamily="OpenSansSemibold"
                                        FontAttributes="Bold"
@@ -101,7 +102,7 @@
                             Grid.Column="{OnIdiom Phone=0, Default=1}"
                             Style="{StaticResource FlatSection}">
                         <VerticalStackLayout Spacing="0">
-                            <Label Text="Resumo" Style="{StaticResource CardTitle}" Margin="0,0,0,8"/>
+                            <Label Text="{helpers:Translate S_ef8d51ef99af}" Style="{StaticResource CardTitle}" Margin="0,0,0,8"/>
                             <Grid Padding="0,10" ColumnDefinitions="30,*,Auto" ColumnSpacing="8">
                                 <Label Text="&#xe7fd;"
                                        FontFamily="MaterialIcons"
@@ -109,7 +110,7 @@
                                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
                                        VerticalTextAlignment="Center"/>
                                 <Label Grid.Column="1"
-                                       Text="Alunos"
+                                       Text="{helpers:Translate S_f72f85e18dee}"
                                        Style="{StaticResource MutedText}"
                                        VerticalTextAlignment="Center"/>
                                 <Label Grid.Column="2" Text="{Binding TotalAlunos}" Style="{StaticResource MetricValue}" FontSize="20"/>
@@ -122,7 +123,7 @@
                                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
                                        VerticalTextAlignment="Center"/>
                                 <Label Grid.Column="1"
-                                       Text="Logradouros"
+                                       Text="{helpers:Translate S_3d7d9bebda59}"
                                        Style="{StaticResource MutedText}"
                                        VerticalTextAlignment="Center"/>
                                 <Label Grid.Column="2" Text="{Binding TotalLogradouros}" Style="{StaticResource MetricValue}" FontSize="20"/>
@@ -135,7 +136,7 @@
                                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
                                        VerticalTextAlignment="Center"/>
                                 <Label Grid.Column="1"
-                                       Text="Colaboradores"
+                                       Text="{helpers:Translate S_8a975827b9be}"
                                        Style="{StaticResource MutedText}"
                                        VerticalTextAlignment="Center"/>
                                 <Label Grid.Column="2" Text="{Binding TotalColaboradores}" Style="{StaticResource MetricValue}" FontSize="20"/>
@@ -148,7 +149,7 @@
                                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
                                        VerticalTextAlignment="Center"/>
                                 <Label Grid.Column="1"
-                                       Text="Matrículas"
+                                       Text="{helpers:Translate S_ecee9ee28669}"
                                        Style="{StaticResource MutedText}"
                                        VerticalTextAlignment="Center"/>
                                 <Label Grid.Column="2" Text="{Binding TotalMatriculas}" Style="{StaticResource MetricValue}" FontSize="20"/>
@@ -176,8 +177,8 @@
                             <VerticalStackLayout Grid.Column="1"
                                                  VerticalOptions="Center"
                                                  Spacing="2">
-                                <Label Text="Área de gestão" Style="{StaticResource CardTitle}" />
-                                <Label Text="Acesse as tarefas do dia a dia sem precisar abrir o menu."
+                                <Label Text="{helpers:Translate S_388d30b88e22}" Style="{StaticResource CardTitle}" />
+                                <Label Text="{helpers:Translate S_446be8fd742d}"
                                        Style="{StaticResource MutedText}"
                                        FontSize="12" />
                             </VerticalStackLayout>
@@ -208,14 +209,14 @@
                                                  Margin="0,12"
                                                  VerticalOptions="Center"
                                                  Spacing="2">
-                                <Label Text="Alunos" Style="{StaticResource QuickActionTitle}" />
-                                <Label Text="Dados pessoais, contato e endereço"
+                                <Label Text="{helpers:Translate S_f72f85e18dee}" Style="{StaticResource QuickActionTitle}" />
+                                <Label Text="{helpers:Translate S_fa6aa2c691d2}"
                                        Style="{StaticResource QuickActionDescription}" />
                             </VerticalStackLayout>
                             <Button Grid.Row="0"
                                     Grid.Column="2"
                                     Margin="0,12"
-                                    Text="Novo aluno"
+                                    Text="{helpers:Translate S_86a674215d37}"
                                     Command="{Binding NavigateToNovoAlunoCommand}"
                                     Style="{StaticResource ButtonPrimary}"
                                     MinimumWidthRequest="175"
@@ -230,7 +231,7 @@
                             <Button Grid.Row="0"
                                     Grid.Column="3"
                                     Margin="0,12,16,12"
-                                    Text="Consultar alunos"
+                                    Text="{helpers:Translate S_77f4a3c91ed4}"
                                     Command="{Binding NavigateToAlunosCommand}"
                                     Style="{StaticResource ButtonSecondary}"
                                     MinimumWidthRequest="175"
@@ -263,14 +264,14 @@
                                                  Margin="0,12"
                                                  VerticalOptions="Center"
                                                  Spacing="2">
-                                <Label Text="Matrículas" Style="{StaticResource QuickActionTitle}" />
-                                <Label Text="Planos, vigências e condições de saúde"
+                                <Label Text="{helpers:Translate S_ecee9ee28669}" Style="{StaticResource QuickActionTitle}" />
+                                <Label Text="{helpers:Translate S_4f1e4ebb16c5}"
                                        Style="{StaticResource QuickActionDescription}" />
                             </VerticalStackLayout>
                             <Button Grid.Row="2"
                                     Grid.Column="2"
                                     Margin="0,12"
-                                    Text="Nova matrícula"
+                                    Text="{helpers:Translate S_90b2f8d86fa9}"
                                     Command="{Binding NavigateToNovaMatriculaCommand}"
                                     Style="{StaticResource ButtonPrimary}"
                                     MinimumWidthRequest="175"
@@ -285,7 +286,7 @@
                             <Button Grid.Row="2"
                                     Grid.Column="3"
                                     Margin="0,12,16,12"
-                                    Text="Consultar matrículas"
+                                    Text="{helpers:Translate S_668cd14c681e}"
                                     Command="{Binding NavigateToMatriculasCommand}"
                                     Style="{StaticResource ButtonSecondary}"
                                     MinimumWidthRequest="175"
@@ -318,14 +319,14 @@
                                                  Margin="0,12"
                                                  VerticalOptions="Center"
                                                  Spacing="2">
-                                <Label Text="Colaboradores" Style="{StaticResource QuickActionTitle}" />
-                                <Label Text="Equipe, função e vínculo de trabalho"
+                                <Label Text="{helpers:Translate S_8a975827b9be}" Style="{StaticResource QuickActionTitle}" />
+                                <Label Text="{helpers:Translate S_1e01714c770d}"
                                        Style="{StaticResource QuickActionDescription}" />
                             </VerticalStackLayout>
                             <Button Grid.Row="4"
                                     Grid.Column="2"
                                     Margin="0,12"
-                                    Text="Novo colaborador"
+                                    Text="{helpers:Translate S_e3d4a6a754c4}"
                                     Command="{Binding NavigateToNovoColaboradorCommand}"
                                     Style="{StaticResource ButtonPrimary}"
                                     MinimumWidthRequest="175"
@@ -340,7 +341,7 @@
                             <Button Grid.Row="4"
                                     Grid.Column="3"
                                     Margin="0,12,16,12"
-                                    Text="Consultar colaboradores"
+                                    Text="{helpers:Translate S_d85226e39566}"
                                     Command="{Binding NavigateToColaboradoresCommand}"
                                     Style="{StaticResource ButtonSecondary}"
                                     MinimumWidthRequest="175"
@@ -373,14 +374,14 @@
                                                  Margin="0,12"
                                                  VerticalOptions="Center"
                                                  Spacing="2">
-                                <Label Text="Logradouros" Style="{StaticResource QuickActionTitle}" />
-                                <Label Text="Endereços e CEPs disponíveis"
+                                <Label Text="{helpers:Translate S_3d7d9bebda59}" Style="{StaticResource QuickActionTitle}" />
+                                <Label Text="{helpers:Translate S_d3cb809a90c4}"
                                        Style="{StaticResource QuickActionDescription}" />
                             </VerticalStackLayout>
                             <Button Grid.Row="6"
                                     Grid.Column="2"
                                     Margin="0,12"
-                                    Text="Novo logradouro"
+                                    Text="{helpers:Translate S_1e11717e30c2}"
                                     Command="{Binding NavigateToNovoLogradouroCommand}"
                                     Style="{StaticResource ButtonPrimary}"
                                     MinimumWidthRequest="175"
@@ -395,7 +396,7 @@
                             <Button Grid.Row="6"
                                     Grid.Column="3"
                                     Margin="0,12,16,12"
-                                    Text="Consultar logradouros"
+                                    Text="{helpers:Translate S_d33dcf46bc6e}"
                                     Command="{Binding NavigateToLogradourosCommand}"
                                     Style="{StaticResource ButtonSecondary}"
                                     MinimumWidthRequest="175"
@@ -422,14 +423,14 @@
                             <VerticalStackLayout Grid.Column="1"
                                                  VerticalOptions="Center"
                                                  Spacing="1">
-                                <Label Text="Configurações"
+                                <Label Text="{helpers:Translate S_871f24c4cdaf}"
                                        Style="{StaticResource QuickActionTitle}"
                                        FontSize="15" />
-                                <Label Text="Tema e conexão com o banco de dados"
+                                <Label Text="{helpers:Translate S_812c31085791}"
                                        Style="{StaticResource QuickActionDescription}" />
                             </VerticalStackLayout>
                             <Button Grid.Column="2"
-                                    Text="Abrir configurações"
+                                    Text="{helpers:Translate S_71c8c1784db8}"
                                     Command="{Binding NavigateToConfiguracoesCommand}"
                                     Style="{StaticResource ButtonSecondary}"
                                     MinimumWidthRequest="175"
@@ -450,7 +451,7 @@
                              HeightRequest="1"
                              BackgroundColor="{AppThemeBinding Light={StaticResource Line}, Dark={StaticResource LineDark}}"/>
                     <Label Grid.Column="1"
-                           Text="Academia do Zé  ·  Sistema administrativo  ·  Vitor Hugo Ribeiro Sá"
+                           Text="{helpers:Translate S_7979622f5539}"
                            Style="{StaticResource MutedText}"
                            FontSize="11"
                            Margin="14,0"/>

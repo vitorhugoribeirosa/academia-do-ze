@@ -1,6 +1,7 @@
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using AcademiaDoZe.Presentation.AppMaui.Helpers;
 
 namespace AcademiaDoZe.Presentation.AppMaui.Controls;
 
@@ -64,6 +65,7 @@ public partial class InAppPicker : ContentView
         InitializeComponent();
         LeadingIcon.Text = LeadingGlyph;
         RefreshSelection();
+        LocalizationManager.Instance.PropertyChanged += (_, _) => RebuildOptions();
     }
 
     private void OnFieldTapped(object? sender, TappedEventArgs e)
@@ -148,8 +150,9 @@ public partial class InAppPicker : ContentView
             return string.Empty;
 
         var member = value.GetType().GetMember(value.ToString() ?? string.Empty).FirstOrDefault();
-        return member?.GetCustomAttribute<DisplayAttribute>()?.Name
+        var display = member?.GetCustomAttribute<DisplayAttribute>()?.Name
             ?? value.ToString()
             ?? string.Empty;
+        return LocalizationManager.Instance.TranslateSource(display);
     }
 }

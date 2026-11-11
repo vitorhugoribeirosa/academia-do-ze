@@ -1,4 +1,5 @@
 using AcademiaDoZe.Application.Enums;
+using AcademiaDoZe.Presentation.AppMaui.Helpers;
 using System.Globalization;
 
 namespace AcademiaDoZe.Presentation.AppMaui.Converters;
@@ -11,11 +12,11 @@ public sealed class RestricoesFlagsDisplayConverter : IValueConverter
             return string.Empty;
 
         if (restricoes == AppMatriculaRestricoes.None)
-            return AppMatriculaRestricoes.None.GetDisplayName();
+            return LocalizationManager.Instance.TranslateSource(AppMatriculaRestricoes.None.GetDisplayName());
 
         return string.Join(", ", Enum.GetValues<AppMatriculaRestricoes>()
             .Where(item => item != AppMatriculaRestricoes.None && restricoes.HasFlag(item))
-            .Select(item => item.GetDisplayName()));
+            .Select(item => LocalizationManager.Instance.TranslateSource(item.GetDisplayName())));
     }
 
     public object ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) =>

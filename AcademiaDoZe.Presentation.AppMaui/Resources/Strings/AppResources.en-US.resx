@@ -1,0 +1,1226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="S_b2eeb387ba65" xml:space="preserve">
+    <value>until</value>
+  </data>
+  <data name="S_fa2da736d7bf" xml:space="preserve">
+    <value>- Neighborhood is mandatory.</value>
+  </data>
+  <data name="S_217080e4d2e3" xml:space="preserve">
+    <value>- ZIP code is mandatory.</value>
+  </data>
+  <data name="S_4cd0fcd0a7d1" xml:space="preserve">
+    <value>- City is mandatory.</value>
+  </data>
+  <data name="S_6bfb35e007e6" xml:space="preserve">
+    <value>- Employee administrator must have a CLT link.</value>
+  </data>
+  <data name="S_953096fa32d3" xml:space="preserve">
+    <value>- CPF must contain 11 digits.</value>
+  </data>
+  <data name="S_1a877d4cba4a" xml:space="preserve">
+    <value>- Admission date must be equal to or before the current date.</value>
+  </data>
+  <data name="S_5b5538ccbab6" xml:space="preserve">
+    <value>- Start date is mandatory.</value>
+  </data>
+  <data name="S_d4304d04663f" xml:space="preserve">
+    <value>- State (UF) is mandatory.</value>
+  </data>
+  <data name="S_471ae379a9ce" xml:space="preserve">
+    <value>- Enter a valid email.</value>
+  </data>
+  <data name="S_bce684cc8604" xml:space="preserve">
+    <value>- Street / Street is mandatory.</value>
+  </data>
+  <data name="S_ed5fd43b2130" xml:space="preserve">
+    <value>- Name is mandatory.</value>
+  </data>
+  <data name="S_1ea802ab4efd" xml:space="preserve">
+    <value>- Address number is mandatory.</value>
+  </data>
+  <data name="S_ab77bf223232" xml:space="preserve">
+    <value>- The zip code must contain exactly 8 numeric digits.</value>
+  </data>
+  <data name="S_9cee0fb711d7" xml:space="preserve">
+    <value>- The medical report is mandatory for this student.</value>
+  </data>
+  <data name="S_5b28f056fd79" xml:space="preserve">
+    <value>- Purpose of enrollment is mandatory.</value>
+  </data>
+  <data name="S_e322500fe038" xml:space="preserve">
+    <value>- Country is mandatory.</value>
+  </data>
+  <data name="S_f45a34f894f1" xml:space="preserve">
+    <value>- Password must have at least 6 characters and one letter capital letter.</value>
+  </data>
+  <data name="S_2ee395eb79b5" xml:space="preserve">
+    <value>- Password and confirmation must be the same.</value>
+  </data>
+  <data name="S_052b764f14e9" xml:space="preserve">
+    <value>- Password is mandatory when registering.</value>
+  </data>
+  <data name="S_8f73de3eeb46" xml:space="preserve">
+    <value>- Phone must contain 11 digits, including the area code.</value>
+  </data>
+  <data name="S_331604d66503" xml:space="preserve">
+    <value>The appearance of the application has been updated.</value>
+  </data>
+  <data name="S_7ce93fa43af4" xml:space="preserve">
+    <value>Student search has expired.</value>
+  </data>
+  <data name="S_b7b945d53b18" xml:space="preserve">
+    <value>Collaborator search has expired. Check the connection with the bank.</value>
+  </data>
+  <data name="S_4210c5fddd9c" xml:space="preserve">
+    <value>Enrollment search has expired.</value>
+  </data>
+  <data name="S_07a0cc292896" xml:space="preserve">
+    <value>Student search has expired.</value>
+  </data>
+  <data name="S_6fb210a0beec" xml:space="preserve">
+    <value>ZIP code search has expired.</value>
+  </data>
+  <data name="S_d4b3de9c6f5c" xml:space="preserve">
+    <value>CEP search has expired. Check the connection with the bank.</value>
+  </data>
+  <data name="S_d0c9d2d23604" xml:space="preserve">
+    <value>ZIP code search timed out. Check the connection.</value>
+  </data>
+  <data name="S_d8dff9bcaf9b" xml:space="preserve">
+    <value>Search timed out. Check the database connection.</value>
+  </data>
+  <data name="S_41f48be37637" xml:space="preserve">
+    <value>Photo capture is not supported on this device.</value>
+  </data>
+  <data name="S_b9df6f0870b6" xml:space="preserve">
+    <value>Capture is not supported on this device.</value>
+  </data>
+  <data name="S_810f3f88092f" xml:space="preserve">
+    <value>Database connection timed out. Verify that the path or connection data is correct.</value>
+  </data>
+  <data name="S_98807bdc47ba" xml:space="preserve">
+    <value>ImageSource to photo conversion is not supported.</value>
+  </data>
+  <data name="S_c89a77233ad0" xml:space="preserve">
+    <value>Text to enum conversion is not supported.</value>
+  </data>
+  <data name="S_a8bdce1b7f25" xml:space="preserve">
+    <value>Text to constraints conversion is not supported.</value>
+  </data>
+  <data name="S_927453f3cfe1" xml:space="preserve">
+    <value>The end date will be calculated according to the selected plan.</value>
+  </data>
+  <data name="S_5994176bf2a8" xml:space="preserve">
+    <value>Enrollment exclusion has expired.</value>
+  </data>
+  <data name="S_13053ebf2806" xml:space="preserve">
+    <value>Student exclusion has expired.</value>
+  </data>
+  <data name="S_59d94df6c7ad" xml:space="preserve">
+    <value>Employee exclusion has expired. Check the connection.</value>
+  </data>
+  <data name="S_a13ec9572e0b" xml:space="preserve">
+    <value>Place deletion has expired. Check the connection.</value>
+  </data>
+  <data name="S_2a3d95b37588" xml:space="preserve">
+    <value>The photo must be a maximum of 15 MB.</value>
+  </data>
+  <data name="S_135257d27321" xml:space="preserve">
+    <value>Enrollment recording has expired.</value>
+  </data>
+  <data name="S_3441fd2a8b66" xml:space="preserve">
+    <value>Student recording has expired.</value>
+  </data>
+  <data name="S_ffbbdcf92615" xml:space="preserve">
+    <value>Employee recording has expired. Check the connection.</value>
+  </data>
+  <data name="S_de98448ea554" xml:space="preserve">
+    <value>Place recording has expired. Check connection.</value>
+  </data>
+  <data name="S_5f93c2d41bb8" xml:space="preserve">
+    <value>Registration ID {0} was not found.</value>
+  </data>
+  <data name="S_5900b5aa8a43" xml:space="preserve">
+    <value>Application navigation is not available.</value>
+  </data>
+  <data name="S_67821932af42" xml:space="preserve">
+    <value>Image selection is not supported on this device.</value>
+  </data>
+  <data name="S_33d318d7eaf6" xml:space="preserve">
+    <value>Image selection is not supported.</value>
+  </data>
+  <data name="S_71c8c1784db8" xml:space="preserve">
+    <value>Open settings</value>
+  </data>
+  <data name="S_82670a3e0332" xml:space="preserve">
+    <value>Open gallery</value>
+  </data>
+  <data name="S_812792f53f88" xml:space="preserve">
+    <value>ACADEMIA DO ZÉ</value>
+  </data>
+  <data name="S_da8ee2fa1a33" xml:space="preserve">
+    <value>Academia do Zé</value>
+  </data>
+  <data name="S_7979622f5539" xml:space="preserve">
+    <value>Academia do Zé · Administrative system · Vitor Hugo Ribeiro Sá</value>
+  </data>
+  <data name="S_446be8fd742d" xml:space="preserve">
+    <value>Access everyday tasks without having to open the menu.</value>
+  </data>
+  <data name="S_d5aa170e8759" xml:space="preserve">
+    <value>Administrator</value>
+  </data>
+  <data name="S_8a1db5972caf" xml:space="preserve">
+    <value>Administrators must have a CLT link.</value>
+  </data>
+  <data name="S_855dc3dcbe0a" xml:space="preserve">
+    <value>Administration</value>
+  </data>
+  <data name="S_88154ff5acc5" xml:space="preserve">
+    <value>Allergies</value>
+  </data>
+  <data name="S_98ee80bdd525" xml:space="preserve">
+    <value>Change texts, dates, numbers and the direction of the interface.</value>
+  </data>
+  <data name="S_4073eea75576" xml:space="preserve">
+    <value>Change the search or register a new student.</value>
+  </data>
+  <data name="S_c59b916c9864" xml:space="preserve">
+    <value>Change the search or register a new collaborator.</value>
+  </data>
+  <data name="S_84ba73973099" xml:space="preserve">
+    <value>Change the search or register a new address.</value>
+  </data>
+  <data name="S_9d65feddfc9e" xml:space="preserve">
+    <value>Change the filter or register a new one registration.</value>
+  </data>
+  <data name="S_ca2932223527" xml:space="preserve">
+    <value>Student</value>
+  </data>
+  <data name="S_60e91154f334" xml:space="preserve">
+    <value>Student updated successfully!</value>
+  </data>
+  <data name="S_9f0a15d46aae" xml:space="preserve">
+    <value>Student registered successfully!</value>
+  </data>
+  <data name="S_5da578dfb8be" xml:space="preserve">
+    <value>Student enrolled</value>
+  </data>
+  <data name="S_112b0b47bb2c" xml:space="preserve">
+    <value>Student deleted successfully!</value>
+  </data>
+  <data name="S_7ace54510067" xml:space="preserve">
+    <value>Student under 16 years old: medical report is mandatory.</value>
+  </data>
+  <data name="S_840f3a248149" xml:space="preserve">
+    <value>Student Not Found</value>
+  </data>
+  <data name="S_f72f85e18dee" xml:space="preserve">
+    <value>Students</value>
+  </data>
+  <data name="S_c87bca917a23" xml:space="preserve">
+    <value>Annual</value>
+  </data>
+  <data name="S_8ecb9f1828bd" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="S_575c80a8ffc2" xml:space="preserve">
+    <value>Apply language</value>
+  </data>
+  <data name="S_a51ca75414a9" xml:space="preserve">
+    <value>Invalid File</value>
+  </data>
+  <data name="S_9562a5ea0654" xml:space="preserve">
+    <value>File Too Large</value>
+  </data>
+  <data name="S_4a41348f9bf0" xml:space="preserve">
+    <value>The {0} bank settings have been saved.</value>
+  </data>
+  <data name="S_1642e770673d" xml:space="preserve">
+    <value>Attendant</value>
+  </data>
+  <data name="S_5aa11a9c2490" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="S_2673b812b65a" xml:space="preserve">
+    <value>Forward one year</value>
+  </data>
+  <data name="S_158568f9d745" xml:space="preserve">
+    <value>Forward one month</value>
+  </data>
+  <data name="S_456ab518e5c1" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="S_66c341b3e963" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="S_49f7179a65c6" xml:space="preserve">
+    <value>Neighborhood</value>
+  </data>
+  <data name="S_67a4de350575" xml:space="preserve">
+    <value>Database</value>
+  </data>
+  <data name="S_6a969b07c9e1" xml:space="preserve">
+    <value>Brazil</value>
+  </data>
+  <data name="S_a62405e2cefb" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="S_a7c5478a16d0" xml:space="preserve">
+    <value>Search student</value>
+  </data>
+  <data name="S_804157cb11ea" xml:space="preserve">
+    <value>Search CEP</value>
+  </data>
+  <data name="S_579ccf41eb63" xml:space="preserve">
+    <value>First register this street on the Streets screen.</value>
+  </data>
+  <data name="S_8c3f903be901" xml:space="preserve">
+    <value>Student registrations of the academia.</value>
+  </data>
+  <data name="S_5f4efa44b606" xml:space="preserve">
+    <value>Path of .db file</value>
+  </data>
+  <data name="S_93dee0568df5" xml:space="preserve">
+    <value>Path of SQLite file</value>
+  </data>
+  <data name="S_c111e0ab9ddb" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="S_ec3d889885b0" xml:space="preserve">
+    <value>Capturing photo...</value>
+  </data>
+  <data name="S_58156c84bf18" xml:space="preserve">
+    <value>CEP</value>
+  </data>
+  <data name="S_2cbe9f1f9067" xml:space="preserve">
+    <value>CEP</value>
+  </data>
+  <data name="S_68ff74c90a0d" xml:space="preserve">
+    <value>CEP already registered! Data uploaded for editing.</value>
+  </data>
+  <data name="S_8ef13edbb8d7" xml:space="preserve">
+    <value>CEP Not Found</value>
+  </data>
+  <data name="S_f6d3dba7bb2e" xml:space="preserve">
+    <value>CEP not found.</value>
+  </data>
+  <data name="S_1a3285047365" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="S_21f72c3cc4b9" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="S_88cc8212a340" xml:space="preserve">
+    <value>Click me</value>
+  </data>
+  <data name="S_559fd9b1866b" xml:space="preserve">
+    <value>Clicked {0} time</value>
+  </data>
+  <data name="S_b6e7249a9057" xml:space="preserve">
+    <value>Clicked {0} times</value>
+  </data>
+  <data name="S_71ce08a93219" xml:space="preserve">
+    <value>Collaborator</value>
+  </data>
+  <data name="S_df405a20276b" xml:space="preserve">
+    <value>Employee updated successfully!</value>
+  </data>
+  <data name="S_6e7281eb5ab3" xml:space="preserve">
+    <value>Employee registered successfully!</value>
+  </data>
+  <data name="S_09d9f9c556e9" xml:space="preserve">
+    <value>Employee deleted successfully!</value>
+  </data>
+  <data name="S_8a975827b9be" xml:space="preserve">
+    <value>Collaborators</value>
+  </data>
+  <data name="S_ba75e2e6719b" xml:space="preserve">
+    <value>Add-on</value>
+  </data>
+  <data name="S_2f4cfad71d36" xml:space="preserve">
+    <value>Add-on (optional)</value>
+  </data>
+  <data name="S_a1572ef22c8f" xml:space="preserve">
+    <value>Health conditions and restrictions</value>
+  </data>
+  <data name="S_ed06f98a2c44" xml:space="preserve">
+    <value>Connection of data</value>
+  </data>
+  <data name="S_32df8c5ac677" xml:space="preserve">
+    <value>Saved configuration</value>
+  </data>
+  <data name="S_871f24c4cdaf" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="S_a3622915f1e2" xml:space="preserve">
+    <value>Check the values before saving.</value>
+  </data>
+  <data name="S_cbfedc3f5120" xml:space="preserve">
+    <value>Confirm Deletion</value>
+  </data>
+  <data name="S_9c469e53fd34" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="S_0a9c40dfeb7a" xml:space="preserve">
+    <value>Query by zip code</value>
+  </data>
+  <data name="S_77f4a3c91ed4" xml:space="preserve">
+    <value>Consult students</value>
+  </data>
+  <data name="S_d85226e39566" xml:space="preserve">
+    <value>Consult collaborators</value>
+  </data>
+  <data name="S_d33dcf46bc6e" xml:space="preserve">
+    <value>Consult public places</value>
+  </data>
+  <data name="S_668cd14c681e" xml:space="preserve">
+    <value>Consult enrollments</value>
+  </data>
+  <data name="S_9a9bf276b82f" xml:space="preserve">
+    <value>CPF</value>
+  </data>
+  <data name="S_ffa6c958f8a8" xml:space="preserve">
+    <value>Camera Unavailable</value>
+  </data>
+  <data name="S_c1c089d2d100" xml:space="preserve">
+    <value>Camera ready</value>
+  </data>
+  <data name="S_09fa3aad2e1d" xml:space="preserve">
+    <value>Code 0x{0}.</value>
+  </data>
+  <data name="S_55156aab474e" xml:space="preserve">
+    <value>Code: 0x{0}.</value>
+  </data>
+  <data name="S_f2dcd0f9b98f" xml:space="preserve">
+    <value>Connection data</value>
+  </data>
+  <data name="S_25e718695f91" xml:space="preserve">
+    <value>Job details</value>
+  </data>
+  <data name="S_30e4c9cb1de5" xml:space="preserve">
+    <value>Address details</value>
+  </data>
+  <data name="S_d54d68a7fe9a" xml:space="preserve">
+    <value>Personal details</value>
+  </data>
+  <data name="S_fa6aa2c691d2" xml:space="preserve">
+    <value>Personal details, contact and address</value>
+  </data>
+  <data name="S_48b07017ccbe" xml:space="preserve">
+    <value>Admission date</value>
+  </data>
+  <data name="S_a244e3c17e32" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="S_d631e8cfef7a" xml:space="preserve">
+    <value>Date of birth</value>
+  </data>
+  <data name="S_504acaca9e8a" xml:space="preserve">
+    <value>Automatic end date</value>
+  </data>
+  <data name="S_914f048010d4" xml:space="preserve">
+    <value>Define the admission, role and employment relationship collaborator.</value>
+  </data>
+  <data name="S_eb76bade10de" xml:space="preserve">
+    <value>Describe specific precautions for training</value>
+  </data>
+  <data name="S_0119499fd85c" xml:space="preserve">
+    <value>Do you really want to delete the enrollment of {0}?</value>
+  </data>
+  <data name="S_899f63628519" xml:space="preserve">
+    <value>Do you really want to delete the student {0}?</value>
+  </data>
+  <data name="S_5c57a3206c82" xml:space="preserve">
+    <value>Do you really want to delete the collaborator {0}?</value>
+  </data>
+  <data name="S_835c02c3c01f" xml:space="preserve">
+    <value>Do you really want to delete the street {0}?</value>
+  </data>
+  <data name="S_460ab082ab7a" xml:space="preserve">
+    <value>Details of the Street</value>
+  </data>
+  <data name="S_7b37baebf228" xml:space="preserve">
+    <value>Diabetes</value>
+  </data>
+  <data name="S_f5cb8944b011" xml:space="preserve">
+    <value>Enter the number of days</value>
+  </data>
+  <data name="S_deed34404875" xml:space="preserve">
+    <value>Enter the CEP and click on Search CEP to link a street registered.</value>
+  </data>
+  <data name="S_e7176ebcaeb0" xml:space="preserve">
+    <value>Enter enrollment ID</value>
+  </data>
+  <data name="S_f9bea91853c2" xml:space="preserve">
+    <value>Enter student ID</value>
+  </data>
+  <data name="S_d644d2ce6cb7" xml:space="preserve">
+    <value>dot net bot in a submarine number ten</value>
+  </data>
+  <data name="S_0d01e2e86669" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="S_2b5f23437f58" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="S_bded4ec0ef81" xml:space="preserve">
+    <value>Edit Student</value>
+  </data>
+  <data name="S_53b755233985" xml:space="preserve">
+    <value>Edit Employee</value>
+  </data>
+  <data name="S_391f69b5b15c" xml:space="preserve">
+    <value>Edit Street</value>
+  </data>
+  <data name="S_157b092d1230" xml:space="preserve">
+    <value>Edit Registration</value>
+  </data>
+  <data name="S_84add5b29527" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="S_ef764c1db7f8" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="S_ca54c1743777" xml:space="preserve">
+    <value>Located address</value>
+  </data>
+  <data name="S_d3cb809a90c4" xml:space="preserve">
+    <value>Available addresses and zip codes</value>
+  </data>
+  <data name="S_38ee17921e1b" xml:space="preserve">
+    <value>Addresses used in the company&#x27;s registrations academy.</value>
+  </data>
+  <data name="S_a72f1cc494a4" xml:space="preserve">
+    <value>Team responsible for the service and operation of the academy.</value>
+  </data>
+  <data name="S_1e01714c770d" xml:space="preserve">
+    <value>Team, role and employment relationship</value>
+  </data>
+  <data name="S_8dba36b0ec44" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="S_5d595b792530" xml:space="preserve">
+    <value>Error when searching for student: {0}</value>
+  </data>
+  <data name="S_49d660f78fc8" xml:space="preserve">
+    <value>Error when searching for students: {0}</value>
+  </data>
+  <data name="S_e4309767a343" xml:space="preserve">
+    <value>Error when searching for CEP: {0}</value>
+  </data>
+  <data name="S_fecf5cc105ab" xml:space="preserve">
+    <value>Error when searching for collaborators: {0}</value>
+  </data>
+  <data name="S_aca14a6804ea" xml:space="preserve">
+    <value>Error when searching for public places: {0}</value>
+  </data>
+  <data name="S_a69a8d76d280" xml:space="preserve">
+    <value>Error when searching for registrations: {0}</value>
+  </data>
+  <data name="S_b1ea8b5302c3" xml:space="preserve">
+    <value>Error when loading student: {0}</value>
+  </data>
+  <data name="S_ff9ee7507af0" xml:space="preserve">
+    <value>Error loading students: {0}</value>
+  </data>
+  <data name="S_1e411457bf12" xml:space="preserve">
+    <value>Error loading collaborator: {0}</value>
+  </data>
+  <data name="S_46bd2216d3ab" xml:space="preserve">
+    <value>Error loading collaborators: {0}</value>
+  </data>
+  <data name="S_353fbd1e72c7" xml:space="preserve">
+    <value>Error loading panel data: {0}</value>
+  </data>
+  <data name="S_51ade7c76b76" xml:space="preserve">
+    <value>Error loading public address: {0}</value>
+  </data>
+  <data name="S_da14cb10eade" xml:space="preserve">
+    <value>Error loading public places: {0}</value>
+  </data>
+  <data name="S_390a1e0279a9" xml:space="preserve">
+    <value>Error when loading enrollment: {0}</value>
+  </data>
+  <data name="S_6fbf99dcd5c3" xml:space="preserve">
+    <value>Error when editing student: {0}</value>
+  </data>
+  <data name="S_adb57fab1e82" xml:space="preserve">
+    <value>Error when editing employee: {0}</value>
+  </data>
+  <data name="S_fd2cdc93629f" xml:space="preserve">
+    <value>Error when editing address: {0}</value>
+  </data>
+  <data name="S_2e718c6b182c" xml:space="preserve">
+    <value>Error when deleting student: {0}</value>
+  </data>
+  <data name="S_0ad9509896e7" xml:space="preserve">
+    <value>Error when deleting employee: {0}</value>
+  </data>
+  <data name="S_0cadae49ef44" xml:space="preserve">
+    <value>Error when deleting street: {0}</value>
+  </data>
+  <data name="S_d4bb81a850eb" xml:space="preserve">
+    <value>Error when deleting registration: {0}</value>
+  </data>
+  <data name="S_74dc58b00c0f" xml:space="preserve">
+    <value>Error when navigating to the registration edition: {0}</value>
+  </data>
+  <data name="S_b66fec619dda" xml:space="preserve">
+    <value>Error when navigating to the edition: {0}</value>
+  </data>
+  <data name="S_ac1a64061351" xml:space="preserve">
+    <value>Error when navigating to the registration register: {0}</value>
+  </data>
+  <data name="S_15831fbcbf4a" xml:space="preserve">
+    <value>Error when navigating to registration: {0}</value>
+  </data>
+  <data name="S_5c80ccef08d7" xml:space="preserve">
+    <value>Error when navigating to registration screen: {0}</value>
+  </data>
+  <data name="S_723bd4a43743" xml:space="preserve">
+    <value>Error when navigating to editing screen: {0}</value>
+  </data>
+  <data name="S_4a132b09ee62" xml:space="preserve">
+    <value>Error when saving student: {0}</value>
+  </data>
+  <data name="S_7403aba90186" xml:space="preserve">
+    <value>Error when saving collaborator: {0}</value>
+  </data>
+  <data name="S_e9c572bf8f58" xml:space="preserve">
+    <value>Error when saving address: {0}</value>
+  </data>
+  <data name="S_e1047ddd31b7" xml:space="preserve">
+    <value>Error when saving enrollment: {0}</value>
+  </data>
+  <data name="S_d8fa214d8356" xml:space="preserve">
+    <value>Validation Errors</value>
+  </data>
+  <data name="S_a46f285634de" xml:space="preserve">
+    <value>Choose the manager and review the data used by the application.</value>
+  </data>
+  <data name="S_0d7f97c38367" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="S_87cf2a843e2e" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="S_4b7b648144ea" xml:space="preserve">
+    <value>Intern</value>
+  </data>
+  <data name="S_d5818add1e07" xml:space="preserve">
+    <value>This device does not support photo capture.</value>
+  </data>
+  <data name="S_18cf51dd9d12" xml:space="preserve">
+    <value>This device does not support photo capture.</value>
+  </data>
+  <data name="S_e49955c4a4b3" xml:space="preserve">
+    <value>This place cannot be deleted as it is linked to registered students or collaborators.</value>
+  </data>
+  <data name="S_95bc3c506e27" xml:space="preserve">
+    <value>Ex.: conditioning, hypertrophy or health</value>
+  </data>
+  <data name="S_8e7c1314fe0b" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="S_960109973683" xml:space="preserve">
+    <value>example@email.com</value>
+  </data>
+  <data name="S_79cf97c8fb90" xml:space="preserve">
+    <value>Photo required upon registration</value>
+  </data>
+  <data name="S_d4900d16e162" xml:space="preserve">
+    <value>Photo ready for save</value>
+  </data>
+  <data name="S_50bdb6701879" xml:space="preserve">
+    <value>Photograph medical report</value>
+  </data>
+  <data name="S_3920c1dfdca1" xml:space="preserve">
+    <value>Photograph or select a readable image of the document.</value>
+  </data>
+  <data name="S_7e74ebac28d5" xml:space="preserve">
+    <value>Gallery Unavailable</value>
+  </data>
+  <data name="S_f675553b8ecc" xml:space="preserve">
+    <value>Manager</value>
+  </data>
+  <data name="S_58d99149af6e" xml:space="preserve">
+    <value>Administrative management</value>
+  </data>
+  <data name="S_0a0a9f2a6772" xml:space="preserve">
+    <value>Hello, World!</value>
+  </data>
+  <data name="S_ba0084278453" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="S_474ae52625b8" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="S_9ca6f7dd0407" xml:space="preserve">
+    <value>Registration ID</value>
+  </data>
+  <data name="S_afbaa2192cd7" xml:space="preserve">
+    <value>Student ID</value>
+  </data>
+  <data name="S_7d8905949279" xml:space="preserve">
+    <value>Language updated</value>
+  </data>
+  <data name="S_6f389f0070a4" xml:space="preserve">
+    <value>Application language</value>
+  </data>
+  <data name="S_ca33ec318e91" xml:space="preserve">
+    <value>Language and region</value>
+  </data>
+  <data name="S_804501989569" xml:space="preserve">
+    <value>Image of Academia do Zé not found on application.</value>
+  </data>
+  <data name="S_0addc9dff273" xml:space="preserve">
+    <value>Invalid Image</value>
+  </data>
+  <data name="S_6536267f169a" xml:space="preserve">
+    <value>Image Too Large</value>
+  </data>
+  <data name="S_fbb0ff2d7c6b" xml:space="preserve">
+    <value>Enter the path of the SQLite file.</value>
+  </data>
+  <data name="S_e36c27fbad71" xml:space="preserve">
+    <value>Enter the zip code to search for the address automatically.</value>
+  </data>
+  <data name="S_0777ea1d57c3" xml:space="preserve">
+    <value>Enter the zip code to perform the search.</value>
+  </data>
+  <data name="S_6d73319ca559" xml:space="preserve">
+    <value>Enter the server, database and user.</value>
+  </data>
+  <data name="S_ae273c33f09c" xml:space="preserve">
+    <value>Enter the address data. The search by ZIP code can fill part of the form.</value>
+  </data>
+  <data name="S_8dcdc90b9160" xml:space="preserve">
+    <value>Enter the student&#x27;s personal data.</value>
+  </data>
+  <data name="S_79a611d94eab" xml:space="preserve">
+    <value>Enter the employee&#x27;s personal data.</value>
+  </data>
+  <data name="S_eb008927889a" xml:space="preserve">
+    <value>Enter the student&#x27;s personal data and address.</value>
+  </data>
+  <data name="S_6947f649be0e" xml:space="preserve">
+    <value>Enter the personal data, address and work details.</value>
+  </data>
+  <data name="S_63c438ee0f9f" xml:space="preserve">
+    <value>Enter a ZIP code with exactly 8 digits.</value>
+  </data>
+  <data name="S_b41741ee35ea" xml:space="preserve">
+    <value>Enter a CPF with 11 digits.</value>
+  </data>
+  <data name="S_c412f61ccb8f" xml:space="preserve">
+    <value>Enter a positive integer ID.</value>
+  </data>
+  <data name="S_bce9926861e6" xml:space="preserve">
+    <value>Enter a number of days equal to or greater than zero.</value>
+  </data>
+  <data name="S_bfbc1687cf66" xml:space="preserve">
+    <value>Instructor</value>
+  </data>
+  <data name="S_fc2c74003cb1" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="S_3cb3d30b949e" xml:space="preserve">
+    <value>Labyrinthitis</value>
+  </data>
+  <data name="S_8ffe782002b9" xml:space="preserve">
+    <value>Report attached</value>
+  </data>
+  <data name="S_07d947143b89" xml:space="preserve">
+    <value>Medical report</value>
+  </data>
+  <data name="S_ac0f1750a4a7" xml:space="preserve">
+    <value>Mandatory report pending. Attach the document before saving.</value>
+  </data>
+  <data name="S_6ef280041542" xml:space="preserve">
+    <value>Locate the existing registration by CPF.</value>
+  </data>
+  <data name="S_1ee5c190242e" xml:space="preserve">
+    <value>Street successfully updated!</value>
+  </data>
+  <data name="S_7c3bd6b38d23" xml:space="preserve">
+    <value>Street created successfully!</value>
+  </data>
+  <data name="S_9a760e8c5524" xml:space="preserve">
+    <value>Street successfully deleted!</value>
+  </data>
+  <data name="S_3d7d9bebda59" xml:space="preserve">
+    <value>Logradouros</value>
+  </data>
+  <data name="S_722555d0fe6e" xml:space="preserve">
+    <value>Active Registration</value>
+  </data>
+  <data name="S_161914d92d4a" xml:space="preserve">
+    <value>Registration updated successfully!</value>
+  </data>
+  <data name="S_d071535abdf3" xml:space="preserve">
+    <value>Registration registered successfully!</value>
+  </data>
+  <data name="S_1714724f41b9" xml:space="preserve">
+    <value>Registration deleted successfully!</value>
+  </data>
+  <data name="S_ecee9ee28669" xml:space="preserve">
+    <value>Registrations</value>
+  </data>
+  <data name="S_6cb71f655e29" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="S_deaa0c393a66" xml:space="preserve">
+    <value>MySQL</value>
+  </data>
+  <data name="S_0df87d977551" xml:space="preserve">
+    <value>Minimum 6 characters and one capital letter</value>
+  </data>
+  <data name="S_824300cb006d" xml:space="preserve">
+    <value>When editing, leave blank to maintain the current password.</value>
+  </data>
+  <data name="S_f748fee56686" xml:space="preserve">
+    <value>No students found</value>
+  </data>
+  <data name="S_3b6d9d207cc5" xml:space="preserve">
+    <value>No students were found with the CPF entered.</value>
+  </data>
+  <data name="S_9978531887c0" xml:space="preserve">
+    <value>No students linked. Enter your CPF and click on Search student.</value>
+  </data>
+  <data name="S_452f0ad41663" xml:space="preserve">
+    <value>No collaborators found</value>
+  </data>
+  <data name="S_207b18cdf4f2" xml:space="preserve">
+    <value>No report attached</value>
+  </data>
+  <data name="S_356cb2a11979" xml:space="preserve">
+    <value>No street found</value>
+  </data>
+  <data name="S_dd6aab1a991e" xml:space="preserve">
+    <value>No value required</value>
+  </data>
+  <data name="S_08c7a1ac64d6" xml:space="preserve">
+    <value>No condition found.</value>
+  </data>
+  <data name="S_7b0fa0a5ce64" xml:space="preserve">
+    <value>No camera was found on this computer.</value>
+  </data>
+  <data name="S_6b7d7353e483" xml:space="preserve">
+    <value>No license plate found</value>
+  </data>
+  <data name="S_2613d15a65bc" xml:space="preserve">
+    <value>None Restriction</value>
+  </data>
+  <data name="S_13030dd962f4" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="S_289e1964a6e9" xml:space="preserve">
+    <value>Name / Street</value>
+  </data>
+  <data name="S_695fc3f31688" xml:space="preserve">
+    <value>Full name</value>
+  </data>
+  <data name="S_0b688160cc5d" xml:space="preserve">
+    <value>Street name</value>
+  </data>
+  <data name="S_dd04852e91a9" xml:space="preserve">
+    <value>Bank name</value>
+  </data>
+  <data name="S_90b2f8d86fa9" xml:space="preserve">
+    <value>New enrollment</value>
+  </data>
+  <data name="S_1864b18074d5" xml:space="preserve">
+    <value>New Enrollment</value>
+  </data>
+  <data name="S_86a674215d37" xml:space="preserve">
+    <value>New student</value>
+  </data>
+  <data name="S_3d14c98bf4c8" xml:space="preserve">
+    <value>New Student</value>
+  </data>
+  <data name="S_f970ce71a7af" xml:space="preserve">
+    <value>New Employee</value>
+  </data>
+  <data name="S_e3d4a6a754c4" xml:space="preserve">
+    <value>New Employee</value>
+  </data>
+  <data name="S_89801738e4c7" xml:space="preserve">
+    <value>New Public Place</value>
+  </data>
+  <data name="S_1e11717e30c2" xml:space="preserve">
+    <value>New Public Place</value>
+  </data>
+  <data name="S_72534bbb0ce3" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="S_70cfec20fcf7" xml:space="preserve">
+    <value>No Found</value>
+  </data>
+  <data name="S_56f7430809d8" xml:space="preserve">
+    <value>Not Found</value>
+  </data>
+  <data name="S_63a2fcfa74aa" xml:space="preserve">
+    <value>Unable to access the camera. Check app permissions.</value>
+  </data>
+  <data name="S_3e7d6583066e" xml:space="preserve">
+    <value>We were unable to access your photos. Check app permissions.</value>
+  </data>
+  <data name="S_6e7f9a9143c8" xml:space="preserve">
+    <value>Unable to capture photo. {0}</value>
+  </data>
+  <data name="S_ea9340422156" xml:space="preserve">
+    <value>Unable to delete registration.</value>
+  </data>
+  <data name="S_e1a9e8e6028b" xml:space="preserve">
+    <value>The student could not be deleted.</value>
+  </data>
+  <data name="S_3fc7ad63be00" xml:space="preserve">
+    <value>Unable to delete the collaborator.</value>
+  </data>
+  <data name="S_57c09cb5c88d" xml:space="preserve">
+    <value>It was not possible to delete the street.</value>
+  </data>
+  <data name="S_3074a4561384" xml:space="preserve">
+    <value>It was not possible to photograph the report: {0}</value>
+  </data>
+  <data name="S_8dbc56cc14b3" xml:space="preserve">
+    <value>Unable to start camera: {0}</value>
+  </data>
+  <data name="S_8c318b0d25c6" xml:space="preserve">
+    <value>Unable to select photo: {0}</value>
+  </data>
+  <data name="S_b8b725f9f4c1" xml:space="preserve">
+    <value>Unable to select report: {0}</value>
+  </data>
+  <data name="S_6d03af172f07" xml:space="preserve">
+    <value>Unable to take photo: {0}</value>
+  </data>
+  <data name="S_a68abb4a2c55" xml:space="preserve">
+    <value>Not Allowed</value>
+  </data>
+  <data name="S_1d91f4b8d8d6" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="S_ce9d32a38cfd" xml:space="preserve">
+    <value>Student ID {0} was not found.</value>
+  </data>
+  <data name="S_0d549bca70c7" xml:space="preserve">
+    <value>The selected file is empty.</value>
+  </data>
+  <data name="S_8cb13edf20fd" xml:space="preserve">
+    <value>Enrollment upload has expired.</value>
+  </data>
+  <data name="S_d46115f8a32e" xml:space="preserve">
+    <value>Student upload has expired.</value>
+  </data>
+  <data name="S_eb7a361f2de4" xml:space="preserve">
+    <value>Collaborator upload has expired. Check the connection.</value>
+  </data>
+  <data name="S_f5b5920ae731" xml:space="preserve">
+    <value>Place upload has expired. Check the connection.</value>
+  </data>
+  <data name="S_410e0328769b" xml:space="preserve">
+    <value>Student upload has expired.</value>
+  </data>
+  <data name="S_c3e0a452869b" xml:space="preserve">
+    <value>Collaborator upload has expired. Check the connection.</value>
+  </data>
+  <data name="S_205a27010905" xml:space="preserve">
+    <value>Locations loading has expired. Check the connection.</value>
+  </data>
+  <data name="S_df845ba5c9db" xml:space="preserve">
+    <value>ZIP code must contain exactly 8 numeric digits.</value>
+  </data>
+  <data name="S_739b26b39592" xml:space="preserve">
+    <value>Employee ID {0} was not found.</value>
+  </data>
+  <data name="S_287129640e3f" xml:space="preserve">
+    <value>The language and regional formats have been updated.</value>
+  </data>
+  <data name="S_1e553d09f57c" xml:space="preserve">
+    <value>The report must be a maximum of 15 MB.</value>
+  </data>
+  <data name="S_3596d3f18f8e" xml:space="preserve">
+    <value>The theme is applied immediately to all screens.</value>
+  </data>
+  <data name="S_a7b0c7991f6b" xml:space="preserve">
+    <value>Purpose of enrollment</value>
+  </data>
+  <data name="S_8609c7ca48e6" xml:space="preserve">
+    <value>Observations and recommendations</value>
+  </data>
+  <data name="S_9ce3bd4224c8" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="S_5e6e31464210" xml:space="preserve">
+    <value>Essential fields will be validated before registration.</value>
+  </data>
+  <data name="S_d27fc9c16bb4" xml:space="preserve">
+    <value>Administrative panel</value>
+  </data>
+  <data name="S_55212fca3ba1" xml:space="preserve">
+    <value>To search by ZIP code, enter the 8 numeric digits.</value>
+  </data>
+  <data name="S_4e8c380fa802" xml:space="preserve">
+    <value>To search by ID, enter a valid positive integer.</value>
+  </data>
+  <data name="S_57e90e88b8f6" xml:space="preserve">
+    <value>To filter active enrollments by student, enter a valid ID.</value>
+  </data>
+  <data name="S_0c664fca6df0" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="S_2d610e10ad16" xml:space="preserve">
+    <value>Permission Required</value>
+  </data>
+  <data name="S_d603c4e5b3b3" xml:space="preserve">
+    <value>Search health condition</value>
+  </data>
+  <data name="S_45b37ef91e8d" xml:space="preserve">
+    <value>Search by selected field</value>
+  </data>
+  <data name="S_1b1f5eca7709" xml:space="preserve">
+    <value>Plan and term</value>
+  </data>
+  <data name="S_4f1e4ebb16c5" xml:space="preserve">
+    <value>Plans, terms and health conditions</value>
+  </data>
+  <data name="S_8e51db6231bc" xml:space="preserve">
+    <value>Plans, term and health conditions of students.</value>
+  </data>
+  <data name="S_9a0515e82d76" xml:space="preserve">
+    <value>Please correct the following fields:</value>
+  </data>
+  <data name="S_bb32e4caf122" xml:space="preserve">
+    <value>Position your face and take the photo</value>
+  </data>
+  <data name="S_cdc85643fa9a" xml:space="preserve">
+    <value>Autofill</value>
+  </data>
+  <data name="S_67db423c1963" xml:space="preserve">
+    <value>Appearance and data connection preferences.</value>
+  </data>
+  <data name="S_9c8085a58cb6" xml:space="preserve">
+    <value>Preparing the camera...</value>
+  </data>
+  <data name="S_743ba7351d9e" xml:space="preserve">
+    <value>High Pressure</value>
+  </data>
+  <data name="S_d44763406322" xml:space="preserve">
+    <value>Respiratory Problems</value>
+  </data>
+  <data name="S_2e65a4197f3f" xml:space="preserve">
+    <value>Processing...</value>
+  </data>
+  <data name="S_8c8ef1bcfc2f" xml:space="preserve">
+    <value>Business Rule</value>
+  </data>
+  <data name="S_4bd4ea834263" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="S_4f88b73b9d17" xml:space="preserve">
+    <value>Remove photo</value>
+  </data>
+  <data name="S_4619558c78d5" xml:space="preserve">
+    <value>Continuous Remedy</value>
+  </data>
+  <data name="S_85a9f1a88a5e" xml:space="preserve">
+    <value>Repeat password</value>
+  </data>
+  <data name="S_19594b1413d9" xml:space="preserve">
+    <value>Selected restrictions: presentation of a medical report is mandatory.</value>
+  </data>
+  <data name="S_ef8d51ef99af" xml:space="preserve">
+    <value>Summary</value>
+  </data>
+  <data name="S_ef9a21e2f662" xml:space="preserve">
+    <value>Review the fields entered</value>
+  </data>
+  <data name="S_fe4755da101e" xml:space="preserve">
+    <value>Save student</value>
+  </data>
+  <data name="S_e1a0e8da4846" xml:space="preserve">
+    <value>Save collaborator</value>
+  </data>
+  <data name="S_03019216fed9" xml:space="preserve">
+    <value>Save connection</value>
+  </data>
+  <data name="S_e6585f78a4bf" xml:space="preserve">
+    <value>Save street</value>
+  </data>
+  <data name="S_48aaeb843173" xml:space="preserve">
+    <value>Save registration</value>
+  </data>
+  <data name="S_08191e9ac646" xml:space="preserve">
+    <value>Save theme</value>
+  </data>
+  <data name="S_10d14178f20f" xml:space="preserve">
+    <value>Select the student&#x27;s photo</value>
+  </data>
+  <data name="S_ff728be0fe8f" xml:space="preserve">
+    <value>Select the employee&#x27;s photo</value>
+  </data>
+  <data name="S_44c51a5dd521" xml:space="preserve">
+    <value>Select the image of the medical report</value>
+  </data>
+  <data name="S_5262e2dca95a" xml:space="preserve">
+    <value>Select the language</value>
+  </data>
+  <data name="S_c7b6db223e16" xml:space="preserve">
+    <value>Select plan</value>
+  </data>
+  <data name="S_0d2c3f3af83a" xml:space="preserve">
+    <value>Select type</value>
+  </data>
+  <data name="S_e8d068da547c" xml:space="preserve">
+    <value>Select bond</value>
+  </data>
+  <data name="S_84d09127c216" xml:space="preserve">
+    <value>Select all diagnosed medical conditions.</value>
+  </data>
+  <data name="S_8ea8f1154e79" xml:space="preserve">
+    <value>Select a language.</value>
+  </data>
+  <data name="S_066c4f4457af" xml:space="preserve">
+    <value>Select a database type.</value>
+  </data>
+  <data name="S_8fd904cb374f" xml:space="preserve">
+    <value>Select an option</value>
+  </data>
+  <data name="S_54ce34de0b33" xml:space="preserve">
+    <value>Semi-annual</value>
+  </data>
+  <data name="S_deba0172511d" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="S_423cd0ebcd94" xml:space="preserve">
+    <value>Bank password</value>
+  </data>
+  <data name="S_07728991147d" xml:space="preserve">
+    <value>Server</value>
+  </data>
+  <data name="S_d80faba8a4d8" xml:space="preserve">
+    <value>Server or address IP</value>
+  </data>
+  <data name="S_84fb9bfc81c8" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="S_c004160342cd" xml:space="preserve">
+    <value>System</value>
+  </data>
+  <data name="S_725d4af7c0a6" xml:space="preserve">
+    <value>SQL Server</value>
+  </data>
+  <data name="S_9f09ccbd1cfb" xml:space="preserve">
+    <value>SQLite</value>
+  </data>
+  <data name="S_c078ed95bfcc" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="S_04e0410282ed" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="S_bd5d9f7a70b7" xml:space="preserve">
+    <value>Theme Updated</value>
+  </data>
+  <data name="S_c358926e5acc" xml:space="preserve">
+    <value>Application Theme</value>
+  </data>
+  <data name="S_812c31085791" xml:space="preserve">
+    <value>Theme and Database Connection</value>
+  </data>
+  <data name="S_f18fda020735" xml:space="preserve">
+    <value>Time Out</value>
+  </data>
+  <data name="S_6cc6198d9e75" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="S_a0ad53d6de6e" xml:space="preserve">
+    <value>Plan Type</value>
+  </data>
+  <data name="S_0f23e2edc17e" xml:space="preserve">
+    <value>Remove photo</value>
+  </data>
+  <data name="S_eb0d458c55f1" xml:space="preserve">
+    <value>Take photo of student</value>
+  </data>
+  <data name="S_6c2c42bc981e" xml:space="preserve">
+    <value>Take photo of employee</value>
+  </data>
+  <data name="S_8a3c3440366a" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="S_0370d7f0c637" xml:space="preserve">
+    <value>Work</value>
+  </data>
+  <data name="S_24a8bc2bcd85" xml:space="preserve">
+    <value>Quarterly</value>
+  </data>
+  <data name="S_e81f7a385039" xml:space="preserve">
+    <value>UF</value>
+  </data>
+  <data name="S_03541389dff4" xml:space="preserve">
+    <value>Use camera</value>
+  </data>
+  <data name="S_f32c134523d4" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="S_2067a963e355" xml:space="preserve">
+    <value>Bank user</value>
+  </data>
+  <data name="S_a5089c8bbfe0" xml:space="preserve">
+    <value>Validation</value>
+  </data>
+  <data name="S_2168d7b00e40" xml:space="preserve">
+    <value>Expiring in days</value>
+  </data>
+  <data name="S_3f633601a60c" xml:space="preserve">
+    <value>Check the user&#x27;s camera permission application.</value>
+  </data>
+  <data name="S_402477c96223" xml:space="preserve">
+    <value>Check the application&#x27;s photo permission.</value>
+  </data>
+  <data name="S_2180ab81ae36" xml:space="preserve">
+    <value>Term:</value>
+  </data>
+  <data name="S_a834f7c7ea0f" xml:space="preserve">
+    <value>Link the student, define the plan and record health care.</value>
+  </data>
+  <data name="S_192edbec9710" xml:space="preserve">
+    <value>Vitor Hugo Ribeiro Sá</value>
+  </data>
+  <data name="S_196619a45826" xml:space="preserve">
+    <value>Go back one year</value>
+  </data>
+  <data name="S_e860553b8136" xml:space="preserve">
+    <value>Go back one month</value>
+  </data>
+  <data name="S_ccc6cfe4681f" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="S_04e4a69ee833" xml:space="preserve">
+    <value>Welcome to 
+.NET Multi-platform App UI</value>
+  </data>
+  <data name="S_a809ad91f71d" xml:space="preserve">
+    <value>Welcome to dot net Multi platform App U I</value>
+  </data>
+  <data name="S_bc70260f8205" xml:space="preserve">
+    <value>{0} already has an active registration.</value>
+  </data>
+  <data name="S_7c868f4c4151" xml:space="preserve">
+    <value>« previous year ‹ previous month next month › next year »</value>
+  </data>
+  <data name="S_388d30b88e22" xml:space="preserve">
+    <value>Management area</value>
+  </data>
+  <data name="S_ea61614a869a" xml:space="preserve">
+    <value>✓ {0}</value>
+  </data>
+</root>
