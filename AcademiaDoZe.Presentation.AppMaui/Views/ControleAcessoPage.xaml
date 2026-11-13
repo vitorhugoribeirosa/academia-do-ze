@@ -130,7 +130,7 @@
                                                     Stroke="{AppThemeBinding Light=#2E7D32, Dark={StaticResource PrimaryDark}}"
                                                     BackgroundColor="{AppThemeBinding Light=#E8F5E9, Dark=#30291D}"
                                                     VerticalOptions="Center">
-                                                <Label Text="{Binding Tipo}" FontSize="11"
+                                                <Label Text="{Binding TipoExibicao}" FontSize="11"
                                                        TextColor="{AppThemeBinding Light=#1B5E20, Dark={StaticResource PrimaryDark}}" />
                                             </Border>
                                         </Grid>
@@ -153,6 +153,8 @@
                         <VerticalStackLayout Grid.Column="1" Spacing="4" VerticalOptions="Center">
                             <Label Text="{Binding SelectedPessoa.Nome}" Style="{StaticResource CardTitle}" />
                             <Label Text="{Binding SelectedCpf}" Style="{StaticResource MutedText}" />
+                            <Label Text="{Binding SelectedPessoa.TipoExibicao}" FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#1B5E20, Dark={StaticResource PrimaryDark}}" />
                             <Label Text="{Binding StatusSelecionado}" FontAttributes="Bold"
                                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}" />
                         </VerticalStackLayout>

@@ -1,4 +1,5 @@
 using AcademiaDoZe.Application.DTOs;
+using AcademiaDoZe.Application.Enums;
 using AcademiaDoZe.Application.Interfaces;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -362,15 +363,24 @@ public sealed class PessoaAcessoItem
     public required string Nome { get; init; }
     public required string Cpf { get; init; }
     public bool EhAluno { get; init; }
+    public AppColaboradorVinculo? VinculoColaborador { get; init; }
     public string Tipo => EhAluno ? "Aluno" : "Colaborador";
+    public string TipoExibicao => EhAluno
+        ? "Aluno"
+        : $"Colaborador • {VinculoColaborador?.GetDisplayName() ?? "Vínculo não informado"}";
     public string CpfFormatado => Cpf;
     public ImageSource? Foto { get; init; }
 
-    public static PessoaAcessoItem FromAluno(AlunoDto pessoa) => Criar(pessoa, true);
-    public static PessoaAcessoItem FromColaborador(ColaboradorDto pessoa) => Criar(pessoa, false);
-    private static PessoaAcessoItem Criar(PessoaDto pessoa, bool aluno) => new()
+    public static PessoaAcessoItem FromAluno(AlunoDto pessoa) => Criar(pessoa, true, null);
+    public static PessoaAcessoItem FromColaborador(ColaboradorDto pessoa) =>
+        Criar(pessoa, false, pessoa.Vinculo);
+    private static PessoaAcessoItem Criar(
+        PessoaDto pessoa,
+        bool aluno,
+        AppColaboradorVinculo? vinculoColaborador) => new()
     {
         Id = pessoa.Id, Nome = pessoa.Nome, Cpf = pessoa.Cpf, EhAluno = aluno,
+        VinculoColaborador = vinculoColaborador,
         Foto = pessoa.Foto?.Conteudo is { Length: > 0 } bytes
             ? ImageSource.FromStream(() => new MemoryStream(bytes)) : null
     };
