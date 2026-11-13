@@ -274,8 +274,6 @@ public class AcessoAlunoService : IAcessoAlunoService
     private static string TraduzirNotificacao(Domain.Common.Notification notification) =>
         notification.Mensagem switch
         {
-            "DATA_HORA_INTERVALO_INVALIDO" =>
-                "O registro de entrada ou saída só pode ser feito entre 06h e 22h.",
             "SAIDA_ANTERIOR_A_ENTRADA" =>
                 "O horário de saída não pode ser anterior ao horário de entrada.",
             "SAIDA_JA_REGISTRADA" => "A saída deste acesso já foi registrada.",

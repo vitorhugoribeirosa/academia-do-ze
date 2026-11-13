@@ -21,13 +21,12 @@ public class AcessoColaboradorTests
         if (colaboradorNull) Assert.Contains(result.Notifications, n => n.Mensagem == "COLABORADOR_INVALIDO");
     }
 
-    [Theory(DisplayName = "AcessoColaborador: horario fora do intervalo -> DATAHORA_INTERVALO")]
-    [InlineData(5, 59)] [InlineData(22, 1)]
-    public void Deve_Falhar_Criacao_Quando_HorarioForaDoIntervalo(int hour, int minute)
+    [Theory(DisplayName = "AcessoColaborador: permite registro em qualquer horário")]
+    [InlineData(0, 0)] [InlineData(5, 59)] [InlineData(22, 1)] [InlineData(23, 59)]
+    public void Deve_Permitir_Criacao_Em_Qualquer_Horario(int hour, int minute)
     {
         var result = AcessoColaborador.Criar(1, GetValidColaborador(), DateTime.Today.AddHours(hour).AddMinutes(minute));
-        Assert.True(result.IsFailure);
-        Assert.Contains(result.Notifications, n => n.Mensagem == "DATA_HORA_INTERVALO_INVALIDO");
+        Assert.True(result.IsSuccess);
     }
 
     [Theory(DisplayName = "AcessoColaborador: criação bem-sucedida em horários permitidos")]
@@ -42,11 +41,6 @@ public class AcessoColaboradorTests
         Assert.Null(result.Value.DataHoraSaida);
         Assert.True(result.Value.EstaEmAberto);
     }
-
-    [Theory(DisplayName = "AcessoColaborador: permite horários de borda 06:00 e 22:00")]
-    [InlineData(6)] [InlineData(22)]
-    public void Deve_Permitir_HorariosDeBorda_06_00_e_22_00(int hour) =>
-        Assert.True(AcessoColaborador.Criar(1, GetValidColaborador(), DateTime.Today.AddHours(hour)).IsSuccess);
 
     [Fact(DisplayName = "AcessoColaborador: registra saída do mesmo colaborador")]
     public void Deve_Registrar_Saida_Do_Mesmo_Colaborador()

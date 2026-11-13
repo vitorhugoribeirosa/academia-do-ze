@@ -27,8 +27,6 @@ public sealed class AcessoAluno : Entity, IAggregateRoot
         if (aluno is null)
             notifications.Add(new Notification("Aluno", "ALUNO_INVALIDO"));
 
-        ValidarHorario(dataHoraEntrada, "DataHoraEntrada", notifications);
-
         if (notifications.Count != 0)
             return Result<AcessoAluno>.Failure(notifications);
 
@@ -44,11 +42,8 @@ public sealed class AcessoAluno : Entity, IAggregateRoot
         if (alunoId <= 0)
             notifications.Add(new Notification("AlunoId", "ALUNO_INVALIDO"));
 
-        ValidarHorario(dataHoraEntrada, "DataHoraEntrada", notifications);
-
         if (dataHoraSaida.HasValue)
         {
-            ValidarHorario(dataHoraSaida.Value, "DataHoraSaida", notifications);
             if (dataHoraSaida.Value < dataHoraEntrada)
             {
                 notifications.Add(
@@ -78,8 +73,6 @@ public sealed class AcessoAluno : Entity, IAggregateRoot
         if (DataHoraSaida.HasValue)
             notifications.Add(new Notification("DataHoraSaida", "SAIDA_JA_REGISTRADA"));
 
-        ValidarHorario(dataHoraSaida, "DataHoraSaida", notifications);
-
         if (dataHoraSaida < DataHoraEntrada)
             notifications.Add(new Notification("DataHoraSaida", "SAIDA_ANTERIOR_A_ENTRADA"));
 
@@ -88,16 +81,5 @@ public sealed class AcessoAluno : Entity, IAggregateRoot
 
         DataHoraSaida = dataHoraSaida;
         return Result<AcessoAluno>.Success(this);
-    }
-
-    private static void ValidarHorario(
-        DateTime dataHora, string propriedade, ICollection<Notification> notifications)
-    {
-        if (dataHora.TimeOfDay < new TimeSpan(6, 0, 0) ||
-            dataHora.TimeOfDay > new TimeSpan(22, 0, 0))
-        {
-            notifications.Add(
-                new Notification(propriedade, "DATA_HORA_INTERVALO_INVALIDO"));
-        }
     }
 }
