@@ -94,7 +94,10 @@ public partial class ControleAcessoViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            MostrarFeedback($"Não foi possível carregar o controle de acesso: {ex.Message}", false);
+            MostrarFeedback(CriarMensagemAmigavel(
+                ex,
+                "Não foi possível carregar o controle de acesso. " +
+                "Verifique a conexão com o banco de dados e tente novamente."), false);
         }
         finally { IsBusy = false; }
     }
@@ -144,10 +147,13 @@ public partial class ControleAcessoViewModel : BaseViewModel
         }
         catch (Exception ex)
         {
-            var mensagem = ex.Message.StartsWith(
+            var motivo = CriarMensagemAmigavel(
+                ex,
+                "Não foi possível concluir o registro agora. Tente novamente.");
+            var mensagem = motivo.StartsWith(
                 "Acesso negado:", StringComparison.OrdinalIgnoreCase)
-                ? ex.Message
-                : $"Acesso negado: {ex.Message}";
+                ? motivo
+                : $"Acesso negado: {motivo}";
             MostrarFeedback(mensagem, false);
         }
         finally { IsBusy = false; }
@@ -195,7 +201,12 @@ public partial class ControleAcessoViewModel : BaseViewModel
         catch (Exception ex)
         {
             if (SelectedPessoa == pessoa)
-                MostrarFeedback($"Não foi possível consultar o status: {ex.Message}", false);
+            {
+                MostrarFeedback(CriarMensagemAmigavel(
+                    ex,
+                    "Não foi possível consultar a situação desta pessoa. " +
+                    "Atualize a tela e tente novamente."), false);
+            }
             return false;
         }
     }
@@ -247,6 +258,58 @@ public partial class ControleAcessoViewModel : BaseViewModel
         FeedbackMessage = mensagem;
         FeedbackIsSuccess = sucesso;
         HasFeedback = true;
+    }
+
+    private static string CriarMensagemAmigavel(Exception exception, string mensagemPadrao)
+    {
+        var erro = exception is AggregateException aggregate
+            ? aggregate.GetBaseException()
+            : exception;
+
+        if (erro is OperationCanceledException or TimeoutException)
+        {
+            return "A operação demorou mais que o esperado. " +
+                   "Verifique a conexão e tente novamente.";
+        }
+
+        if (erro is KeyNotFoundException)
+        {
+            return "O cadastro selecionado não foi encontrado. " +
+                   "Atualize a lista e tente novamente.";
+        }
+
+        if (erro is InvalidOperationException or ArgumentException)
+        {
+            var mensagem = erro.Message.Trim();
+            if (!EhMensagemTecnica(mensagem))
+                return mensagem.TrimEnd('.') + ".";
+        }
+
+        return mensagemPadrao;
+    }
+
+    private static bool EhMensagemTecnica(string mensagem)
+    {
+        if (string.IsNullOrWhiteSpace(mensagem))
+            return true;
+
+        var termosTecnicos = new[]
+        {
+            "exception", "stack trace", "database", "connection", "timeout",
+            "sql", "tabela", "coluna", "parâmetro", "parameter", "tb_",
+            "por id", " id ", "acesso_aluno", "acesso_colaborador"
+        };
+        if (termosTecnicos.Any(termo =>
+                mensagem.Contains(termo, StringComparison.OrdinalIgnoreCase)))
+        {
+            return true;
+        }
+
+        return mensagem
+            .Split([' ', ',', ':', ';', '.', '(', ')'], StringSplitOptions.RemoveEmptyEntries)
+            .Any(parte => parte.Contains('_') &&
+                          parte.Any(char.IsLetter) &&
+                          parte == parte.ToUpperInvariant());
     }
 
     private static string CriarMensagemAluno(AcessoAlunoDto acesso, bool eraSaida)

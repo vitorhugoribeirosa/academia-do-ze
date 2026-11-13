@@ -92,7 +92,8 @@ public class AcessoColaboradorService : IAcessoColaboradorService
         if (ultimo?.EstaEmAberto == true)
         {
             throw new InvalidOperationException(
-                "O colaborador já possui uma entrada aberta na academia.");
+                "A entrada deste colaborador já foi registrada. " +
+                "Registre a saída antes de iniciar um novo acesso.");
         }
 
         var dataRegistro = dataHora ?? DateTime.Now;
@@ -133,7 +134,8 @@ public class AcessoColaboradorService : IAcessoColaboradorService
         if (acesso is null || !acesso.EstaEmAberto)
         {
             throw new InvalidOperationException(
-                "Não existe uma entrada aberta para este colaborador.");
+                "Este colaborador não possui uma entrada em aberto. " +
+                "Registre a entrada antes da saída.");
         }
 
         var result = acesso.RegistrarSaida(
@@ -271,6 +273,20 @@ public class AcessoColaboradorService : IAcessoColaboradorService
     private static InvalidOperationException CriarErroDominio(
         string operacao,
         IEnumerable<Domain.Common.Notification> notifications) =>
-        new($"Não foi possível {operacao}: " +
-            string.Join(", ", notifications.Select(n => n.Mensagem)));
+        new(string.Join(", ", notifications.Select(TraduzirNotificacao)));
+
+    private static string TraduzirNotificacao(Domain.Common.Notification notification) =>
+        notification.Mensagem switch
+        {
+            "DATA_HORA_INTERVALO_INVALIDO" =>
+                "O registro de entrada ou saída só pode ser feito entre 06h e 22h.",
+            "SAIDA_ANTERIOR_A_ENTRADA" =>
+                "O horário de saída não pode ser anterior ao horário de entrada.",
+            "SAIDA_JA_REGISTRADA" => "A saída deste acesso já foi registrada.",
+            "COLABORADOR_DIFERENTE_DA_ENTRADA" =>
+                "A saída deve ser registrada para o mesmo colaborador que entrou.",
+            "COLABORADOR_INVALIDO" =>
+                "O colaborador informado para o acesso é inválido.",
+            _ => $"Não foi possível {notification.Propriedade}: {notification.Mensagem}."
+        };
 }
