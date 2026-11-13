@@ -144,6 +144,26 @@ public abstract class AcessoRepositoryBase<TAcesso> : BaseRepository
         }
     }
 
+    protected async Task<int> RemoverTodosDoTipoAsync(
+        CancellationToken cancellationToken = default)
+    {
+        try
+        {
+            await using var command = await CreateCommandAsync(
+                "DELETE FROM tb_acesso WHERE pessoa_tipo = @PessoaTipo",
+                cancellationToken);
+            AdicionarPessoaTipo(command);
+            return await command.ExecuteNonQueryAsync(cancellationToken);
+        }
+        catch (DbException ex)
+        {
+            throw CriarErro(
+                "REMOVER_TODOS",
+                $"Erro ao remover os registros de {NomeEntidade}.",
+                ex);
+        }
+    }
+
     protected async Task<IEnumerable<TAcesso>> ObterPorPessoaPeriodoAsync(
         int? pessoaId,
         DateOnly? inicio,

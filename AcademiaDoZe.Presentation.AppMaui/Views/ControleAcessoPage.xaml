@@ -210,7 +210,9 @@
                                         <Grid ColumnDefinitions="*,Auto,70" ColumnSpacing="10">
                                             <VerticalStackLayout Spacing="1">
                                                 <Label Text="{Binding Nome}" FontAttributes="Bold" />
-                                                <Label Text="{Binding Tipo}" Style="{StaticResource MutedText}" />
+                                                <Label Text="{Binding TipoExibicao}"
+                                                       FontSize="13"
+                                                       TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
                                             </VerticalStackLayout>
                                             <Label Grid.Column="1" Text="{Binding Movimento}" VerticalTextAlignment="Center"
                                                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />

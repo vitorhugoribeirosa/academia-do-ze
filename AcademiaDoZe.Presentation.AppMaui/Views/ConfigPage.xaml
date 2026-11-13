@@ -402,6 +402,9 @@
 
                         <BoxView Style="{StaticResource SectionRule}"/>
                         <HorizontalStackLayout HorizontalOptions="End" Spacing="10">
+                            <Button Text="Limpar registros de acesso"
+                                    Clicked="OnLimparAcessosClicked"
+                                    Style="{StaticResource ButtonDanger}" />
                             <Button Text="{helpers:Translate S_c111e0ab9ddb}"
                                     Clicked="OnCancelarClicked"
                                     Style="{StaticResource ButtonSecondary}"

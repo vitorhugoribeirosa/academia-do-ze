@@ -1,3 +1,4 @@
+using AcademiaDoZe.Application.Interfaces;
 using AcademiaDoZe.Presentation.AppMaui.Messages;
 using AcademiaDoZe.Presentation.AppMaui.Services;
 using AcademiaDoZe.Presentation.AppMaui.Helpers;
@@ -12,13 +13,47 @@ public partial class ConfigPage : ContentPage
     private int _temaSelecionadoIndex = 2;
     private int _databaseTypeSelecionadoIndex;
     private string _culturaSelecionada = LocalizationManager.DefaultCulture;
+    private readonly IAcessoAlunoService _acessoAlunoService;
+    private readonly IAcessoColaboradorService _acessoColaboradorService;
 
-    public ConfigPage()
+    public ConfigPage(
+        IAcessoAlunoService acessoAlunoService,
+        IAcessoColaboradorService acessoColaboradorService)
     {
+        _acessoAlunoService = acessoAlunoService;
+        _acessoColaboradorService = acessoColaboradorService;
         InitializeComponent();
         CarregarTema();
         CarregarBanco();
         CarregarCultura();
+    }
+
+    private async void OnLimparAcessosClicked(object? sender, EventArgs e)
+    {
+        var confirmou = await InAppDialogService.ShowAsync(
+            "Limpar registros de acesso",
+            "Deseja apagar todo o histórico de entradas e saídas? Os cadastros e as matrículas serão preservados.",
+            "Limpar registros",
+            "Cancelar");
+        if (!confirmou) return;
+
+        try
+        {
+            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(15));
+            var alunos = await _acessoAlunoService.LimparRegistrosAsync(cts.Token);
+            var colaboradores = await _acessoColaboradorService.LimparRegistrosAsync(cts.Token);
+            await InAppDialogService.ShowAsync(
+                "Histórico limpo",
+                $"{alunos + colaboradores} registro(s) removido(s).",
+                "OK");
+        }
+        catch
+        {
+            await InAppDialogService.ShowAsync(
+                "Não foi possível limpar",
+                "Tente novamente em alguns instantes.",
+                "OK");
+        }
     }
 
     protected override async void OnAppearing()

@@ -37,6 +37,9 @@ public class AcessoColaboradorRepository
         int colaboradorId, CancellationToken cancellationToken = default) =>
         ObterUltimoAsync(colaboradorId, cancellationToken);
 
+    public Task<int> RemoverTodos(CancellationToken cancellationToken = default) =>
+        RemoverTodosDoTipoAsync(cancellationToken);
+
     public Task<TimeSpan> ObterHorasTrabalhadasNoDia(
         int colaboradorId,
         DateOnly data,

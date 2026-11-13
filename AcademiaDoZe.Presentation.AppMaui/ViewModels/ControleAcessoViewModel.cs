@@ -225,13 +225,18 @@ public partial class ControleAcessoViewModel : BaseViewModel
         var itens = new List<MovimentacaoAcessoItem>();
         foreach (var acesso in acessosAlunos)
         {
-            itens.Add(new(acesso.AlunoAcesso.Nome, "Aluno", "Entrada", acesso.DataHoraEntrada));
-            if (acesso.DataHoraSaida is { } saida) itens.Add(new(acesso.AlunoAcesso.Nome, "Aluno", "Saída", saida));
+            itens.Add(new(acesso.AlunoAcesso.Nome, "Aluno", "Aluno", "Entrada", acesso.DataHoraEntrada));
+            if (acesso.DataHoraSaida is { } saida)
+                itens.Add(new(acesso.AlunoAcesso.Nome, "Aluno", "Aluno", "Saída", saida));
         }
         foreach (var acesso in acessosColaboradores)
         {
-            itens.Add(new(acesso.ColaboradorAcesso.Nome, "Colaborador", "Entrada", acesso.DataHoraEntrada));
-            if (acesso.DataHoraSaida is { } saida) itens.Add(new(acesso.ColaboradorAcesso.Nome, "Colaborador", "Saída", saida));
+            var tipoExibicao = acesso.ColaboradorAcesso.Vinculo == AppColaboradorVinculo.Estagio
+                ? "Colaborador • Estagiário"
+                : "Colaborador";
+            itens.Add(new(acesso.ColaboradorAcesso.Nome, "Colaborador", tipoExibicao, "Entrada", acesso.DataHoraEntrada));
+            if (acesso.DataHoraSaida is { } saida)
+                itens.Add(new(acesso.ColaboradorAcesso.Nome, "Colaborador", tipoExibicao, "Saída", saida));
         }
 
         _todasMovimentacoesHoje = itens.OrderByDescending(i => i.DataHora).ToList();
@@ -386,7 +391,12 @@ public sealed class PessoaAcessoItem
     };
 }
 
-public sealed record MovimentacaoAcessoItem(string Nome, string Tipo, string Movimento, DateTime DataHora)
+public sealed record MovimentacaoAcessoItem(
+    string Nome,
+    string Tipo,
+    string TipoExibicao,
+    string Movimento,
+    DateTime DataHora)
 {
     public string Horario => DataHora.ToString("HH:mm");
 }

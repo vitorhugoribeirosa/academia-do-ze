@@ -42,6 +42,9 @@ public class AcessoAlunoRepository : AcessoRepositoryBase<AcessoAluno>, IAcessoA
         int alunoId, CancellationToken cancellationToken = default) =>
         EstaNaAcademiaAsync(alunoId, cancellationToken);
 
+    public Task<int> RemoverTodos(CancellationToken cancellationToken = default) =>
+        RemoverTodosDoTipoAsync(cancellationToken);
+
     public Task<Dictionary<TimeOnly, int>> ObterHorarioMaisProcuradoPorMes(
         int mes, CancellationToken cancellationToken = default) =>
         ObterHorariosPorMesAsync(mes, cancellationToken);

@@ -41,4 +41,5 @@ public interface IAcessoColaboradorService
         CancellationToken cancellationToken = default);
     Task<bool> RemoverAsync(
         int id, CancellationToken cancellationToken = default);
+    Task<int> LimparRegistrosAsync(CancellationToken cancellationToken = default);
 }

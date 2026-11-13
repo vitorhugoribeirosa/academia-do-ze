@@ -227,6 +227,13 @@ public class AcessoColaboradorService : IAcessoColaboradorService
         return await repository.Remover(id, cancellationToken);
     }
 
+    public async Task<int> LimparRegistrosAsync(
+        CancellationToken cancellationToken = default)
+    {
+        await using var repository = _acessoRepoFactory();
+        return await repository.RemoverTodos(cancellationToken);
+    }
+
     private async Task<AcessoColaboradorDto> MapearAsync(
         AcessoColaborador acesso, CancellationToken cancellationToken)
     {
