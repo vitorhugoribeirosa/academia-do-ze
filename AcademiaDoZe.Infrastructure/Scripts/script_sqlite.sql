@@ -71,12 +71,19 @@ CREATE TABLE IF NOT EXISTS tb_matricula (
 CREATE INDEX IF NOT EXISTS ix_tb_matricula_aluno_id ON tb_matricula(aluno_id);
 CREATE INDEX IF NOT EXISTS ix_tb_matricula_data_fim ON tb_matricula(data_fim);
 
+-- pessoa_tipo: 1 = aluno; 2 = colaborador.
 CREATE TABLE IF NOT EXISTS tb_acesso (
     id_acesso INTEGER PRIMARY KEY AUTOINCREMENT,
-    pessoa_tipo INTEGER NOT NULL,
-    pessoa_id INTEGER NOT NULL,
-    data_hora TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP)
+    pessoa_tipo INTEGER NOT NULL CHECK (pessoa_tipo IN (1, 2)),
+    pessoa_id INTEGER NOT NULL CHECK (pessoa_id > 0),
+    data_hora_entrada TEXT NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+    data_hora_saida TEXT NULL,
+    CHECK (data_hora_saida IS NULL OR data_hora_saida >= data_hora_entrada)
 );
 
 CREATE INDEX IF NOT EXISTS ix_tb_acesso_pessoa ON tb_acesso(pessoa_tipo, pessoa_id);
-CREATE INDEX IF NOT EXISTS ix_tb_acesso_data_hora ON tb_acesso(data_hora);
+CREATE INDEX IF NOT EXISTS ix_tb_acesso_data_hora_entrada ON tb_acesso(data_hora_entrada);
+CREATE INDEX IF NOT EXISTS ix_tb_acesso_data_hora_saida ON tb_acesso(data_hora_saida);
+CREATE UNIQUE INDEX IF NOT EXISTS uq_tb_acesso_aberto
+    ON tb_acesso(pessoa_tipo, pessoa_id)
+    WHERE data_hora_saida IS NULL;

@@ -75,12 +75,22 @@ CREATE TABLE IF NOT EXISTS tb_matricula (
         REFERENCES tb_aluno (id_aluno) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
+-- pessoa_tipo: 1 = aluno; 2 = colaborador.
 CREATE TABLE IF NOT EXISTS tb_acesso (
     id_acesso INT AUTO_INCREMENT NOT NULL,
-    pessoa_tipo INT NOT NULL,
+    pessoa_tipo TINYINT NOT NULL,
     pessoa_id INT NOT NULL,
-    data_hora DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    data_hora_entrada DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    data_hora_saida DATETIME NULL,
+    acesso_em_aberto TINYINT GENERATED ALWAYS AS
+        (CASE WHEN data_hora_saida IS NULL THEN 1 ELSE NULL END) STORED,
     PRIMARY KEY (id_acesso),
+    CONSTRAINT ck_tb_acesso_pessoa_tipo CHECK (pessoa_tipo IN (1, 2)),
+    CONSTRAINT ck_tb_acesso_pessoa_id CHECK (pessoa_id > 0),
+    CONSTRAINT ck_tb_acesso_periodo CHECK
+        (data_hora_saida IS NULL OR data_hora_saida >= data_hora_entrada),
+    UNIQUE KEY uq_tb_acesso_aberto (pessoa_tipo, pessoa_id, acesso_em_aberto),
     INDEX ix_tb_acesso_pessoa (pessoa_tipo, pessoa_id),
-    INDEX ix_tb_acesso_data_hora (data_hora)
+    INDEX ix_tb_acesso_data_hora_entrada (data_hora_entrada),
+    INDEX ix_tb_acesso_data_hora_saida (data_hora_saida)
 ) ENGINE=InnoDB;

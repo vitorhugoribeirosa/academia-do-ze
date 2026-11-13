@@ -1224,4 +1224,13 @@
   <data name="S_ea61614a869a" xml:space="preserve">
     <value>✓ {0}</value>
   </data>
+  <data name="AccessControl" xml:space="preserve"><value>Controle de acesso</value></data>
+  <data name="Students" xml:space="preserve"><value>Alunos</value></data>
+  <data name="Employees" xml:space="preserve"><value>Colaboradores</value></data>
+  <data name="FindPerson" xml:space="preserve"><value>Localizar pessoa</value></data>
+  <data name="SearchNameCpf" xml:space="preserve"><value>Pesquisar por nome ou CPF</value></data>
+  <data name="TodayAccesses" xml:space="preserve"><value>Acessos de hoje</value></data>
+  <data name="NoAccessToday" xml:space="preserve"><value>Nenhum acesso registrado hoje.</value></data>
+  <data name="AccessControlDescription" xml:space="preserve"><value>Registre entradas e saídas da academia.</value></data>
+  <data name="OpenAccessControl" xml:space="preserve"><value>Controle de acesso</value></data>
 </root>

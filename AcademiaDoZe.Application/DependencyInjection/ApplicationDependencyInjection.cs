@@ -17,6 +17,8 @@ public static class ApplicationDependencyInjection
         services.AddTransient<IAlunoService, AlunoService>();
         services.AddTransient<IColaboradorService, ColaboradorService>();
         services.AddTransient<IMatriculaService, MatriculaService>();
+        services.AddTransient<IAcessoAlunoService, AcessoAlunoService>();
+        services.AddTransient<IAcessoColaboradorService, AcessoColaboradorService>();
 
         services.AddTransient(provider =>
         {
@@ -45,6 +47,18 @@ public static class ApplicationDependencyInjection
             return CriarRepositoryFactory<IMatriculaRepository>(config,
                 static (connectionString, databaseType) =>
                     new MatriculaRepository(connectionString, databaseType));
+        });
+        services.AddTransient(provider =>
+        {
+            var config = provider.GetRequiredService<RepositoryConfig>();
+            return new Func<IAcessoAlunoRepository>(() =>
+                new AcessoAlunoRepository(config.ConnectionString, config.DatabaseType));
+        });
+        services.AddTransient(provider =>
+        {
+            var config = provider.GetRequiredService<RepositoryConfig>();
+            return new Func<IAcessoColaboradorRepository>(() =>
+                new AcessoColaboradorRepository(config.ConnectionString, config.DatabaseType));
         });
 
         return services;

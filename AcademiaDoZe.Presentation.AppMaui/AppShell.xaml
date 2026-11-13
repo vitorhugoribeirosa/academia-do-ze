@@ -72,6 +72,14 @@
         <ShellContent ContentTemplate="{DataTemplate views:ColaboradorListPage}" Route="colaboradores" />
     </FlyoutItem>
 
+    <FlyoutItem Title="{helpers:Translate AccessControl}">
+        <FlyoutItem.Icon>
+            <FontImageSource FontFamily="MaterialIcons" Glyph="&#xe8d1;" Size="21"
+                             Color="{AppThemeBinding Light={StaticResource Tertiary}, Dark={StaticResource PrimaryDark}}"/>
+        </FlyoutItem.Icon>
+        <ShellContent ContentTemplate="{DataTemplate views:ControleAcessoPage}" Route="acessos" />
+    </FlyoutItem>
+
     <FlyoutItem Title="{helpers:Translate S_871f24c4cdaf}">
         <FlyoutItem.Icon>
             <FontImageSource FontFamily="MaterialIcons" Glyph="&#xe8b8;" Size="21"

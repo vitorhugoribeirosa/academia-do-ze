@@ -16,6 +16,9 @@ public static class DataReaderExtensions
 
     public static DateTime GetDateTimeValue(this DbDataReader reader, string columnName) => Convert.ToDateTime(reader[columnName]);
 
+    public static DateTime? GetNullableDateTime(this DbDataReader reader, string columnName) =>
+        reader[columnName] is DBNull ? null : Convert.ToDateTime(reader[columnName]);
+
     public static DateOnly GetDateOnlyValue(this DbDataReader reader, string columnName) =>
         DateOnly.FromDateTime(Convert.ToDateTime(reader[columnName]));
 }

@@ -1223,4 +1223,13 @@
   <data name="S_ea61614a869a" xml:space="preserve">
     <value>✓ {0}</value>
   </data>
+  <data name="AccessControl" xml:space="preserve"><value>Access control</value></data>
+  <data name="Students" xml:space="preserve"><value>Students</value></data>
+  <data name="Employees" xml:space="preserve"><value>Employees</value></data>
+  <data name="FindPerson" xml:space="preserve"><value>Find person</value></data>
+  <data name="SearchNameCpf" xml:space="preserve"><value>Search by name or CPF</value></data>
+  <data name="TodayAccesses" xml:space="preserve"><value>Today's accesses</value></data>
+  <data name="NoAccessToday" xml:space="preserve"><value>No access recorded today.</value></data>
+  <data name="AccessControlDescription" xml:space="preserve"><value>Record gym entries and exits.</value></data>
+  <data name="OpenAccessControl" xml:space="preserve"><value>Open front desk</value></data>
 </root>

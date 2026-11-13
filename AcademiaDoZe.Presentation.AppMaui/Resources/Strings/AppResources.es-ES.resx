@@ -1223,4 +1223,13 @@ UI de aplicación multiplataforma .NET</value>
   <data name="S_ea61614a869a" xml:space="preserve">
     <value>✓ {0}</value>
   </data>
+  <data name="AccessControl" xml:space="preserve"><value>Control de acceso</value></data>
+  <data name="Students" xml:space="preserve"><value>Alumnos</value></data>
+  <data name="Employees" xml:space="preserve"><value>Colaboradores</value></data>
+  <data name="FindPerson" xml:space="preserve"><value>Localizar persona</value></data>
+  <data name="SearchNameCpf" xml:space="preserve"><value>Buscar por nombre o CPF</value></data>
+  <data name="TodayAccesses" xml:space="preserve"><value>Accesos de hoy</value></data>
+  <data name="NoAccessToday" xml:space="preserve"><value>Ningún acceso registrado hoy.</value></data>
+  <data name="AccessControlDescription" xml:space="preserve"><value>Registre entradas y salidas del gimnasio.</value></data>
+  <data name="OpenAccessControl" xml:space="preserve"><value>Abrir portería</value></data>
 </root>

@@ -3,7 +3,7 @@ using AcademiaDoZe.Domain.Entities;
 
 namespace AcademiaDoZe.Domain.Repositories;
 
-public interface IAcessoColaboradorRepository : IRepository<AcessoColaborador>
+public interface IAcessoColaboradorRepository : IRepository<AcessoColaborador>, IDisposable, IAsyncDisposable
 {
     Task<IEnumerable<AcessoColaborador>> ObterAcessosPorColaboradorPeriodo(int? colaboradorId = null, DateOnly? inicio = null, DateOnly? fim = null, CancellationToken cancellationToken = default);
     Task<AcessoColaborador?> ObterUltimoAcesso(int colaboradorId, CancellationToken cancellationToken = default);

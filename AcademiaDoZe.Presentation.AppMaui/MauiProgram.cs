@@ -72,6 +72,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ColaboradorViewModel>();
         builder.Services.AddTransient<LogradouroListViewModel>();
         builder.Services.AddTransient<LogradouroViewModel>();
+        builder.Services.AddTransient<ControleAcessoViewModel>();
 
         builder.Services.AddTransient<DashboardListPage>();
         builder.Services.AddTransient<AlunoListPage>();
@@ -83,6 +84,7 @@ public static class MauiProgram
         builder.Services.AddTransient<LogradouroListPage>();
         builder.Services.AddTransient<LogradouroPage>();
         builder.Services.AddTransient<ConfigPage>();
+        builder.Services.AddTransient<ControleAcessoPage>();
 
 #if DEBUG
         builder.Logging.AddDebug();

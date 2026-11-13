@@ -91,16 +91,27 @@ BEGIN
     CREATE INDEX IX_tb_matricula_data_fim ON tb_matricula(data_fim);
 END;
 
+-- pessoa_tipo: 1 = aluno; 2 = colaborador.
 IF OBJECT_ID(N'dbo.tb_acesso', N'U') IS NULL
 BEGIN
     CREATE TABLE tb_acesso (
         id_acesso INT IDENTITY(1,1) NOT NULL,
-        pessoa_tipo INT NOT NULL,
+        pessoa_tipo TINYINT NOT NULL,
         pessoa_id INT NOT NULL,
-        data_hora DATETIME NOT NULL CONSTRAINT DF_tb_acesso_data_hora DEFAULT GETDATE(),
-        CONSTRAINT PK_tb_acesso PRIMARY KEY (id_acesso)
+        data_hora_entrada DATETIME2 NOT NULL
+            CONSTRAINT DF_tb_acesso_data_hora_entrada DEFAULT SYSDATETIME(),
+        data_hora_saida DATETIME2 NULL,
+        CONSTRAINT PK_tb_acesso PRIMARY KEY (id_acesso),
+        CONSTRAINT CK_tb_acesso_pessoa_tipo CHECK (pessoa_tipo IN (1, 2)),
+        CONSTRAINT CK_tb_acesso_pessoa_id CHECK (pessoa_id > 0),
+        CONSTRAINT CK_tb_acesso_periodo CHECK
+            (data_hora_saida IS NULL OR data_hora_saida >= data_hora_entrada)
     );
 
     CREATE INDEX IX_tb_acesso_pessoa ON tb_acesso(pessoa_tipo, pessoa_id);
-    CREATE INDEX IX_tb_acesso_data_hora ON tb_acesso(data_hora);
+    CREATE INDEX IX_tb_acesso_data_hora_entrada ON tb_acesso(data_hora_entrada);
+    CREATE INDEX IX_tb_acesso_data_hora_saida ON tb_acesso(data_hora_saida);
+    CREATE UNIQUE INDEX UQ_tb_acesso_aberto
+        ON tb_acesso(pessoa_tipo, pessoa_id)
+        WHERE data_hora_saida IS NULL;
 END;

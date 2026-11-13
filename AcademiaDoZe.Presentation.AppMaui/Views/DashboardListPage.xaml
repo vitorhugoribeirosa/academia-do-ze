@@ -413,6 +413,25 @@
                         <Grid ColumnDefinitions="Auto,*,Auto"
                               ColumnSpacing="14"
                               Padding="16,12,16,0">
+                            <Label Text="&#xe8d1;"
+                                   FontFamily="MaterialIcons"
+                                   FontSize="23"
+                                   TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Gold}}"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   WidthRequest="46" />
+                            <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="1">
+                                <Label Text="{helpers:Translate AccessControl}" Style="{StaticResource QuickActionTitle}" FontSize="15" />
+                                <Label Text="{helpers:Translate AccessControlDescription}" Style="{StaticResource QuickActionDescription}" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="2" Text="{helpers:Translate OpenAccessControl}"
+                                    Command="{Binding NavigateToControleAcessoCommand}"
+                                    Style="{StaticResource ButtonPrimary}" MinimumWidthRequest="175" />
+                        </Grid>
+
+                        <Grid ColumnDefinitions="Auto,*,Auto"
+                              ColumnSpacing="14"
+                              Padding="16,12,16,0">
                             <Label Text="&#xe8b8;"
                                    FontFamily="MaterialIcons"
                                    FontSize="23"

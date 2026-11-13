@@ -9,7 +9,7 @@ public class AcessoColaboradorTests
 {
     private static Logradouro GetValidLogradouro() => Logradouro.Criar(1, "12345-678", "Rua Teste", "Bairro", "Cidade", "SP", "Brasil").Value!;
     private static Arquivo GetValidArquivo() => Arquivo.Criar([1, 2, 3]).Value!;
-    private static Colaborador GetValidColaborador() => Colaborador.Criar(1, "Fulano", "529.982.247-25", DateOnly.FromDateTime(DateTime.Today.AddYears(-30)), "(11) 91234-5678", "user@example.com", GetValidLogradouro(), "123", "", "Abcdef", GetValidArquivo(), DateOnly.FromDateTime(DateTime.Today.AddYears(-1)), ColaboradorTipo.Atendente, ColaboradorVinculo.CLT).Value!;
+    private static Colaborador GetValidColaborador(int id = 1) => Colaborador.Criar(id, "Fulano", "529.982.247-25", DateOnly.FromDateTime(DateTime.Today.AddYears(-30)), "(11) 91234-5678", "user@example.com", GetValidLogradouro(), "123", "", "Abcdef", GetValidArquivo(), DateOnly.FromDateTime(DateTime.Today.AddYears(-1)), ColaboradorTipo.Atendente, ColaboradorVinculo.CLT).Value!;
 
     [Theory(DisplayName = "AcessoColaborador: colaborador nulo -> COLABORADOR_INVALIDO")]
     [InlineData(true)] [InlineData(false)]
@@ -36,11 +36,79 @@ public class AcessoColaboradorTests
     {
         var colaborador = GetValidColaborador(); var dataHora = DateTime.Today.AddHours(hour);
         var result = AcessoColaborador.Criar(1, colaborador, dataHora);
-        Assert.True(result.IsSuccess); Assert.Equal(colaborador.Id, result.Value!.ColaboradorId); Assert.Equal(dataHora, result.Value.DataHora);
+        Assert.True(result.IsSuccess);
+        Assert.Equal(colaborador.Id, result.Value!.ColaboradorId);
+        Assert.Equal(dataHora, result.Value.DataHoraEntrada);
+        Assert.Null(result.Value.DataHoraSaida);
+        Assert.True(result.Value.EstaEmAberto);
     }
 
     [Theory(DisplayName = "AcessoColaborador: permite horários de borda 06:00 e 22:00")]
     [InlineData(6)] [InlineData(22)]
     public void Deve_Permitir_HorariosDeBorda_06_00_e_22_00(int hour) =>
         Assert.True(AcessoColaborador.Criar(1, GetValidColaborador(), DateTime.Today.AddHours(hour)).IsSuccess);
+
+    [Fact(DisplayName = "AcessoColaborador: registra saída do mesmo colaborador")]
+    public void Deve_Registrar_Saida_Do_Mesmo_Colaborador()
+    {
+        var colaborador = GetValidColaborador();
+        var acesso = AcessoColaborador.Criar(
+            1, colaborador, DateTime.Today.AddHours(10)).Value!;
+        var dataHoraSaida = DateTime.Today.AddHours(12);
+
+        var result = acesso.RegistrarSaida(colaborador, dataHoraSaida);
+
+        Assert.True(result.IsSuccess);
+        Assert.Equal(dataHoraSaida, acesso.DataHoraSaida);
+        Assert.False(acesso.EstaEmAberto);
+    }
+
+    [Fact(DisplayName = "AcessoColaborador: rejeita saída de colaborador diferente")]
+    public void Deve_Falhar_Saida_Quando_ColaboradorForDiferente()
+    {
+        var acesso = AcessoColaborador.Criar(
+            1, GetValidColaborador(1), DateTime.Today.AddHours(10)).Value!;
+
+        var result = acesso.RegistrarSaida(
+            GetValidColaborador(2), DateTime.Today.AddHours(12));
+
+        Assert.True(result.IsFailure);
+        Assert.Contains(result.Notifications,
+            n => n.Mensagem == "COLABORADOR_DIFERENTE_DA_ENTRADA");
+        Assert.True(acesso.EstaEmAberto);
+    }
+
+    [Fact(DisplayName = "AcessoColaborador: rejeita saída anterior à entrada")]
+    public void Deve_Falhar_Saida_Quando_ForAnteriorAEntrada()
+    {
+        var colaborador = GetValidColaborador();
+        var acesso = AcessoColaborador.Criar(
+            1, colaborador, DateTime.Today.AddHours(10)).Value!;
+
+        var result = acesso.RegistrarSaida(
+            colaborador, DateTime.Today.AddHours(9));
+
+        Assert.True(result.IsFailure);
+        Assert.Contains(result.Notifications,
+            n => n.Mensagem == "SAIDA_ANTERIOR_A_ENTRADA");
+        Assert.True(acesso.EstaEmAberto);
+    }
+
+    [Fact(DisplayName = "AcessoColaborador: rejeita segunda saída")]
+    public void Deve_Falhar_Quando_SaidaJaFoiRegistrada()
+    {
+        var colaborador = GetValidColaborador();
+        var acesso = AcessoColaborador.Criar(
+            1, colaborador, DateTime.Today.AddHours(10)).Value!;
+        var primeiraSaida = DateTime.Today.AddHours(12);
+        acesso.RegistrarSaida(colaborador, primeiraSaida);
+
+        var result = acesso.RegistrarSaida(
+            colaborador, DateTime.Today.AddHours(13));
+
+        Assert.True(result.IsFailure);
+        Assert.Contains(result.Notifications,
+            n => n.Mensagem == "SAIDA_JA_REGISTRADA");
+        Assert.Equal(primeiraSaida, acesso.DataHoraSaida);
+    }
 }
